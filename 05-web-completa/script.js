@@ -118,39 +118,37 @@ conectarFormulario('.registro-form', 'api/registro.php');
 
 /**
  * Checkout: preselecciona el servicio según ?servicio=slug (llegando desde
- * producto.php) y mantiene el resumen (nombre + precio) sincronizado con la
- * opción elegida en el <select>.
+ * producto.php) y mantiene el resumen (nombre del servicio) sincronizado con
+ * la opción elegida en el <select>. El precio se cotiza a medida: no hay una
+ * tarifa fija por categoría todavía, así que no se muestra un monto inventado.
  */
-const catalogoPrecios = {
-  plomeria: { nombre: 'Plomería', precio: 8500 },
-  electricidad: { nombre: 'Electricidad', precio: 9200 },
-  gas: { nombre: 'Gas', precio: 10000 },
-  cerrajeria: { nombre: 'Cerrajería', precio: 7500 },
-  aire: { nombre: 'Aire acondicionado', precio: 11300 },
-  pintura: { nombre: 'Pintura', precio: 7900 },
-  carpinteria: { nombre: 'Carpintería', precio: 8100 },
-  jardineria: { nombre: 'Jardinería', precio: 7000 },
-  limpieza: { nombre: 'Limpieza', precio: 6500 },
-  mudanzas: { nombre: 'Mudanzas', precio: 15000 },
-  tecnicos: { nombre: 'Técnicos', precio: 9500 },
-  otros: { nombre: 'Otros servicios', precio: 7000 },
+const nombresServicios = {
+  plomeria: 'Plomería',
+  electricidad: 'Electricidad',
+  gas: 'Gas',
+  cerrajeria: 'Cerrajería',
+  aire: 'Aire acondicionado',
+  pintura: 'Pintura',
+  carpinteria: 'Carpintería',
+  jardineria: 'Jardinería',
+  limpieza: 'Limpieza',
+  mudanzas: 'Mudanzas',
+  tecnicos: 'Técnicos',
+  otros: 'Otros servicios',
 };
 
 const selectServicio = document.getElementById('servicio');
 if (selectServicio) {
   const resumenServicio = document.getElementById('resumen-servicio');
-  const resumenPrecio = document.getElementById('resumen-precio');
 
   const actualizarResumen = () => {
-    const info = catalogoPrecios[selectServicio.value];
-    if (!info) return;
-    if (resumenServicio) resumenServicio.textContent = info.nombre;
-    if (resumenPrecio) resumenPrecio.textContent = `$${info.precio.toLocaleString('es-AR')}`;
+    const nombre = nombresServicios[selectServicio.value];
+    if (nombre && resumenServicio) resumenServicio.textContent = nombre;
   };
 
   const parametros = new URLSearchParams(window.location.search);
   const servicioUrl = parametros.get('servicio');
-  if (servicioUrl && catalogoPrecios[servicioUrl]) {
+  if (servicioUrl && nombresServicios[servicioUrl]) {
     selectServicio.value = servicioUrl;
   }
 

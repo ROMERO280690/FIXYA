@@ -14,7 +14,7 @@ a un hosting de Hostinger (plan Premium/Business con PHP y MySQL).
 
 ## 2. Configurar `config.php`
 
-Antes de subir, editá el bloque `else` (producción) de [`config.php`](config.php)
+Copiá [`config.example.php`](config.example.php) como `config.php` (este último **no** se sube al repositorio, queda solo en el servidor). Editá el bloque `else` (producción)
 con los datos reales del paso 1:
 
 ```php

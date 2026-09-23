@@ -84,13 +84,13 @@ $esProfesional = $usuario['tipo_usuario'] === 'profesional';
           <div class="profile-summary">
             <img class="profile-pic" src="assets/corporativas/corp-15-foto-equipo.webp" alt="<?= $nombreCompleto ?>" width="960" height="540" loading="lazy" decoding="async" />
             <div>
-              <span class="status-badge">● Verificado</span>
+              <span class="status-badge">● Cuenta activa</span>
               <h2><?= $nombreCompleto ?></h2>
               <p><?= $especialidad ?> · <?= $zona ?></p>
             </div>
           </div>
           <div class="quick-stats">
-            <div class="score-pill">★★★★★ 4.8</div>
+            <div class="score-pill">Sin calificaciones aún</div>
             <strong>Cuenta <?= $esProfesional ? 'profesional' : 'de cliente' ?></strong>
           </div>
           <ul class="profile-list" style="margin-top: 18px;">

@@ -99,12 +99,11 @@ function e(string $v): string { return htmlspecialchars($v, ENT_QUOTES, 'UTF-8')
           </div>
 
           <aside class="checkout-card">
-            <div class="score-pill">★★★★★ <?= e($cat['rating']) ?></div>
-            <h2>Desde $<?= e($cat['precio']) ?></h2>
-            <p>Incluye diagnóstico inicial y cotización detallada. <?= (int)$cat['trabajos'] ? e($cat['trabajos']) . ' trabajos realizados.' : '' ?></p>
+            <h2>Cotización a medida</h2>
+            <p>El costo depende del trabajo. Contanos qué necesitás y recibís un presupuesto sin cargo antes de confirmar.</p>
             <ul class="feature-list">
-              <li>Respuesta en <?= e($cat['respuesta']) ?></li>
-              <li>Presupuesto transparente</li>
+              <li>Presupuesto sin cargo</li>
+              <li>Precio transparente antes de empezar</li>
               <li>Pago seguro con Mercado Pago</li>
               <li>Profesionales verificados</li>
             </ul>
