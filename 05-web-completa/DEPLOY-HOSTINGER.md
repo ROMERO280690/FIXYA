@@ -54,7 +54,7 @@ el `www`. Esperá unos minutos a que el certificado esté activo antes de probar
 - Cerrá sesión (**Salir**) y volvé a entrar con **Iniciar sesión**.
 - Enviá el formulario de **Contacto** y el de **Checkout** → deberían mostrar el
   mensaje de éxito y, si el hosting tiene `mail()` habilitado (Hostinger lo tiene
-  por defecto), debería llegarte un email a `info@fixya.emprenor.com.ar`.
+  por defecto), debería llegarte un email a `info@fixya.io`.
 - Revisá en phpMyAdmin las tablas `users`, `contact_messages` y `service_requests`
   para confirmar que los datos se están guardando.
 

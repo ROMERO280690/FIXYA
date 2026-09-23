@@ -47,7 +47,7 @@ $esProfesional = $usuario['tipo_usuario'] === 'profesional';
       <div class="container topbar-inner">
         <div class="topbar-links">
           <a href="tel:+5493873522920">+54 9 387 352-2920</a>
-          <a href="mailto:info@fixya.emprenor.com.ar">info@fixya.emprenor.com.ar</a>
+          <a href="mailto:info@fixya.io">info@fixya.io</a>
         </div>
         <div class="topbar-meta">
           <span>fixya.io</span>

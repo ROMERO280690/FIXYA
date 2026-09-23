@@ -22,7 +22,7 @@ if ($esLocal) {
 }
 
 // Email donde llegan las consultas del formulario de contacto y presupuestos.
-define('MAIL_TO', 'info@fixya.emprenor.com.ar');
+define('MAIL_TO', 'info@fixya.io');
 define('MAIL_FROM', 'no-responder@fixya.io');
 
 // Cambiar por una cadena aleatoria propia antes de producción (usada para firmar la sesión).
