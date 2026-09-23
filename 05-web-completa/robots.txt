@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /includes/
+Disallow: /db/
+Disallow: /perfil.php
+Disallow: /dashboard.php
+
+Sitemap: https://fixya.io/sitemap.xml

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <title>FIXYA Ad · Meta 4:5 — Pedí presupuesto gratis</title>
+  <style>
+    :root { --navy:#0B1F3A; --orange:#FF8A00; --white:#fff; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background:#e8eef5; padding:32px; color:var(--navy);
+    }
+    .spec {
+      max-width:720px; margin:0 auto 24px;
+      background:#fff; border-radius:12px; padding:20px 24px;
+      border:1px solid #d0dae6; font-size:14px; line-height:1.5;
+    }
+    .spec h1 { font-size:1.15rem; margin-bottom:8px; }
+    .spec code { background:#f0f4f8; padding:2px 6px; border-radius:4px; font-size:12px; }
+    .spec ul { margin:8px 0 0 18px; color:#445; }
+    .board-wrap { display:flex; justify-content:center; padding:16px 0 40px; }
+    .ad {
+      width:432px; height:540px; /* 4:5 at ~50% of 1080x1350 */
+      border-radius:22px; overflow:hidden; position:relative;
+      background: linear-gradient(180deg, #0B1F3A 0%, #122a4a 50%, #0B1F3A 100%);
+      color:var(--white);
+      box-shadow:0 20px 50px rgba(11,31,58,.35);
+      display:flex; flex-direction:column;
+      padding:32px 28px;
+    }
+    .ad::before {
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255,138,0,.4), transparent 55%),
+        linear-gradient(180deg, transparent 60%, rgba(255,138,0,.12) 100%);
+      pointer-events:none;
+    }
+    .ad > * { position:relative; z-index:1; }
+    .logo { height:44px; align-self:flex-start; }
+    .badge {
+      margin-top:28px; align-self:flex-start;
+      background:var(--orange); color:var(--navy);
+      font-weight:800; font-size:12px; letter-spacing:.04em;
+      text-transform:uppercase; padding:8px 14px; border-radius:8px;
+    }
+    .ad h2 {
+      margin-top:20px; font-size:2.1rem; line-height:1.12; font-weight:800;
+    }
+    .ad h2 span { color:var(--orange); }
+    .ad .desc { margin-top:14px; font-size:1.05rem; opacity:.92; flex:1; }
+    .cta {
+      background:var(--orange); color:var(--navy);
+      font-weight:800; text-align:center;
+      padding:16px; border-radius:14px; font-size:1.05rem;
+      box-shadow:0 8px 24px rgba(255,138,0,.35);
+    }
+    .meta {
+      margin-top:14px; font-size:12px; opacity:.8; text-align:center;
+      display:flex; align-items:center; justify-content:center; gap:8px;
+    }
+    .meta img { height:22px; }
+    .ratio { text-align:center; font-size:12px; color:#667; margin-top:-24px; }
+    @media print {
+      body { background:#fff; padding:0; }
+      .ad { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="spec">
+    <h1>Meta Ads · Vertical 4:5 (1080×1350)</h1>
+    <p><strong>Headline:</strong> Pedí presupuesto gratis</p>
+    <p><strong>Primary text:</strong> Contanos qué necesitás arreglar y recibí presupuestos de técnicos verificados en Salta. Sin costo de consulta.</p>
+    <p><strong>CTA:</strong> Empezar / Enviar mensaje</p>
+    <ul>
+      <li>Formato: feed IG/FB vertical · <code>4:5</code></li>
+      <li>Ideal para remarketing y tráfico a WhatsApp</li>
+      <li>Brand: navy <code>#0B1F3A</code> · orange <code>#FF8A00</code></li>
+    </ul>
+  </div>
+  <div class="board-wrap">
+    <div class="ad">
+      <img class="logo" src="../../../04-web-assets/fixya-pack-final/01-logos/logo-fondo-oscuro.png" alt="FIXYA" />
+      <div class="badge">100% gratis pedir</div>
+      <h2>Pedí <span>presupuesto</span> gratis</h2>
+      <p class="desc">Decinos qué se rompió. Te conectamos con técnicos verificados cerca tuyo en Salta. Vos elegís.</p>
+      <div class="cta">Empezar ahora</div>
+      <div class="meta">
+        <img src="assets/ui-mercado-pago.png" alt="Mercado Pago" />
+        <span>+54 9 387 352-2920</span>
+      </div>
+    </div>
+  </div>
+  <p class="ratio">Mock 432×540 (escala ~40% de 1080×1350)</p>
+</body>
+</html>

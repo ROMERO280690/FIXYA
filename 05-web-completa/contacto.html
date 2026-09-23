@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto | FIXYA</title>
+    <link rel="canonical" href="https://fixya.io/contacto.html" />
+    <meta name="description" content="Contactate con FIXYA para presupuestos, consultas y sumarte como profesional." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/extras/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/extras/favicon-180.png" />
+    <meta name="theme-color" content="#0b1f3a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FIXYA.io" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content="Contacto | FIXYA" />
+    <meta property="og:description" content="Contactate con FIXYA para presupuestos, consultas y sumarte como profesional." />
+    <meta property="og:image" content="https://fixya.io/assets/marketing/og-share.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-links">
+          <a href="tel:+5493873522920">+54 9 387 352-2920</a>
+          <a href="mailto:info@fixya.emprenor.com.ar">info@fixya.emprenor.com.ar</a>
+        </div>
+        <div class="topbar-meta">
+          <span>✓ Mercado Pago</span>
+          <span>✓ Identidad verificada</span>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="Inicio FIXYA">
+          <img src="assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+          <a href="index.html">Inicio</a>
+          <a href="servicios.html">Servicios</a>
+          <a href="categoria.html">Categorías</a>
+          <a href="profesionales.html">Profesionales</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="contacto.html" class="active">Contacto</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn-outline" href="profesionales.html">Soy profesional</a>
+          <a class="btn btn-primary" href="index.html#buscar">Buscar</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero" style="background: linear-gradient(180deg,#f6f0ff 0%,#f9fbfd 100%);">
+        <div class="container page-hero-grid">
+          <div>
+            <span class="eyebrow eyebrow-dark">Contacto</span>
+            <h1>Hablá con FIXYA</h1>
+            <p>Si buscás un profesional, querés sumarte a la red o necesitás ayuda, estamos para acompañarte.</p>
+          </div>
+          <div class="page-hero-card">
+            <img src="assets/corporativas/corp-16-oficina-noche.webp" alt="Atención FIXYA" width="960" height="540" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container contact-layout">
+          <div class="contact-panel">
+            <form class="contact-form">
+              <input type="text" name="sitio_web" value="" autocomplete="off" tabindex="-1" style="position:absolute; left:-9999px;" aria-hidden="true" />
+              <p class="form-message" role="status" aria-live="polite" style="display:none; margin-bottom: 8px; font-weight: 600;"></p>
+              <div class="field-group two-up">
+                <div class="field">
+                  <label for="nombre">Nombre</label>
+                  <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="tuemail@mail.com" required />
+                </div>
+              </div>
+
+              <div class="field-group two-up">
+                <div class="field">
+                  <label for="categoria">Interés</label>
+                  <select id="categoria" name="categoria">
+                    <option>Quiero contratar un servicio</option>
+                    <option>Soy profesional y quiero sumarme</option>
+                    <option>Necesito ayuda con una operación</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="telefono">Teléfono</label>
+                  <input id="telefono" name="telefono" type="tel" placeholder="+54 9 ..." />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="6" placeholder="Contanos qué necesitás..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Enviar consulta</button>
+            </form>
+          </div>
+
+          <aside class="info-panel">
+            <div class="info-card">
+              <h3>Atención</h3>
+              <ul>
+                <li><strong>Tel:</strong> <a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+                <li><strong>Email:</strong> <a href="mailto:info@fixya.emprenor.com.ar">info@fixya.emprenor.com.ar</a></li>
+                <li><strong>Ubicación:</strong> Salta, Argentina</li>
+              </ul>
+            </div>
+
+            <div class="info-card dark-card">
+              <h3>WhatsApp</h3>
+              <p>Respondemos consultas y presupuestos por WhatsApp de forma rápida.</p>
+              <a class="btn btn-primary" href="https://wa.me/5493873522920?text=Hola%20FIXYA%2C%20quiero%20consultar%20por%20un%20servicio" target="_blank" rel="noreferrer">Chatear con FIXYA</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <img src="assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
+          <p>Marketplace de servicios con profesionales verificados y pago seguro.</p>
+        </div>
+        <div>
+          <h3>Servicios</h3>
+          <ul><li><a href="producto.php?s=plomeria">Plomería</a></li><li><a href="producto.php?s=electricidad">Electricidad</a></li><li><a href="producto.php?s=gas">Gas</a></li><li><a href="producto.php?s=pintura">Pintura</a></li><li><a href="categoria.html">Ver todas</a></li></ul>
+        </div>
+        <div>
+          <h3>Empresa</h3>
+          <ul><li><a href="nosotros.html">Nosotros</a></li><li><a href="profesionales.html">Profesionales</a></li><li><a href="servicios.html">Servicios</a></li><li><a href="privacidad.html">Privacidad</a></li><li><a href="terminos.html">Términos</a></li></ul>
+        </div>
+        <div>
+          <h3>Contacto</h3>
+          <ul><li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li><li><a href="mailto:info@fixya.emprenor.com.ar">info@fixya.emprenor.com.ar</a></li><li>Salta, Argentina</li></ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="year"></span> FIXYA</span>
+        <span>Todos los derechos reservados</span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

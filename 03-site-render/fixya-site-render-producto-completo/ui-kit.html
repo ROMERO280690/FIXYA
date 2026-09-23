@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FIXYA — UI Kit</title>
+  <link rel="icon" type="image/png" href="../../04-web-assets/fixya-pack-final/06-extras/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+</head>
+<body class="uikit-page">
+
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-left">
+        <a href="tel:+5493873522920" aria-label="Llamar a FIXYA">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +54 9 387 352-2920
+        </a>
+        <a href="mailto:info@fixya.emprenor.com.ar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@fixya.emprenor.com.ar
+        </a>
+      </div>
+      <div class="topbar-right">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display:inline;vertical-align:-2px;width:14px;height:14px;margin-right:4px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Lun–Vie 9:00–18:00 · Salta, Argentina
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <input type="checkbox" id="nav-check" aria-hidden="true" />
+
+  <header class="header">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="FIXYA inicio">
+        <img src="../../04-web-assets/fixya-pack-final/01-logos/logo-horizontal.png" alt="FIXYA" width="160" height="40" />
+      </a>
+
+      <label for="nav-check" class="nav-toggle" aria-label="Abrir menú">
+        <span></span>
+      </label>
+
+      <div class="nav-panel">
+        <nav class="nav" aria-label="Principal">
+          <a href="categoria.html">Servicios</a>
+          <a href="index.html#como-funciona">Cómo funciona</a>
+          <a href="perfil.html">Profesionales</a>
+          <a href="producto.html">Producto</a>
+          <a href="ui-kit.html" class="is-active">UI Kit</a>
+          <a href="index.html#contacto">Contacto</a>
+        </nav>
+        <div class="header-ctas">
+          <a class="btn btn-outline" href="login.html">Ingresar</a>
+          <a class="btn btn-primary" href="categoria.html">Buscar profesional</a>
+        </div>
+      </div>
+
+      <div class="header-ctas">
+        <a class="btn btn-outline" href="login.html">Ingresar</a>
+        <a class="btn btn-primary" href="categoria.html">Buscar profesional</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="uikit-page page-main">
+    <div class="uikit-hero">
+      <div class="container">
+        <span class="section-eyebrow">Design system</span>
+        <h1>FIXYA UI Kit</h1>
+        <p>Guía viva de componentes: colores, tipografía, botones, formularios, badges, alertas y cards del producto.</p>
+        <nav class="uikit-nav" aria-label="Secciones del UI Kit">
+          <a href="#colores">Colores</a>
+          <a href="#tipografia">Tipografía</a>
+          <a href="#botones">Botones</a>
+          <a href="#inputs">Inputs</a>
+          <a href="#chips">Chips & badges</a>
+          <a href="#alertas">Alertas</a>
+          <a href="#cards">Cards</a>
+          <a href="#avatar">Avatar & rating</a>
+          <a href="#tabs">Tabs</a>
+          <a href="#empty">Empty state</a>
+          <a href="#iconos">Iconos</a>
+        </nav>
+      </div>
+    </div>
+
+    <section class="uikit-section" id="colores">
+      <div class="container">
+        <h2>Colores</h2>
+        <p class="uikit-desc">Paleta oficial — no inventar variantes fuera de este sistema.</p>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background:#0B1F3A"></div><div class="swatch-meta"><strong>Navy</strong><span>#0B1F3A</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#FF8A00"></div><div class="swatch-meta"><strong>Orange hot</strong><span>#FF8A00</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#F5A623"></div><div class="swatch-meta"><strong>Orange</strong><span>#F5A623</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#FFFFFF;border-bottom:1px solid #E8ECF2"></div><div class="swatch-meta"><strong>White</strong><span>#FFFFFF</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#F4F6F9"></div><div class="swatch-meta"><strong>Gray 50</strong><span>#F4F6F9</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#1A2332"></div><div class="swatch-meta"><strong>Text</strong><span>#1A2332</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#071528"></div><div class="swatch-meta"><strong>Navy deep</strong><span>#071528</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#FFF4E0"></div><div class="swatch-meta"><strong>Orange soft</strong><span>#FFF4E0</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uikit-section" id="tipografia">
+      <div class="container">
+        <h2>Tipografía</h2>
+        <p class="uikit-desc">Plus Jakarta Sans para títulos · Inter para cuerpo.</p>
+        <div class="type-scale">
+          <div class="type-row"><span class="type-label">Display</span><span class="type-display">Técnicos cerca tuyo</span></div>
+          <div class="type-row"><span class="type-label">H2</span><span class="type-h2">¿Qué necesitás resolver hoy?</span></div>
+          <div class="type-row"><span class="type-label">Body</span><span class="type-body">Encontrá profesionales verificados para hogar, industria y campo. Pagá con Mercado Pago.</span></div>
+          <div class="type-row"><span class="type-label">Small</span><span class="type-small">Identidad revisada · cobertura en las 24 provincias</span></div>
+          <div class="type-row"><span class="type-label">Caption</span><span class="type-caption">Lun–Vie 9:00–18:00 · Salta, Argentina</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uikit-section" id="botones">
+      <div class="container">
+        <h2>Botones</h2>
+        <p class="uikit-desc">Primary, secondary/outline, ghost, danger · sm / md / lg · disabled.</p>
+        <div class="demo-block">
+          <div class="demo-row">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-outline">Outline</button>
+            <button class="btn btn-secondary">Secondary</button>
+            <button class="btn btn-ghost">Ghost</button>
+            <button class="btn btn-danger">Danger</button>
+            <button class="btn btn-primary" disabled>Disabled</button>
+          </div>
+          <div class="demo-row">
+            <button class="btn btn-primary btn-sm">Small</button>
+            <button class="btn btn-primary btn-md">Medium</button>
+            <button class="btn btn-primary btn-lg">Large</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uikit-section" id="inputs">
+      <div class="container">
+        <h2>Inputs</h2>
+        <p class="uikit-desc">Text, select, textarea, search · labels, help y errores.</p>
+        <div class="demo-grid-2">
+          <div class="demo-block form-stack">
+            <div class="field">
+              <label for="demo-nombre">Nombre</label>
+              <input id="demo-nombre" type="text" placeholder="Ej. Juan Pérez" />
+              <span class="field-help">Como figura en tu DNI.</span>
+            </div>
+            <div class="field">
+              <label for="demo-zona">Zona</label>
+              <select id="demo-zona">
+                <option>Salta Capital</option>
+                <option>Cerrillos</option>
+                <option>San Lorenzo</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="demo-desc">Descripción</label>
+              <textarea id="demo-desc" placeholder="Contanos qué necesitás…"></textarea>
+            </div>
+          </div>
+          <div class="demo-block form-stack">
+            <div class="field">
+              <label for="demo-search">Buscar</label>
+              <div class="input-search">
+                <img class="search-icon" src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-buscar.png" alt="" width="18" height="18" />
+                <input id="demo-search" type="search" placeholder="Plomería, electricidad…" />
+              </div>
+            </div>
+            <div class="field has-error">
+              <label for="demo-err">Email</label>
+              <input id="demo-err" type="email" value="mal@" />
+              <span class="field-error-msg">Ingresá un email válido.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uikit-section" id="chips">
+      <div class="container">
+        <h2>Chips, tags y badges</h2>
+        <p class="uikit-desc">Estados de trabajo y etiquetas de confianza.</p>
+        <div class="demo-block">
+          <div class="demo-row">
+            <span class="chip"><span class="chip-dot"></span> Mercado Pago</span>
+            <span class="chip"><span class="chip-dot"></span> Identidad revisada</span>
+            <span class="tag">Plomería</span>
+            <span class="tag tag-orange">Urgente</span>
+          </div>
+          <div class="demo-row">
+            <span class="badge badge-verificado"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-identidad-verificada.png" alt="" width="14" height="14" style="display:inline;width:14px;height:14px" /> Verificado</span>
+            <span class="badge badge-curso">En curso</span>
+            <span class="badge badge-completado">Completado</span>
+            <span class="badge badge-navy">Nuevo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uikit-section" id="alertas">
+      <div class="container">
+        <h2>Alertas</h2>
+        <p class="uikit-desc">Success, warning, info y error.</p>
+        <div class="form-stack">
+          <div class="alert alert-success"><div><strong>Listo</strong>Tu presupuesto se envió correctamente.</div></div>
+          <div class="alert alert-warning"><div><strong>Atención</strong>Confirmá la zona antes de contratar.</div></div>
+          <div class="alert alert-info"><div><strong>Info</strong>Los fondos quedan retenidos hasta tu conformidad.</div></div>
+          <div class="alert alert-error"><div><strong>Error</strong>No pudimos procesar el pago. Probá de nuevo.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uikit-section" id="cards">
+      <div class="container">
+        <h2>Cards</h2>
+        <p class="uikit-desc">Service card, pro card y quote card.</p>
+        <div class="demo-grid-3" style="margin-bottom:1.25rem">
+          <article class="card service-card">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-plomeria.png" alt="" width="56" height="56" />
+            <div>
+              <h3>Plomería</h3>
+              <p>Pérdidas, destapes e instalaciones.</p>
+            </div>
+          </article>
+          <article class="card quote-card">
+            <div class="quote-card-head">
+              <h3>Presupuesto #1042</h3>
+              <span class="quote-amount">$28.500</span>
+            </div>
+            <p>Cambio de canilla + revisión de presión en baño principal.</p>
+            <div class="quote-card-actions">
+              <a class="btn btn-primary btn-sm" href="checkout.html">Aceptar</a>
+              <a class="btn btn-ghost btn-sm" href="#">Ver detalle</a>
+            </div>
+          </article>
+          <div></div>
+        </div>
+        <div class="demo-grid-3">
+          <article class="card pro-card">
+            <div class="pro-card-media">
+              <img src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-06-plomeria.png" alt="Martín Ríos" />
+            </div>
+            <div class="pro-card-body">
+              <div class="pro-card-top">
+                <img class="avatar" src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-05-cliente-tecnico.png" alt="" />
+                <div class="pro-card-meta">
+                  <h3>Martín Ríos</h3>
+                  <div class="zona">Salta Capital · Plomería</div>
+                  <div class="rating" style="margin-top:0.35rem">
+                    <span class="rating-stars" aria-hidden="true">★★★★★</span>
+                    <span>4.9</span>
+                    <span class="rating-count">(128)</span>
+                  </div>
+                </div>
+              </div>
+              <div><span class="badge badge-verificado">Identidad verificada</span></div>
+              <div class="pro-card-price">
+                <div><div class="from">Desde</div><div class="amount">$12.000</div></div>
+                <a class="btn btn-primary btn-sm" href="perfil.html">Ver perfil</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="uikit-section" id="avatar">
+      <div class="container">
+        <h2>Avatar y rating</h2>
+        <p class="uikit-desc">Tamaños sm / md / lg / xl y estrellas.</p>
+        <div class="demo-block demo-row">
+          <img class="avatar avatar-sm" src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-07-electricista.png" alt="" />
+          <img class="avatar" src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-05-cliente-tecnico.png" alt="" />
+          <img class="avatar avatar-lg" src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-06-plomeria.png" alt="" />
+          <img class="avatar avatar-xl" src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-15-foto-equipo.png" alt="" />
+          <div class="rating"><span class="rating-stars">★★★★☆</span> <span>4.2</span> <span class="rating-count">(36 reseñas)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uikit-section" id="tabs">
+      <div class="container">
+        <h2>Tabs</h2>
+        <p class="uikit-desc">Navegación por pestañas (estilo login cliente / profesional).</p>
+        <div class="demo-block" style="max-width:480px">
+          <div class="tabs" role="tablist">
+            <button type="button" class="tab is-active">Cliente</button>
+            <button type="button" class="tab">Profesional</button>
+          </div>
+          <p style="color:var(--gray-600);font-size:0.9375rem">Ingresá con tu email para pedir presupuestos y seguir trabajos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="uikit-section" id="empty">
+      <div class="container">
+        <h2>Empty state</h2>
+        <p class="uikit-desc">Cuando no hay resultados o aún no hay actividad.</p>
+        <div class="empty-state">
+          <img src="../../04-web-assets/fixya-pack-final/06-extras/empty-state.png" alt="" width="160" />
+          <h3>Todavía no hay presupuestos</h3>
+          <p>Cuando un profesional te responda, vas a ver las ofertas acá.</p>
+          <a class="btn btn-primary" href="categoria.html">Buscar profesional</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="uikit-section" id="iconos">
+      <div class="container">
+        <h2>Iconos</h2>
+        <p class="uikit-desc">Muestras de <code>assets/iconos-ui/</code> y <code>assets/categorias/</code>.</p>
+        <h3 style="font-size:0.875rem;color:var(--gray-600);margin-bottom:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em">UI</h3>
+        <div class="icon-row" style="margin-bottom:1.75rem">
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-buscar.png" alt="" /><span>buscar</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-agenda.png" alt="" /><span>agenda</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-chat.png" alt="" /><span>chat</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-candado.png" alt="" /><span>candado</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-identidad-verificada.png" alt="" /><span>identidad</span></div>
+          <div class="icon-sample"><img src="../../02-marketing/fixya-marketing-pack/ads/assets/ui-mercado-pago.png" alt="" /><span>MP FIXYA</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-exito.png" alt="" /><span>éxito</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-resena.png" alt="" /><span>reseña</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-ubicacion.png" alt="" /><span>ubicación</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-perfil.png" alt="" /><span>perfil</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-notificacion.png" alt="" /><span>notif</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-entrega-garantia.png" alt="" /><span>garantía</span></div>
+        </div>
+        <h3 style="font-size:0.875rem;color:var(--gray-600);margin-bottom:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em">Categorías</h3>
+        <div class="icon-row">
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-plomeria.png" alt="" /><span>plomería</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-electricidad.png" alt="" /><span>electricidad</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-gas.png" alt="" /><span>gas</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-pintura.png" alt="" /><span>pintura</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-aire.png" alt="" /><span>aire</span></div>
+          <div class="icon-sample"><img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-cerrajeria.png" alt="" /><span>cerrajería</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <footer class="footer" id="contacto">
+    <div class="footer-pattern" style="background-image: url('../../04-web-assets/fixya-pack-final/02-hero-marketing/footer-pattern.png');"></div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../../04-web-assets/fixya-pack-final/01-logos/logo-blanco.png" alt="FIXYA" width="140" height="36" />
+          <p>Marketplace de servicios para hogar, industria, campo y talento en toda Argentina.</p>
+        </div>
+
+        <div>
+          <h4>Explorar</h4>
+          <ul class="footer-links">
+            <li><a href="categoria.html">Servicios</a></li>
+            <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+            <li><a href="perfil.html">Profesionales</a></li>
+            <li><a href="checkout.html">Pedir presupuesto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Producto</h4>
+          <ul class="footer-links">
+            <li><a href="producto.html">Mapa de pantallas</a></li>
+            <li><a href="ui-kit.html">UI Kit</a></li>
+            <li><a href="login.html">Ingresar</a></li>
+            <li><a href="emails/presupuesto-recibido.html">Emails</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contacto</h4>
+          <ul class="footer-contact">
+            <li>
+              <span aria-hidden="true">📍</span>
+              <span>Av. Casiano Casas 3080, Salta, Argentina</span>
+            </li>
+            <li>
+              <span aria-hidden="true">📞</span>
+              <a href="tel:+5493873522920">+54 9 387 352-2920</a>
+            </li>
+            <li>
+              <span aria-hidden="true">✉️</span>
+              <a href="mailto:info@fixya.emprenor.com.ar">info@fixya.emprenor.com.ar</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 FIXYA. Todos los derechos reservados.</span>
+        <span>Una empresa de <strong>Grupo Emprenor</strong></span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

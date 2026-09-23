@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registrarse — FIXYA</title>
+  <link rel="icon" type="image/png" href="../../04-web-assets/fixya-pack-final/06-extras/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="../../04-web-assets/fixya-pack-final/01-logos/logo-horizontal.png" alt="FIXYA" /></a>
+      <nav class="nav">
+        <a href="categoria.html">Servicios</a>
+        <a href="index.html#como-funciona">Cómo funciona</a>
+        <a href="producto.html">Producto</a>
+        <a href="login.html">Entrar</a>
+      </nav>
+      <div class="header-ctas">
+        <a class="btn btn-outline" href="login.html">Ya tengo cuenta</a>
+        <a class="btn btn-primary" href="#form">Crear cuenta</a>
+      </div>
+    </div>
+  </header>
+  <main class="section">
+    <div class="container" style="max-width:560px;margin:0 auto">
+      <h1 style="font-family:Plus Jakarta Sans,sans-serif">Creá tu cuenta FIXYA</h1>
+      <p class="muted">Un solo acceso para clientes y profesionales. Sin costo de registro.</p>
+      <div class="tabs" style="display:flex;gap:8px;margin:1.5rem 0">
+        <button class="btn btn-primary" type="button">Soy cliente</button>
+        <button class="btn btn-outline" type="button">Soy profesional</button>
+      </div>
+      <form id="form" class="card" style="padding:1.5rem;display:grid;gap:1rem;background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(11,31,58,.08)">
+        <label>Nombre completo<input class="input" type="text" placeholder="Tu nombre" required /></label>
+        <label>Email<input class="input" type="email" placeholder="vos@email.com" required /></label>
+        <label>Teléfono<input class="input" type="tel" placeholder="+54 9 …" /></label>
+        <label>Contraseña<input class="input" type="password" placeholder="Mínimo 8 caracteres" required /></label>
+        <label style="display:flex;gap:.5rem;align-items:flex-start;font-size:.9rem"><input type="checkbox" required /> Acepto términos y política de privacidad</label>
+        <button class="btn btn-primary" type="submit">Registrarme gratis</button>
+      </form>
+      <p style="margin-top:1rem">¿Ya tenés cuenta? <a href="login.html">Ingresá</a></p>
+    </div>
+  </main>
+  <footer class="footer"><div class="container"><p>FIXYA · Salta, Argentina · +54 9 387 352-2920</p></div></footer>
+</body>
+</html>

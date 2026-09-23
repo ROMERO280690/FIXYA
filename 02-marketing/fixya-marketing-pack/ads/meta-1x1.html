@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <title>FIXYA Ad · Meta 1:1 — Técnicos verificados</title>
+  <style>
+    :root { --navy:#0B1F3A; --orange:#FF8A00; --white:#fff; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background:#e8eef5;
+      padding:32px;
+      color:var(--navy);
+    }
+    .spec {
+      max-width:720px; margin:0 auto 24px;
+      background:#fff; border-radius:12px; padding:20px 24px;
+      border:1px solid #d0dae6; font-size:14px; line-height:1.5;
+    }
+    .spec h1 { font-size:1.15rem; margin-bottom:8px; }
+    .spec code { background:#f0f4f8; padding:2px 6px; border-radius:4px; font-size:12px; }
+    .spec ul { margin:8px 0 0 18px; color:#445; }
+    .board-wrap { display:flex; justify-content:center; padding:16px 0 40px; }
+    /* Ad mock 1080x1080 scaled */
+    .ad {
+      width:540px; height:540px;
+      border-radius:24px;
+      overflow:hidden;
+      position:relative;
+      background: linear-gradient(160deg, #0B1F3A 0%, #143456 45%, #0B1F3A 100%);
+      color:var(--white);
+      box-shadow:0 20px 50px rgba(11,31,58,.35);
+      display:flex; flex-direction:column;
+      padding:36px 40px;
+    }
+    .ad::before {
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(255,138,0,.45), transparent 42%),
+        radial-gradient(circle at 10% 90%, rgba(255,138,0,.2), transparent 40%);
+      pointer-events:none;
+    }
+    .ad > * { position:relative; z-index:1; }
+    .ad-top { display:flex; align-items:center; justify-content:space-between; }
+    .ad-top img.logo { height:48px; }
+    .pill {
+      background:rgba(255,138,0,.2); color:var(--orange);
+      border:1px solid rgba(255,138,0,.55);
+      font-size:11px; font-weight:700; letter-spacing:.06em;
+      text-transform:uppercase; padding:6px 12px; border-radius:999px;
+    }
+    .ad-body { flex:1; display:flex; flex-direction:column; justify-content:center; gap:16px; }
+    .ad-body h2 {
+      font-size:2.35rem; line-height:1.1; font-weight:800;
+    }
+    .ad-body h2 span { color:var(--orange); }
+    .ad-body p { font-size:1.1rem; opacity:.9; max-width:90%; }
+    .cta {
+      align-self:flex-start;
+      background:var(--orange); color:var(--navy);
+      font-weight:800; font-size:1rem;
+      padding:14px 28px; border-radius:12px;
+      box-shadow:0 8px 24px rgba(255,138,0,.4);
+    }
+    .ad-foot {
+      display:flex; align-items:center; gap:10px;
+      font-size:13px; opacity:.85; margin-top:8px;
+    }
+    .ad-foot img.mp { height:26px; }
+    .ratio { text-align:center; font-size:12px; color:#667; margin-top:-24px; }
+    @media print {
+      body { background:#fff; padding:0; }
+      .spec { border:none; }
+      .ad { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="spec">
+    <h1>Meta Ads · Cuadrado 1:1 (1080×1080)</h1>
+    <p><strong>Headline:</strong> Técnicos verificados cerca tuyo</p>
+    <p><strong>Primary text:</strong> Encontrá profesionales de confianza en Salta. Pedí presupuesto y arreglálo fácil con FIXYA.</p>
+    <p><strong>CTA botón:</strong> Saber más / Contactar</p>
+    <ul>
+      <li>Formato: feed Instagram / Facebook · <code>1:1</code></li>
+      <li>Colores: navy <code>#0B1F3A</code> · orange <code>#FF8A00</code></li>
+      <li>Contacto: +54 9 387 352-2920 · info@fixya.emprenor.com.ar</li>
+    </ul>
+  </div>
+  <div class="board-wrap">
+    <div class="ad" role="img" aria-label="Mock anuncio FIXYA 1x1">
+      <div class="ad-top">
+        <img class="logo" src="../../../04-web-assets/fixya-pack-final/01-logos/logo-fondo-oscuro.png" alt="FIXYA" />
+        <span class="pill">Salta</span>
+      </div>
+      <div class="ad-body">
+        <h2>Técnicos <span>verificados</span> cerca tuyo</h2>
+        <p>Plomería, electricidad, gas y más. Pedí presupuesto y conectá con profesionales de confianza.</p>
+        <div class="cta">Pedí presupuesto</div>
+      </div>
+      <div class="ad-foot">
+        <span>Pagos con</span>
+        <img class="mp" src="assets/ui-mercado-pago.png" alt="Mercado Pago" />
+        <span style="margin-left:auto">fixya.emprenor.com.ar</span>
+      </div>
+    </div>
+  </div>
+  <p class="ratio">Vista mock 540×540 (escala 50% de 1080×1080) · Exportar captura o recrear en Canva/Meta Ads Manager</p>
+</body>
+</html>

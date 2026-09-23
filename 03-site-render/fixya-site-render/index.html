@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FIXYA — Técnicos verificados cerca tuyo</title>
+  <meta name="description" content="Marketplace de servicios en Argentina. Encontrá técnicos verificados para hogar, industria y campo. Pagá con Mercado Pago. Cobertura en las 24 provincias." />
+  <meta property="og:title" content="FIXYA — Técnicos verificados cerca tuyo" />
+  <meta property="og:description" content="Marketplace de servicios en Argentina. Identidad revisada, Mercado Pago y cobertura nacional." />
+  <meta property="og:image" content="assets/marketing/og-share.png" />
+  <link rel="icon" type="image/png" href="../../04-web-assets/fixya-pack-final/06-extras/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-left">
+        <a href="tel:+5493873522920" aria-label="Llamar a FIXYA">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +54 9 387 352-2920
+        </a>
+        <a href="mailto:info@fixya.emprenor.com.ar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@fixya.emprenor.com.ar
+        </a>
+      </div>
+      <div class="topbar-right">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display:inline;vertical-align:-2px;width:14px;height:14px;margin-right:4px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Lun–Vie 9:00–18:00 · Salta, Argentina
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <input type="checkbox" id="nav-check" aria-hidden="true" />
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a class="logo" href="#inicio" aria-label="FIXYA inicio">
+        <img src="../../04-web-assets/fixya-pack-final/01-logos/logo-horizontal.png" alt="FIXYA" width="160" height="40" />
+      </a>
+
+      <label for="nav-check" class="nav-toggle" aria-label="Abrir menú">
+        <span></span>
+      </label>
+
+      <div class="nav-panel">
+        <nav class="nav" aria-label="Principal">
+          <a href="#servicios">Servicios</a>
+          <a href="#como-funciona">Cómo funciona</a>
+          <a href="#profesionales">Profesionales</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <div class="header-ctas">
+          <a class="btn btn-outline" href="#profesionales">Soy profesional</a>
+          <a class="btn btn-primary" href="#buscar">Buscar profesional</a>
+        </div>
+      </div>
+
+      <div class="header-ctas">
+        <a class="btn btn-outline" href="#profesionales">Soy profesional</a>
+        <a class="btn btn-primary" href="#buscar">Buscar profesional</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="inicio">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="hero-badge">Marketplace de servicios · Argentina</span>
+          <h1>Técnicos verificados <span class="accent">cerca tuyo</span></h1>
+          <p class="hero-lead">
+            Encontrá profesionales para hogar, industria y campo. Identidad revisada,
+            presupuestos claros y pago seguro con Mercado Pago.
+          </p>
+
+          <form class="search-card" id="buscar" action="#servicios" method="get" role="search">
+            <div class="search-grid">
+              <div class="field">
+                <label for="servicio">Servicio</label>
+                <input id="servicio" name="servicio" type="text" placeholder="Ej. Plomería, electricidad…" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="zona">Zona</label>
+                <input id="zona" name="zona" type="text" placeholder="Barrio o ciudad" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="radio">Radio</label>
+                <select id="radio" name="radio">
+                  <option value="5">5 km</option>
+                  <option value="10" selected>10 km</option>
+                  <option value="25">25 km</option>
+                  <option value="50">50 km</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+          </form>
+
+          <div class="trust-chips" aria-label="Confianza">
+            <span class="chip"><span class="chip-dot" aria-hidden="true"></span> Mercado Pago</span>
+            <span class="chip"><span class="chip-dot" aria-hidden="true"></span> Identidad revisada</span>
+            <span class="chip"><span class="chip-dot" aria-hidden="true"></span> 24 provincias</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <img
+            src="../../04-web-assets/fixya-pack-final/02-hero-marketing/hero-principal.png"
+            alt="Profesional FIXYA atendiendo a un cliente"
+            width="640"
+            height="480"
+            fetchpriority="high"
+          />
+          <div class="hero-float" aria-hidden="true">
+            <div class="hero-float-icon">OK</div>
+            <div>
+              <strong>Expediente digital</strong>
+              <span>Trabajo documentado y trazable</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categorías -->
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Servicios</span>
+          <h2>¿Qué necesitás resolver hoy?</h2>
+          <p>Elegí una categoría y pedí presupuesto a técnicos cerca de tu zona.</p>
+        </div>
+
+        <div class="cat-grid">
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-plomeria.png" alt="" width="85" height="85" />
+            <h3>Plomería</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-electricidad.png" alt="" width="155" height="85" />
+            <h3>Electricidad</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-gas.png" alt="" width="64" height="64" />
+            <h3>Gas</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-cerrajeria.png" alt="" width="64" height="64" />
+            <h3>Cerrajería</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-aire.png" alt="" width="64" height="64" />
+            <h3>Aire acondicionado</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-pintura.png" alt="" width="64" height="64" />
+            <h3>Pintura</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-carpinteria.png" alt="" width="64" height="64" />
+            <h3>Carpintería</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-jardineria.png" alt="" width="64" height="64" />
+            <h3>Jardinería</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-limpieza.png" alt="" width="64" height="64" />
+            <h3>Limpieza</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-mudanzas.png" alt="" width="64" height="64" />
+            <h3>Mudanzas</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-tecnicos.png" alt="" width="64" height="64" />
+            <h3>Técnicos</h3>
+          </a>
+          <a class="cat-card" href="#buscar">
+            <img src="../../01-iconos/fixya-iconos-pack/03-categorias-base/cat-otros.png" alt="" width="64" height="64" />
+            <h3>Otros</h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cómo funciona -->
+    <section class="section section-alt" id="como-funciona">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Cómo funciona</span>
+          <h2>De la consulta a la entrega, en 5 pasos</h2>
+          <p>Un flujo simple para clientes y profesionales, con pago protegido.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <h3>Consultá</h3>
+            <p>Contanos qué necesitás y en qué zona. En minutos llegás a técnicos cercanos.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+            </div>
+            <h3>Recibí presupuestos</h3>
+            <p>Compará precios y perfiles con identidad revisada antes de decidir.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>Contratá</h3>
+            <p>Elegí al profesional que mejor se adapte y coordiná día y horario.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+            </div>
+            <h3>Pagá con MP</h3>
+            <p>Aboná con Mercado Pago de forma segura. El dinero se libera al confirmar.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-num">5</div>
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3>Entrega</h3>
+            <p>Recibí el trabajo con expediente digital: fotos, detalle y seguimiento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="profesionales">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Por qué FIXYA</span>
+          <h2>Confianza pensada para Argentina</h2>
+          <p>Herramientas reales para clientes exigentes y profesionales serios.</p>
+        </div>
+
+        <div class="feat-grid">
+          <article class="feat-card">
+            <img src="../../04-web-assets/fixya-pack-final/04-features/feat-verificados.png" alt="" width="72" height="72" />
+            <h3>Profesionales verificados</h3>
+            <p>Identidad revisada y perfiles con historial para que sepas con quién estás trabajando.</p>
+          </article>
+          <article class="feat-card">
+            <img src="../../04-web-assets/fixya-pack-final/04-features/feat-pagos.png" alt="" width="72" height="72" />
+            <h3>Pagos con Mercado Pago</h3>
+            <p>Cobrá y pagá con la plataforma que ya usás. Menos fricción, más seguridad.</p>
+          </article>
+          <article class="feat-card">
+            <img src="../../04-web-assets/fixya-pack-final/04-features/feat-garantia.png" alt="" width="72" height="72" />
+            <h3>Garantía de servicio</h3>
+            <p>Expediente digital y respaldo ante reclamos para que el trabajo quede bien cerrado.</p>
+          </article>
+          <article class="feat-card">
+            <img src="../../04-web-assets/fixya-pack-final/04-features/feat-rapido.png" alt="" width="72" height="72" />
+            <h3>Respuesta rápida</h3>
+            <p>Pedí presupuesto y recibí ofertas de técnicos cercanos sin dar vueltas por WhatsApp.</p>
+          </article>
+          <article class="feat-card">
+            <img src="../../04-web-assets/fixya-pack-final/04-features/feat-soporte.png" alt="" width="72" height="72" />
+            <h3>Soporte humano</h3>
+            <p>Equipo en Salta listo para acompañarte si necesitás una mano con tu pedido.</p>
+          </article>
+          <article class="feat-card">
+            <img src="../../04-web-assets/fixya-pack-final/04-features/feat-cobertura.png" alt="" width="72" height="72" />
+            <h3>Cobertura nacional</h3>
+            <p>Operamos en las 24 provincias: hogar, industria, campo y talento especializado.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social proof / corporativas -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">En acción</span>
+          <h2>Del escritorio a la obra</h2>
+          <p>Así se vive FIXYA: equipo, campo y clientes resolviendo juntos.</p>
+        </div>
+
+        <div class="corp-grid">
+          <figure class="corp-card">
+            <img src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-01-equipo-oficina.png" alt="Equipo FIXYA en oficina" width="480" height="360" loading="lazy" />
+            <figcaption class="corp-caption">Equipo operativo listo para acompañarte</figcaption>
+          </figure>
+          <figure class="corp-card">
+            <img src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-03-taller.png" alt="Obra con profesionales FIXYA" width="480" height="360" loading="lazy" />
+            <figcaption class="corp-caption">Profesionales en obra, con seguimiento digital</figcaption>
+          </figure>
+          <figure class="corp-card">
+            <img src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-06-plomeria.png" alt="Servicio de plomería" width="480" height="360" loading="lazy" />
+            <figcaption class="corp-caption">Plomería y oficios del hogar, cerca tuyo</figcaption>
+          </figure>
+        </div>
+
+        <div class="corp-grid" style="margin-top: 1.25rem;">
+          <figure class="corp-card">
+            <img src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-14-cliente-app.png" alt="Cliente usando la app FIXYA" width="480" height="360" loading="lazy" />
+            <figcaption class="corp-caption">Pedí y seguí tu servicio desde el celular</figcaption>
+          </figure>
+          <figure class="corp-card">
+            <img src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-05-cliente-tecnico.png" alt="Cliente con técnico" width="480" height="360" loading="lazy" />
+            <figcaption class="corp-caption">Encuentro cliente–técnico con confianza</figcaption>
+          </figure>
+          <figure class="corp-card">
+            <img src="../../04-web-assets/fixya-pack-final/07-corporativas/corp-17-planta-industrial.png" alt="Planta industrial" width="480" height="360" loading="lazy" />
+            <figcaption class="corp-caption">También industria y operaciones de escala</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA banner -->
+    <section class="cta-band" id="presupuesto">
+      <div class="container">
+        <div class="cta-inner">
+          <img src="../../04-web-assets/fixya-pack-final/02-hero-marketing/cta-banner.png" alt="" loading="lazy" />
+          <div class="cta-content">
+            <h2>Pedí presupuesto gratis</h2>
+            <p>Contanos qué necesitás y recibí propuestas de técnicos verificados en tu zona.</p>
+            <div class="cta-actions">
+              <a class="btn btn-primary btn-lg" href="#buscar">Buscar profesional</a>
+              <a class="btn btn-outline-light btn-lg" href="#contacto">Hablar con nosotros</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- App promo -->
+    <section class="app-promo">
+      <div class="container">
+        <div class="app-promo-inner">
+          <div class="app-promo-copy">
+            <h2>Llevá FIXYA en el bolsillo</h2>
+            <p>
+              Pedí servicios, compará presupuestos y seguí el expediente digital
+              desde tu celular. Pronto en App Store y Google Play.
+            </p>
+            <div class="app-badges">
+              <a class="app-badge" href="#contacto" aria-label="Próximamente en App Store">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <span><small>Próximamente</small>App Store</span>
+              </a>
+              <a class="app-badge" href="#contacto" aria-label="Próximamente en Google Play">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.18 23.73c-.3-.13-.5-.4-.5-.73V1c0-.33.2-.6.5-.73l.08-.02 12.1 11.02v1.48L3.26 23.75l-.08-.02zm13.02-8.13-2.56-2.34 2.56-2.34 3.2 1.84c.5.29.5.99 0 1.28l-3.2 1.56zm.5-7.66L3.97.23C4.2.08 4.48.03 4.74.14l13.7 7.9-2.74 1.9zM4.74 23.86c-.26.11-.54.06-.77-.09l12.96-7.9 2.74 1.9-13.7 7.9c-.4.23-.83.23-1.23.09z"/></svg>
+                <span><small>Próximamente</small>Google Play</span>
+              </a>
+            </div>
+          </div>
+          <div class="app-promo-visual">
+            <img src="../../04-web-assets/fixya-pack-final/06-extras/app-promo.png" alt="Promoción de la app FIXYA" width="400" height="320" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="contacto">
+    <div class="footer-pattern" style="background-image: url('../../04-web-assets/fixya-pack-final/02-hero-marketing/footer-pattern.png');"></div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../../04-web-assets/fixya-pack-final/01-logos/logo-blanco.png" alt="FIXYA" width="140" height="36" />
+          <p>Marketplace de servicios para hogar, industria, campo y talento en toda Argentina.</p>
+        </div>
+
+        <div>
+          <h4>Explorar</h4>
+          <ul class="footer-links">
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#como-funciona">Cómo funciona</a></li>
+            <li><a href="#profesionales">Profesionales</a></li>
+            <li><a href="#buscar">Buscar profesional</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Empresa</h4>
+          <ul class="footer-links">
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="https://fixya.emprenor.com" rel="noopener">Sitio actual</a></li>
+            <li><a href="#profesionales">Sumate como profesional</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contacto</h4>
+          <ul class="footer-contact">
+            <li>
+              <span aria-hidden="true">📍</span>
+              <span>Av. Casiano Casas 3080, Salta, Argentina</span>
+            </li>
+            <li>
+              <span aria-hidden="true">📞</span>
+              <a href="tel:+5493873522920">+54 9 387 352-2920</a>
+            </li>
+            <li>
+              <span aria-hidden="true">✉️</span>
+              <a href="mailto:info@fixya.emprenor.com.ar">info@fixya.emprenor.com.ar</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 FIXYA. Todos los derechos reservados.</span>
+        <span>Una empresa de <strong>Grupo Emprenor</strong></span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sumate a FIXYA | Kit profesionales</title>
+  <style>
+    :root {
+      --navy: #0B1F3A;
+      --orange: #FF8A00;
+      --white: #ffffff;
+      --muted: #5a6a7a;
+      --light: #f4f7fb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #163a63 55%, #0B1F3A 100%);
+      color: var(--white);
+      padding: 48px 0 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px; top: -40px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,138,0,.35), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { display: flex; flex-wrap: wrap; gap: 32px; align-items: center; position: relative; z-index: 1; }
+    .hero-copy { flex: 1 1 320px; }
+    .hero-logo { flex: 0 0 auto; }
+    .hero-logo img { height: 72px; width: auto; display: block; }
+    .badge {
+      display: inline-block;
+      background: rgba(255,138,0,.2);
+      color: var(--orange);
+      border: 1px solid rgba(255,138,0,.5);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p.lead { font-size: 1.1rem; opacity: .92; max-width: 480px; margin-bottom: 24px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-orange {
+      background: var(--orange);
+      color: var(--navy);
+      box-shadow: 0 6px 20px rgba(255,138,0,.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,.55);
+    }
+
+    /* Benefits */
+    .section { padding: 56px 0; }
+    .section.alt { background: var(--light); }
+    .section h2 {
+      font-size: 1.75rem;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .section .sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 36px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 16px rgba(11,31,58,.06);
+      text-align: center;
+    }
+    .card img.icon {
+      width: 64px; height: 64px;
+      object-fit: contain;
+      margin-bottom: 14px;
+    }
+    .card h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--navy); }
+    .card p { color: var(--muted); font-size: .95rem; }
+
+    /* Steps */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      counter-reset: step;
+    }
+    .step {
+      position: relative;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px 22px 22px;
+      border-top: 4px solid var(--orange);
+      box-shadow: 0 4px 16px rgba(11,31,58,.06);
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      top: -16px; left: 20px;
+      width: 32px; height: 32px;
+      background: var(--navy);
+      color: var(--orange);
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      line-height: 32px;
+      text-align: center;
+    }
+    .step h3 { margin: 8px 0 8px; font-size: 1.1rem; }
+    .step p { color: var(--muted); font-size: .95rem; }
+
+    /* CTA band */
+    .cta-band {
+      background: linear-gradient(90deg, var(--navy), #163a63);
+      color: var(--white);
+      padding: 48px 0;
+      text-align: center;
+    }
+    .cta-band h2 { font-size: 1.6rem; margin-bottom: 10px; }
+    .cta-band p { opacity: .9; margin-bottom: 22px; }
+    .cta-band .contact {
+      font-size: .95rem;
+      opacity: .85;
+      margin-top: 18px;
+    }
+    .cta-band .contact a { color: var(--orange); font-weight: 600; }
+
+    /* Printable strip */
+    .print-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 12px;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.75);
+      padding: 28px 0;
+      text-align: center;
+      font-size: .9rem;
+    }
+    footer strong { color: var(--orange); }
+    footer .mp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    footer .mp img { height: 28px; width: auto; }
+
+    @media print {
+      .hero { padding: 28px 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .btn { box-shadow: none !important; }
+      .section { padding: 28px 0; }
+      .cta-band, footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <span class="badge">Para profesionales · Salta</span>
+        <h1>Sumate a <span>FIXYA</span></h1>
+        <p class="lead">Conectá con clientes cerca tuyo, cobrá con Mercado Pago y llevá tu expediente digital. Más trabajos, menos vueltas.</p>
+        <div class="cta-row">
+          <a class="btn btn-orange" href="https://wa.me/5493873522920?text=Hola%20FIXYA%2C%20quiero%20sumarme%20como%20profesional">WhatsApp · Sumarme</a>
+          <a class="btn btn-outline" href="tel:+5493873522920">Llamar +54 9 387 352-2920</a>
+        </div>
+      </div>
+      <div class="hero-logo">
+        <img src="../../../04-web-assets/fixya-pack-final/01-logos/logo-fondo-oscuro.png" alt="FIXYA" />
+      </div>
+    </div>
+  </header>
+
+  <section class="section alt">
+    <div class="wrap">
+      <h2>Beneficios para tu oficio</h2>
+      <p class="sub">Diseñado para electricistas, plomeros, gasistas y técnicos de Salta que quieren crecer con confianza.</p>
+      <div class="cards">
+        <article class="card">
+          <img class="icon" src="../../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-identidad-verificada.png" alt="" />
+          <h3>Más clientes</h3>
+          <p>Aparecé frente a vecinos que buscan técnicos verificados cerca. Pedidos reales, sin intermediarios raros.</p>
+        </article>
+        <article class="card">
+          <img class="icon" src="../ads/assets/ui-mercado-pago.png" alt="Mercado Pago" />
+          <h3>Pagos con Mercado Pago</h3>
+          <p>Cobrás seguro y transparente. El cliente paga con MP y vos recibís sin pelear por el efectivo.</p>
+        </article>
+        <article class="card">
+          <img class="icon" src="../../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-expediente.png" alt="" />
+          <h3>Expediente digital</h3>
+          <p>Historial de trabajos, reseñas y documentos en un solo lugar. Profesionalismo que se nota.</p>
+        </article>
+        <article class="card">
+          <img class="icon" src="../../../01-iconos/fixya-iconos-pack/08-iconos-ui/ui-agenda.png" alt="" />
+          <h3>Agenda ordenada</h3>
+          <p>Organízate: presupuestos, visitas y seguimientos sin perder mensajes en el chat.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Cómo registrarte</h2>
+      <p class="sub">Tres pasos simples. En menos de un día podés estar activo.</p>
+      <div class="steps">
+        <div class="step">
+          <h3>Escribinos</h3>
+          <p>Mandanos un WhatsApp o llamá. Contanos tu oficio y zona de cobertura en Salta.</p>
+        </div>
+        <div class="step">
+          <h3>Verificamos</h3>
+          <p>Validamos identidad y datos profesionales. Así los clientes confían en vos desde el día uno.</p>
+        </div>
+        <div class="step">
+          <h3>Empezá a recibir</h3>
+          <p>Activamos tu perfil, conectás Mercado Pago y empezás a recibir pedidos y presupuestos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>¿Listo para sumarte?</h2>
+      <p>Hablá con el equipo FIXYA. Te guiamos en el alta y la activación.</p>
+      <div class="cta-row" style="justify-content:center">
+        <a class="btn btn-orange" href="https://wa.me/5493873522920?text=Hola%20FIXYA%2C%20quiero%20sumarme%20como%20profesional">WhatsApp ahora</a>
+        <a class="btn btn-outline" href="mailto:info@fixya.emprenor.com.ar">info@fixya.emprenor.com.ar</a>
+      </div>
+      <p class="contact">
+        Tel: <a href="tel:+5493873522920">+54 9 387 352-2920</a> · Salta, Argentina
+      </p>
+    </div>
+  </section>
+
+  <p class="print-note">Versión imprimible · Abrí en el navegador y usá Imprimir / Guardar PDF · FIXYA © Emprenor</p>
+
+  <footer>
+    <div class="wrap">
+      <p><strong>FIXYA</strong> — Arreglalo fácil · Salta</p>
+      <p>+54 9 387 352-2920 · info@fixya.emprenor.com.ar</p>
+      <div class="mp">
+        <span>Pagos con</span>
+        <img src="../ads/assets/ui-mercado-pago.png" alt="Mercado Pago" />
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

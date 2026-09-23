@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <title>FIXYA Ad · Story 9:16 — Arreglalo fácil</title>
+  <style>
+    :root { --navy:#0B1F3A; --orange:#FF8A00; --white:#fff; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background:#e8eef5; padding:32px; color:var(--navy);
+    }
+    .spec {
+      max-width:720px; margin:0 auto 24px;
+      background:#fff; border-radius:12px; padding:20px 24px;
+      border:1px solid #d0dae6; font-size:14px; line-height:1.5;
+    }
+    .spec h1 { font-size:1.15rem; margin-bottom:8px; }
+    .spec code { background:#f0f4f8; padding:2px 6px; border-radius:4px; font-size:12px; }
+    .spec ul { margin:8px 0 0 18px; color:#445; }
+    .board-wrap { display:flex; justify-content:center; padding:16px 0 40px; }
+    .phone {
+      width:270px; height:480px; /* 9:16 ~50% of 1080x1920 */
+      border-radius:28px; overflow:hidden; position:relative;
+      background: linear-gradient(165deg, #FF8A00 0%, #e07000 18%, #0B1F3A 42%, #0B1F3A 100%);
+      color:var(--white);
+      box-shadow:0 24px 60px rgba(11,31,58,.4);
+      display:flex; flex-direction:column;
+      padding:28px 22px 24px;
+    }
+    .phone::after {
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(circle at 70% 25%, rgba(255,255,255,.12), transparent 45%);
+      pointer-events:none;
+    }
+    .phone > * { position:relative; z-index:1; }
+    .safe { height:18px; font-size:10px; opacity:.5; text-align:center; letter-spacing:.1em; }
+    .logo { height:40px; margin:12px auto 0; display:block; }
+    .mid { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:14px; }
+    .mid h2 { font-size:1.65rem; line-height:1.15; font-weight:800; }
+    .mid h2 span { color:var(--orange); }
+    .mid p { font-size:.92rem; opacity:.9; }
+    .chips { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
+    .chip {
+      background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25);
+      padding:6px 10px; border-radius:999px; font-size:11px; font-weight:600;
+    }
+    .swipe {
+      background:var(--orange); color:var(--navy);
+      font-weight:800; text-align:center; padding:14px; border-radius:14px;
+      font-size:.95rem; margin-top:8px;
+    }
+    .foot { text-align:center; font-size:10px; opacity:.75; margin-top:10px; }
+    .foot img { height:20px; vertical-align:middle; margin-left:4px; }
+    .ratio { text-align:center; font-size:12px; color:#667; margin-top:-24px; }
+    @media print {
+      body { background:#fff; padding:0; }
+      .phone { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="spec">
+    <h1>Stories / Reels · 9:16 (1080×1920)</h1>
+    <p><strong>Copy:</strong> Arreglalo fácil con FIXYA</p>
+    <p><strong>Sub:</strong> Técnicos verificados · Presupuesto gratis · Pagás con Mercado Pago</p>
+    <p><strong>CTA sticker / swipe-up:</strong> Escribinos por WhatsApp</p>
+    <ul>
+      <li>Formato: IG/FB Stories · WhatsApp Status · <code>9:16</code></li>
+      <li>Dejar zona segura arriba/abajo (~250px) libre de texto crítico</li>
+      <li>Link: wa.me/5493873522920</li>
+    </ul>
+  </div>
+  <div class="board-wrap">
+    <div class="phone">
+      <div class="safe">STORY · 9:16</div>
+      <img class="logo" src="../../../04-web-assets/fixya-pack-final/01-logos/logo-fondo-oscuro.png" alt="FIXYA" />
+      <div class="mid">
+        <h2>Arreglalo <span>fácil</span> con FIXYA</h2>
+        <p>Pedí, compará y contratá técnicos verificados en Salta.</p>
+        <div class="chips">
+          <span class="chip">Verificados</span>
+          <span class="chip">Presupuesto gratis</span>
+          <span class="chip">Cerca tuyo</span>
+        </div>
+      </div>
+      <div class="swipe">Deslizá · WhatsApp</div>
+      <div class="foot">
+        Pagos con <img src="assets/ui-mercado-pago.png" alt="MP" />
+      </div>
+    </div>
+  </div>
+  <p class="ratio">Mock 270×480 (escala 25% de 1080×1920)</p>
+</body>
+</html>
