@@ -1,39 +1,49 @@
-# FIXYA — material organizado
+# FIXYA — sitio web
 
-Carpeta única del proyecto. Cada archivo existe **una sola vez**: se eliminaron los duplicados
-de los paquetes descargados y las páginas que los usaban se reapuntaron a la copia canónica.
+Repositorio del sitio de producción de **fixya.io**. El contenido de este
+repositorio se despliega tal cual a la raíz del hosting (`public_html`), por
+eso el sitio vive directamente en la raíz del repo y no en una subcarpeta.
 
 ## Estructura
 
 ```text
-FIXYA-organizado/
-├── 00-referencia/            Referencia visual principal (image.png)
-├── 01-iconos/                Iconografía oficial: categorías base/extra, íconos UI, ESTANDAR-ICONOS.md
-├── 02-marketing/             Ads (Meta, Google, stories), emails de bienvenida/reseña, kit profesionales
-├── 03-site-render/           Prototipos HTML anteriores (homepage, UI kit, checkout con Mercado Pago, emails)
-│                             └─ assets/marcas/mercado-pago/: logos oficiales de Mercado Pago
-├── 04-web-assets/            Pack de marca: logos, hero/marketing, categorías, features, extras, corporativas
-├── 05-web-completa/          ★ SITIO ACTUAL (FIXYA.io): 12 páginas, assets optimizados en WebP
-├── 06-fixya-fun/             Landing de la academia FIXYA.fun
-└── 99-versiones-anteriores/  Versiones viejas de algunas páginas, solo como archivo
+.
+├── index.html, servicios.html, categoria.html, ...   Páginas del sitio
+├── producto.php, perfil.php, dashboard.php           Páginas dinámicas (PHP)
+├── api/                                              Endpoints del backend (contacto, checkout, login, registro)
+├── includes/                                         Helpers PHP (DB, auth, CSRF, catálogo de categorías)
+├── db/schema.sql                                      Esquema de la base de datos
+├── assets/                                            Imágenes, logos e íconos optimizados para web
+├── config.example.php                                 Plantilla de configuración (copiar como config.php, NO se sube al hosting con datos reales)
+├── DEPLOY-HOSTINGER.md                                 Guía de despliegue paso a paso
+├── _reemplazados-por-php/                              Versiones estáticas viejas (perfil/dashboard/producto), solo de archivo
+└── _recursos-marca/                                    Material de marca que no forma parte del sitio: íconos fuente,
+                                                         piezas de marketing, prototipos históricos (00 a 04, 06, 99)
 ```
 
-## Dónde está cada cosa
+## Desarrollo local
 
-| Necesito… | Ir a |
-|---|---|
-| Trabajar en el sitio web | `05-web-completa/` (abrir `index.html`) |
-| Un ícono de categoría o UI | `01-iconos/fixya-iconos-pack/` |
-| Logos, fotos corporativas, hero | `04-web-assets/fixya-pack-final/` |
-| Logo oficial de Mercado Pago | `03-site-render/fixya-site-render-producto-completo/assets/marcas/mercado-pago/` |
-| Piezas de campaña | `02-marketing/fixya-marketing-pack/` |
-| Reglas de uso de íconos y marca | `01-iconos/fixya-iconos-pack/ESTANDAR-ICONOS.md`, `04-web-assets/fixya-pack-final/AUDITORIA.md` |
+El sitio usa PHP + MySQL. Con PHP instalado localmente:
 
-## Notas
+```bash
+php -S localhost:4174
+```
 
-- Los prototipos de `02` y `03` ya no tienen su propia copia de `assets/`: sus imágenes apuntan
-  (con rutas relativas) a `01-iconos` y `04-web-assets`. Si movés esas carpetas, mantené la estructura.
-- `05-web-completa/assets/` es independiente: contiene versiones optimizadas (WebP, íconos 192px,
-  logo transparente) y se puede publicar sola.
-- Los íconos originales de `01`/`04` están en alta resolución (1280×720 JPEG con extensión .png);
-  usar las versiones de `05-web-completa/assets/` para web.
+Necesitás una base `fixya` local (importar `db/schema.sql`) y un `config.php`
+copiado de `config.example.php` (el bloque `if ($esLocal)` ya apunta a
+`root` sin contraseña, el estándar de XAMPP).
+
+## Desplegar en Hostinger
+
+Ver [`DEPLOY-HOSTINGER.md`](DEPLOY-HOSTINGER.md).
+
+**Importante si usás el despliegue automático por Git de hPanel:** cada
+redeploy clona el repositorio de nuevo, así que `config.php` (que no está en
+el repo a propósito, para no exponer credenciales) se pierde y hay que
+volver a subirlo por FTP después de cada redeploy.
+
+## Material de marca
+
+Todo lo que no es el sitio en sí (íconos originales, piezas de marketing,
+prototipos anteriores) vive en [`_recursos-marca/`](_recursos-marca/) y se
+despliega junto con el sitio pero no está enlazado desde ninguna página.
