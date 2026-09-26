@@ -60,7 +60,7 @@ function e(string $v): string { return htmlspecialchars($v, ENT_QUOTES, 'UTF-8')
           <a href="index.html">Inicio</a>
           <a href="servicios.html">Servicios</a>
           <a href="categoria.html" class="active">Categorías</a>
-          <a href="profesionales.html">Profesionales</a>
+          <a href="profesionales.php">Profesionales</a>
           <a href="nosotros.html">Nosotros</a>
           <a href="contacto.html">Contacto</a>
         </nav>
@@ -109,7 +109,7 @@ function e(string $v): string { return htmlspecialchars($v, ENT_QUOTES, 'UTF-8')
             </ul>
             <div class="page-actions">
               <a class="btn btn-primary" href="checkout.html?servicio=<?= e($slug) ?>">Contratar</a>
-              <a class="btn btn-outline" href="profesionales.html">Ver profesionales</a>
+              <a class="btn btn-outline" href="profesionales.php">Ver profesionales</a>
             </div>
           </aside>
         </section>
@@ -147,7 +147,7 @@ function e(string $v): string { return htmlspecialchars($v, ENT_QUOTES, 'UTF-8')
         </div>
         <div>
           <h3>Empresa</h3>
-          <ul><li><a href="nosotros.html">Nosotros</a></li><li><a href="profesionales.html">Profesionales</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="privacidad.html">Privacidad</a></li><li><a href="terminos.html">Términos</a></li></ul>
+          <ul><li><a href="nosotros.html">Nosotros</a></li><li><a href="profesionales.php">Profesionales</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="privacidad.html">Privacidad</a></li><li><a href="terminos.html">Términos</a></li></ul>
         </div>
         <div>
           <h3>Contacto</h3>

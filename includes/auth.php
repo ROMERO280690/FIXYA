@@ -22,7 +22,7 @@ function usuarioActual(): ?array
     }
     static $cache = null;
     if ($cache === null) {
-        $stmt = db()->prepare('SELECT id, nombre, apellido, email, tipo_usuario, especialidad, zona, precio_base, bio FROM users WHERE id = ?');
+        $stmt = db()->prepare('SELECT id, nombre, apellido, email, tipo_usuario, especialidad, zona, precio_base, bio, foto, es_admin FROM users WHERE id = ?');
         $stmt->execute([$_SESSION['user_id']]);
         $cache = $stmt->fetch() ?: null;
     }
@@ -35,6 +35,16 @@ function requerirSesion(string $redirectA = 'login.html'): array
     if (!$usuario) {
         header('Location: ' . $redirectA);
         exit;
+    }
+    return $usuario;
+}
+
+function requerirAdmin(string $redirectA = 'login.html'): array
+{
+    $usuario = requerirSesion($redirectA);
+    if (empty($usuario['es_admin'])) {
+        http_response_code(403);
+        exit('No autorizado.');
     }
     return $usuario;
 }

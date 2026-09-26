@@ -49,6 +49,7 @@ $nombreCompleto = htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido
           <a href="perfil.php">Perfil</a>
           <a href="dashboard.php" class="active">Dashboard</a>
           <a href="servicios.html">Servicios</a>
+          <?php if (!empty($usuario['es_admin'])): ?><a href="admin.php">Admin</a><?php endif; ?>
         </nav>
         <div class="header-actions">
           <a class="btn btn-outline" href="api/logout.php">Salir</a>

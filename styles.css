@@ -1121,6 +1121,33 @@ p {
   border: 3px solid rgba(11, 31, 58, 0.08);
 }
 
+.profile-pic-placeholder {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.6rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  border: 3px solid rgba(11, 31, 58, 0.08);
+}
+
+.avatar-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
 .score-pill {
   display: inline-flex;
   align-items: center;

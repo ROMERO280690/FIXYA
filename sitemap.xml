@@ -3,7 +3,7 @@
   <url><loc>https://fixya.io/index.html</loc><priority>1.0</priority></url>
   <url><loc>https://fixya.io/servicios.html</loc><priority>0.9</priority></url>
   <url><loc>https://fixya.io/categoria.html</loc><priority>0.9</priority></url>
-  <url><loc>https://fixya.io/profesionales.html</loc><priority>0.8</priority></url>
+  <url><loc>https://fixya.io/profesionales.php</loc><priority>0.8</priority></url>
   <url><loc>https://fixya.io/nosotros.html</loc><priority>0.6</priority></url>
   <url><loc>https://fixya.io/contacto.html</loc><priority>0.7</priority></url>
   <url><loc>https://fixya.io/producto.php?s=plomeria</loc><priority>0.6</priority></url>

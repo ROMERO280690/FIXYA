@@ -1,29 +1,50 @@
 <?php
 require_once __DIR__ . '/includes/auth.php';
 require_once __DIR__ . '/includes/csrf.php';
+require_once __DIR__ . '/includes/uploads.php';
 
 $usuario = requerirSesion('login.html');
 
 $guardadoOk = false;
+$errorFoto = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && csrfValido($_POST['csrf'] ?? null)) {
     $especialidad = trim(htmlspecialchars($_POST['especialidad'] ?? '', ENT_QUOTES, 'UTF-8'));
+    $zonaInput = trim(htmlspecialchars($_POST['zona'] ?? '', ENT_QUOTES, 'UTF-8'));
     $precioBase = trim(htmlspecialchars($_POST['precio-base'] ?? '', ENT_QUOTES, 'UTF-8'));
     $bio = trim(htmlspecialchars($_POST['bio'] ?? '', ENT_QUOTES, 'UTF-8'));
 
-    $stmt = db()->prepare('UPDATE users SET especialidad = ?, precio_base = ?, bio = ? WHERE id = ?');
-    $stmt->execute([$especialidad, $precioBase, $bio, $usuario['id']]);
+    $rutaFoto = $usuario['foto'];
+    try {
+        $nuevaFoto = procesarFotoPerfil((int)$usuario['id']);
+        if ($nuevaFoto !== null) {
+            borrarFotoAnterior($usuario['foto']);
+            $rutaFoto = $nuevaFoto;
+        }
+    } catch (RuntimeException $e) {
+        $errorFoto = $e->getMessage();
+    }
 
-    $usuario['especialidad'] = $especialidad;
-    $usuario['precio_base'] = $precioBase;
-    $usuario['bio'] = $bio;
-    $guardadoOk = true;
+    if ($errorFoto === null) {
+        $stmt = db()->prepare('UPDATE users SET especialidad = ?, zona = ?, precio_base = ?, bio = ?, foto = ? WHERE id = ?');
+        $stmt->execute([$especialidad, $zonaInput, $precioBase, $bio, $rutaFoto, $usuario['id']]);
+
+        $usuario['especialidad'] = $especialidad;
+        $usuario['zona'] = $zonaInput;
+        $usuario['precio_base'] = $precioBase;
+        $usuario['bio'] = $bio;
+        $usuario['foto'] = $rutaFoto;
+        $guardadoOk = true;
+    }
 }
 
-$nombreCompleto = htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido'], ENT_QUOTES, 'UTF-8');
-$especialidad = htmlspecialchars($usuario['especialidad'] ?: 'Sin especialidad definida', ENT_QUOTES, 'UTF-8');
-$zona = htmlspecialchars($usuario['zona'] ?: 'Zona no definida', ENT_QUOTES, 'UTF-8');
-$precioBase = htmlspecialchars($usuario['precio_base'] ?: '', ENT_QUOTES, 'UTF-8');
-$bio = htmlspecialchars($usuario['bio'] ?: '', ENT_QUOTES, 'UTF-8');
+function e(?string $v): string { return htmlspecialchars($v ?? '', ENT_QUOTES, 'UTF-8'); }
+
+$nombreCompleto = e($usuario['nombre'] . ' ' . $usuario['apellido']);
+$inicial = e(mb_strtoupper(mb_substr($usuario['nombre'], 0, 1)));
+$especialidad = e($usuario['especialidad'] ?: 'Sin especialidad definida');
+$zona = e($usuario['zona'] ?: 'Zona no definida');
+$precioBase = e($usuario['precio_base'] ?: '');
+$bio = e($usuario['bio'] ?: '');
 $esProfesional = $usuario['tipo_usuario'] === 'profesional';
 ?>
 <!DOCTYPE html>
@@ -51,7 +72,7 @@ $esProfesional = $usuario['tipo_usuario'] === 'profesional';
         </div>
         <div class="topbar-meta">
           <span>fixya.io</span>
-          <span>✓ Perfil verificado</span>
+          <span>Tu cuenta</span>
         </div>
       </div>
     </div>
@@ -71,6 +92,7 @@ $esProfesional = $usuario['tipo_usuario'] === 'profesional';
           <a href="perfil.php" class="active">Perfil</a>
           <a href="dashboard.php">Dashboard</a>
           <a href="servicios.html">Servicios</a>
+          <?php if (!empty($usuario['es_admin'])): ?><a href="admin.php">Admin</a><?php endif; ?>
         </nav>
         <div class="header-actions">
           <a class="btn btn-outline" href="api/logout.php">Salir</a>
@@ -82,7 +104,11 @@ $esProfesional = $usuario['tipo_usuario'] === 'profesional';
       <div class="container profile-grid">
         <section class="profile-card">
           <div class="profile-summary">
-            <img class="profile-pic" src="assets/corporativas/corp-15-foto-equipo.webp" alt="<?= $nombreCompleto ?>" width="960" height="540" loading="lazy" decoding="async" />
+            <?php if ($usuario['foto']): ?>
+              <img class="profile-pic" src="<?= e($usuario['foto']) ?>" alt="<?= $nombreCompleto ?>" width="92" height="92" />
+            <?php else: ?>
+              <div class="profile-pic-placeholder" aria-hidden="true"><?= $inicial ?></div>
+            <?php endif; ?>
             <div>
               <span class="status-badge">● Cuenta activa</span>
               <h2><?= $nombreCompleto ?></h2>
@@ -94,10 +120,13 @@ $esProfesional = $usuario['tipo_usuario'] === 'profesional';
             <strong>Cuenta <?= $esProfesional ? 'profesional' : 'de cliente' ?></strong>
           </div>
           <ul class="profile-list" style="margin-top: 18px;">
-            <li>Email: <?= htmlspecialchars($usuario['email'], ENT_QUOTES, 'UTF-8') ?></li>
+            <li>Email: <?= e($usuario['email']) ?></li>
             <?php if ($precioBase !== ''): ?><li>Precio base: <?= $precioBase ?></li><?php endif; ?>
             <?php if ($bio !== ''): ?><li><?= $bio ?></li><?php endif; ?>
           </ul>
+          <?php if ($esProfesional): ?>
+            <p style="margin-top: 16px;"><a href="profesional.php?id=<?= (int)$usuario['id'] ?>" class="btn btn-outline btn-small">Ver mi ficha pública</a></p>
+          <?php endif; ?>
         </section>
 
         <section class="profile-card">
@@ -106,17 +135,30 @@ $esProfesional = $usuario['tipo_usuario'] === 'profesional';
           <?php if ($guardadoOk): ?>
             <p style="color:#156f43; font-weight:600; margin-bottom: 14px;">Perfil actualizado correctamente.</p>
           <?php endif; ?>
-          <form method="post">
+          <?php if ($errorFoto): ?>
+            <p style="color:#b3261e; font-weight:600; margin-bottom: 14px;"><?= e($errorFoto) ?></p>
+          <?php endif; ?>
+          <form method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf" value="<?= csrfToken() ?>" />
+            <div class="form-field">
+              <label for="foto">Foto de perfil (JPG, PNG o WEBP, hasta 3 MB)</label>
+              <input id="foto" name="foto" type="file" accept="image/png, image/jpeg, image/webp" />
+            </div>
+
             <div class="form-row">
               <div class="form-field">
                 <label for="especialidad">Especialidad</label>
                 <input id="especialidad" name="especialidad" type="text" value="<?= $especialidad === 'Sin especialidad definida' ? '' : $especialidad ?>" />
               </div>
               <div class="form-field">
-                <label for="precio-base">Precio base</label>
-                <input id="precio-base" name="precio-base" type="text" value="<?= $precioBase ?>" />
+                <label for="zona">Zona</label>
+                <input id="zona" name="zona" type="text" value="<?= $zona === 'Zona no definida' ? '' : $zona ?>" placeholder="Ej. Salta Capital" />
               </div>
+            </div>
+
+            <div class="form-field">
+              <label for="precio-base">Precio base</label>
+              <input id="precio-base" name="precio-base" type="text" value="<?= $precioBase ?>" />
             </div>
 
             <div class="form-field">

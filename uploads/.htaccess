@@ -1,0 +1,7 @@
+# Los archivos subidos por usuarios nunca deben ejecutarse como script.
+<FilesMatch "\.(php|php\d|phtml|pl|py|cgi|sh)$">
+  Require all denied
+</FilesMatch>
+
+Options -Indexes -ExecCGI
+AddType text/plain .php .phtml .pl .py .cgi .sh

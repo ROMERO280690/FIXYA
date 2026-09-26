@@ -4,3 +4,5 @@ desktop.ini
 *.log
 .claude/
 config.php
+uploads/profesionales/*
+!uploads/profesionales/.gitkeep

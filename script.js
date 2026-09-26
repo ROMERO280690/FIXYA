@@ -1,7 +1,6 @@
 const header = document.querySelector('.site-header');
 const navToggle = document.querySelector('.nav-toggle');
 const yearEl = document.getElementById('year');
-const searchForm = document.querySelector('.search-panel');
 
 if (navToggle) {
   navToggle.addEventListener('click', () => {
@@ -14,21 +13,9 @@ if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
-if (searchForm) {
-  searchForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const servicio = document.getElementById('servicio')?.value?.trim();
-    const zona = document.getElementById('zona')?.value?.trim();
-
-    if (document.getElementById('servicios')) {
-      document.getElementById('servicios').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    if (servicio || zona) {
-      window.alert(`Búsqueda activa: ${servicio || 'servicio'} en ${zona || 'tu zona'}.`);
-    }
-  });
-}
+// El formulario de búsqueda (.search-panel) es un <form method="get"> real
+// hacia profesionales.php: no necesita JS, el navegador arma la URL con
+// ?servicio=...&zona=... y profesionales.php filtra del lado del servidor.
 
 const navLinks = document.querySelectorAll('.main-nav a, .header-actions a');
 navLinks.forEach((link) => {
