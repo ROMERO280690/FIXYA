@@ -35,16 +35,17 @@ navLinks.forEach((link) => {
  * fresco pedido a api/csrf.php, y muestra el resultado en su .form-message.
  */
 async function obtenerCsrfToken() {
-  const respuesta = await fetch('api/csrf.php', { credentials: 'same-origin' });
+  const respuesta = await fetch('/api/csrf.php', { credentials: 'same-origin' });
   const datos = await respuesta.json();
   return datos.token;
 }
 
 function mostrarMensaje(form, texto, tipo) {
-  const el = form.querySelector('.form-message');
+  let el = form.querySelector('.form-message');
   if (!el) {
-    window.alert(texto);
-    return;
+    el = document.createElement('div');
+    el.className = 'form-message';
+    form.prepend(el);
   }
   el.textContent = texto;
   el.style.display = 'block';
@@ -79,7 +80,7 @@ function conectarFormulario(selector, endpoint, { onExito } = {}) {
       if (respuesta.ok && resultado.ok) {
         mostrarMensaje(form, resultado.mensaje || 'Listo.', 'ok');
         if (resultado.redirect) {
-          window.location.href = resultado.redirect;
+          window.location.href = resultado.redirect.startsWith('/') ? resultado.redirect : '/' + resultado.redirect;
           return;
         }
         form.reset();
@@ -98,10 +99,10 @@ function conectarFormulario(selector, endpoint, { onExito } = {}) {
   });
 }
 
-conectarFormulario('.contact-form', 'api/contacto.php');
-conectarFormulario('.checkout-form', 'api/checkout.php');
-conectarFormulario('.login-form', 'api/login.php');
-conectarFormulario('.registro-form', 'api/registro.php');
+conectarFormulario('.contact-form', '/api/contacto.php');
+conectarFormulario('.checkout-form', '/api/checkout.php');
+conectarFormulario('.login-form', '/api/login.php');
+conectarFormulario('.registro-form', '/api/registro.php');
 
 /**
  * Checkout: preselecciona el servicio según ?servicio=slug (llegando desde

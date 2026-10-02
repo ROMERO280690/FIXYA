@@ -1,0 +1,8 @@
+{
+  "name": "FIXYA",
+  "description": "Marketplace de servicios profesionales con técnicos verificados para hogar, industria y campo en Argentina.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
