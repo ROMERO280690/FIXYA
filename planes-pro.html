@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planes FIXYA PRO | Suscripción para Profesionales y Empresas</title>
+    <link rel="canonical" href="https://fixya.io/planes-pro" />
+    <meta name="description" content="Sumate a FIXYA PRO. Menor comisión, posicionamiento prioritario en tu zona, insignia de verificación oficial y alertas inmediatas por WhatsApp." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/extras/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/extras/favicon-180.png" />
+    <meta name="theme-color" content="#0b1f3a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FIXYA.io" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content="Planes FIXYA PRO | Multiplicá tus trabajos" />
+    <meta property="og:description" content="Recibí pedidos de clientes verificados en tu zona. 0% comisión en trabajos menores, cobro en 24hs por Mercado Pago y posición destacada." />
+    <meta property="og:image" content="https://fixya.io/assets/marketing/og-share.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style>
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+        align-items: stretch;
+        margin-top: 40px;
+      }
+      .pricing-card {
+        position: relative;
+        background: #ffffff;
+        border: 2px solid var(--line);
+        border-radius: var(--radius-lg);
+        padding: 36px 28px;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      }
+      .pricing-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(11, 31, 58, 0.08);
+      }
+      .pricing-card.is-popular {
+        border-color: var(--orange);
+        box-shadow: 0 12px 32px rgba(255, 138, 0, 0.18);
+        transform: scale(1.03);
+      }
+      .popular-badge {
+        position: absolute;
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, var(--orange) 0%, #ff6b00 100%);
+        color: #ffffff;
+        font-size: 0.76rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 4px 16px;
+        border-radius: 999px;
+        box-shadow: 0 4px 12px rgba(255, 138, 0, 0.35);
+      }
+      .pricing-price {
+        margin: 22px 0;
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+      .pricing-price .amount {
+        font-size: 2.6rem;
+        font-weight: 800;
+        color: var(--navy);
+        line-height: 1;
+      }
+      .pricing-price .period {
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+      .pricing-features {
+        list-style: none;
+        padding: 0;
+        margin: 24px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex-grow: 1;
+      }
+      .pricing-features li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.92rem;
+        color: var(--text);
+        line-height: 1.45;
+      }
+      .pricing-features li .check-icon {
+        color: #10b981;
+        font-weight: 800;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      .pricing-features li.is-disabled {
+        color: var(--muted);
+        opacity: 0.6;
+      }
+      .pricing-features li.is-disabled .check-icon {
+        color: var(--muted);
+      }
+      .roi-calculator-box {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        padding: 36px;
+        box-shadow: var(--shadow);
+        margin-top: 50px;
+      }
+      @media (max-width: 900px) {
+        .pricing-grid {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+        .pricing-card.is-popular {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Topbar Oficial FIXYA -->
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-links">
+          <a href="tel:+5493873522920">Atención telefónica: +54 9 387 352-2920</a>
+          <a href="mailto:profesionales@fixya.io">profesionales@fixya.io</a>
+        </div>
+        <div class="topbar-meta">
+          <span>✓ Custodia Mercado Pago</span>
+          <span>✓ Cobro en 24hs garantizado</span>
+          <span>✓ Facturación electrónica</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cabecera de Navegación Estándar -->
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
+          <img src="assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
+        </a>
+
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria">Categorías</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" class="active" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="btn btn-outline" href="/login">Iniciar sesión</a>
+          <a class="btn btn-primary" href="/registro">Registrarme</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero de Planes PRO -->
+      <section class="page-hero" style="background: linear-gradient(180deg, #eef4fb 0%, #f9fbfd 100%);">
+        <div class="container page-hero-grid">
+          <div>
+            <span class="eyebrow eyebrow-dark">Canal de Monetización para Profesionales</span>
+            <h1>Multiplicá tus ingresos con FIXYA PRO</h1>
+            <p>
+              Accedé a clientes verificados en tu zona geográfica, disfrutá de <strong>0% de comisión</strong> en tus intervenciones cotidianas, recibí solicitudes directo por WhatsApp y cobrá de forma segura a través de Mercado Pago en menos de 24 horas.
+            </p>
+            <div style="display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap;">
+              <a class="btn btn-primary" href="#planes">Ver planes y precios</a>
+              <a class="btn btn-outline" href="#simulador">Calcular mis ganancias</a>
+            </div>
+          </div>
+          <div class="page-hero-card">
+            <img src="assets/corporativas/corp-01-oficina.webp" alt="Profesionales FIXYA PRO" width="960" height="540" fetchpriority="high" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Grilla de Planes y Precios -->
+      <section class="section" id="planes">
+        <div class="container">
+          <div class="section-head" style="text-align: center;">
+            <span class="eyebrow eyebrow-dark">Tarifas Transparentes en Pesos Argentinos</span>
+            <h2>Elegí el plan que mejor impulse tu oficio</h2>
+            <p style="margin: 0 auto; max-width: 640px;">Sin contratos forzosos. Cancelás o pausás en cualquier momento desde tu panel de autogestión.</p>
+          </div>
+
+          <div class="pricing-grid">
+            <!-- Plan Básico -->
+            <div class="pricing-card">
+              <h3>Plan Inicial</h3>
+              <p style="color: var(--muted); font-size: 0.92rem; margin-top: 6px;">Para técnicos que están empezando y desean probar la plataforma sin costo fijo.</p>
+              <div class="pricing-price">
+                <span class="amount">$0</span>
+                <span class="period">/ mes</span>
+              </div>
+              <ul class="pricing-features">
+                <li><span class="check-icon">✓</span> Publicación básica en el directorio de técnicos</li>
+                <li><span class="check-icon">✓</span> Presupuestos y solicitudes ilimitadas</li>
+                <li><span class="check-icon">✓</span> Cobro protegido por custodia Mercado Pago</li>
+                <li><span class="check-icon">✓</span> Expediente digital de garantías básicas</li>
+                <li class="is-disabled"><span class="check-icon">✗</span> 15% de comisión por trabajo cobrado</li>
+                <li class="is-disabled"><span class="check-icon">✗</span> Sin insignia PRO dorada</li>
+                <li class="is-disabled"><span class="check-icon">✗</span> Posicionamiento estándar</li>
+                <li class="is-disabled"><span class="check-icon">✗</span> Cobro a 5 días hábiles</li>
+              </ul>
+              <a href="/registro" class="btn btn-outline" style="width: 100%;">Registrarme gratis</a>
+            </div>
+
+            <!-- Plan Profesional PRO -->
+            <div class="pricing-card is-popular">
+              <span class="popular-badge">⭐ El Más Elegido</span>
+              <h3>Profesional PRO</h3>
+              <p style="color: var(--muted); font-size: 0.92rem; margin-top: 6px;">Para técnicos independientes que buscan maximizar sus ganancias y volumen de clientes.</p>
+              <div class="pricing-price">
+                <span class="amount">$14.990</span>
+                <span class="period">ARS / mes</span>
+              </div>
+              <ul class="pricing-features">
+                <li><span class="check-icon">✓</span> <strong>0% de comisión</strong> en servicios de hasta $50.000</li>
+                <li><span class="check-icon">✓</span> <strong>Insignia dorada</strong> de Técnico Verificado PRO</li>
+                <li><span class="check-icon">✓</span> <strong>Posicionamiento prioritario #1</strong> en tu zona y oficio</li>
+                <li><span class="check-icon">✓</span> Alertas inmediatas por WhatsApp con teléfono directo</li>
+                <li><span class="check-icon">✓</span> <strong>Liberación de fondos en 24hs</strong> vía Mercado Pago</li>
+                <li><span class="check-icon">✓</span> Certificados de matrícula y DNI destacados</li>
+                <li><span class="check-icon">✓</span> Mediación técnica y comercial prioritaria</li>
+              </ul>
+              <button type="button" class="btn btn-primary btn-suscribir" data-plan="pro" data-monto="14990" data-nombre="Profesional PRO" style="width: 100%;">
+                Activar Plan PRO
+              </button>
+            </div>
+
+            <!-- Plan Empresa / Contratistas -->
+            <div class="pricing-card">
+              <h3>Empresa & Cuadrillas</h3>
+              <p style="color: var(--muted); font-size: 0.92rem; margin-top: 6px;">Para empresas instaladoras, talleres y contratistas con múltiples operarios.</p>
+              <div class="pricing-price">
+                <span class="amount">$34.990</span>
+                <span class="period">ARS / mes</span>
+              </div>
+              <ul class="pricing-features">
+                <li><span class="check-icon">✓</span> <strong>0% de comisión</strong> en todos los trabajos</li>
+                <li><span class="check-icon">✓</span> Hasta <strong>5 operarios</strong> bajo la misma cuenta corporativa</li>
+                <li><span class="check-icon">✓</span> Facturación electrónica automática A y B</li>
+                <li><span class="check-icon">✓</span> Asignación prioritaria en licitaciones y empresas</li>
+                <li><span class="check-icon">✓</span> Panel de trazabilidad y métricas de cuadrilla</li>
+                <li><span class="check-icon">✓</span> Gestor de cuenta comercial asignado y soporte VIP</li>
+              </ul>
+              <button type="button" class="btn btn-outline btn-suscribir" data-plan="empresa" data-monto="34990" data-nombre="Empresa & Cuadrillas" style="width: 100%;">
+                Activar Plan Empresa
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Simulador de Ganancias ROI -->
+      <section class="section" id="simulador" style="background: var(--bg);">
+        <div class="container">
+          <div class="roi-calculator-box">
+            <div class="section-head" style="margin-bottom: 24px;">
+              <span class="eyebrow eyebrow-dark">Simulador Financiero</span>
+              <h2>¿Cuánto más ganas con FIXYA PRO?</h2>
+              <p>Compará lo que conservás en tu bolsillo eliminando comisiones de intermediarios tradicionales.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center;">
+              <div>
+                <label for="slider-trabajos" style="font-weight: 700; display: block; margin-bottom: 8px;">
+                  Trabajos completados al mes: <span id="label-trabajos" style="color: var(--orange); font-size: 1.2rem;">12</span>
+                </label>
+                <input
+                  type="range"
+                  id="slider-trabajos"
+                  min="2"
+                  max="40"
+                  value="12"
+                  step="1"
+                  style="width: 100%; height: 8px; border-radius: 4px; accent-color: var(--orange); cursor: pointer;"
+                />
+
+                <label for="slider-ticket" style="font-weight: 700; display: block; margin-top: 24px; margin-bottom: 8px;">
+                  Valor promedio por servicio: <span id="label-ticket" style="color: var(--orange); font-size: 1.2rem;">$45.000</span>
+                </label>
+                <input
+                  type="range"
+                  id="slider-ticket"
+                  min="20000"
+                  max="150000"
+                  value="45000"
+                  step="5000"
+                  style="width: 100%; height: 8px; border-radius: 4px; accent-color: var(--orange); cursor: pointer;"
+                />
+              </div>
+
+              <div style="background: var(--navy); color: #ffffff; padding: 28px; border-radius: var(--radius-md); box-shadow: var(--shadow);">
+                <div style="font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8;">Tu facturación mensual estimada</div>
+                <div id="sim-facturacion" style="font-size: 2.2rem; font-weight: 800; color: #ffffff; margin: 8px 0 16px;">$540.000</div>
+
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 16px 0;" />
+
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.92rem;">
+                  <span style="opacity: 0.8;">Costo en otras plataformas (15% - 20%):</span>
+                  <span id="sim-otras" style="color: #f87171; font-weight: 700;">-$81.000</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.92rem;">
+                  <span style="opacity: 0.8;">Costo con FIXYA PRO (cuota fija):</span>
+                  <span style="color: #6ee7b7; font-weight: 700;">-$14.990</span>
+                </div>
+
+                <div style="background: rgba(255,138,0,0.2); border: 1px solid var(--orange); border-radius: 8px; padding: 12px 16px; margin-top: 16px;">
+                  <div style="font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--orange); font-weight: 700;">Ahorro neto mensual para vos</div>
+                  <div id="sim-ahorro" style="font-size: 1.6rem; font-weight: 800; color: #ffffff;">+$66.010 ARS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonios de Profesionales de la Red -->
+      <section class="section">
+        <div class="container">
+          <div class="section-head" style="text-align: center;">
+            <span class="eyebrow eyebrow-dark">Casos de Éxito</span>
+            <h2>Colegas que ya escalaron su negocio con FIXYA</h2>
+            <p style="margin: 0 auto;">Opiniones reales de profesionales matriculados trabajando en la red.</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+            <div class="content-card" style="padding: 28px;">
+              <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                <img src="/assets/corporativas/corp-06-plomeria.webp" alt="Carlos Romero" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange);" />
+                <div>
+                  <strong style="display: block; color: var(--navy);">Carlos Romero</strong>
+                  <small style="color: var(--muted);">Plomería y Gas · Salta Capital</small>
+                </div>
+              </div>
+              <p style="color: var(--muted); font-size: 0.94rem; line-height: 1.6;">
+                "Antes perdía horas pasando presupuestos a gente que no contrataba. Con el Plan PRO de FIXYA, las personas que entran ya vienen verificadas y listas para coordinar. La insignia dorada genera una confianza inmediata."
+              </p>
+            </div>
+
+            <div class="content-card" style="padding: 28px;">
+              <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                <img src="/assets/corporativas/corp-07-electricista.webp" alt="Martín Gómez" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange);" />
+                <div>
+                  <strong style="display: block; color: var(--navy);">Martín Gómez</strong>
+                  <small style="color: var(--muted);">Electricidad e Iluminación · COPEL</small>
+                </div>
+              </div>
+              <p style="color: var(--muted); font-size: 0.94rem; line-height: 1.6;">
+                "Elegí el Plan Empresa para mi equipo de 3 electricistas. No pagamos comisiones por cada tablero instalado y el cobro mediante Mercado Pago nos garantiza que el dinero está en 24 horas sin discusiones."
+              </p>
+            </div>
+
+            <div class="content-card" style="padding: 28px;">
+              <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                <img src="/assets/corporativas/corp-08-aire.webp" alt="Laura Vargas" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange);" />
+                <div>
+                  <strong style="display: block; color: var(--navy);">Laura Vargas</strong>
+                  <small style="color: var(--muted);">Climatización y Refrigeración</small>
+                </div>
+              </div>
+              <p style="color: var(--muted); font-size: 0.94rem; line-height: 1.6;">
+                "La temporada de calor es exigente y necesitaba estar en el puesto #1 de búsquedas en Salta. La suscripción PRO se pagó sola en las primeras 48 horas de la temporada. Excelente plataforma."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Final -->
+      <section class="section cta-section">
+        <div class="container cta-box">
+          <div>
+            <span class="eyebrow eyebrow-dark">Comenzá hoy</span>
+            <h2>Sumate a la red líder de técnicos en Argentina</h2>
+            <p style="margin-top:8px; opacity:0.9;">Activá tu cuenta profesional en menos de 3 minutos y recibí solicitudes hoy mismo.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="/registro">Crear cuenta profesional</a>
+            <a class="btn btn-outline btn-dark" href="/contacto">Consultar con un asesor</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal Interactivo de Suscripción PRO -->
+    <div id="modal-suscripcion" style="display: none; position: fixed; inset: 0; background: rgba(11,31,58,0.7); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px;">
+      <div style="background: #ffffff; border-radius: var(--radius-lg); max-width: 500px; width: 100%; padding: 32px; box-shadow: var(--shadow); position: relative; animation: heroFadeInUp 0.3s ease;">
+        <button type="button" id="modal-close-btn" style="position: absolute; top: 18px; right: 18px; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted);">✕</button>
+        
+        <div style="text-align: center; margin-bottom: 20px;">
+          <span style="font-size: 2.5rem;">⭐</span>
+          <h3 style="margin: 8px 0 4px; color: var(--navy);" id="modal-plan-title">Activar Plan Profesional PRO</h3>
+          <p style="color: var(--muted); font-size: 0.9rem;">Suscripción mensual recurrente protegida por Mercado Pago.</p>
+        </div>
+
+        <div style="background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.92rem; margin-bottom: 8px;">
+            <span>Plan seleccionado:</span>
+            <strong id="modal-plan-nombre" style="color: var(--navy);">Profesional PRO</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.92rem; margin-bottom: 8px;">
+            <span>Importe mensual (con IVA):</span>
+            <strong id="modal-plan-precio" style="color: var(--orange); font-size: 1.1rem;">$14.990 ARS</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: #10b981; font-weight: 700; margin-bottom: 8px;">
+            <span>Activación:</span>
+            <span>Inmediata en tu perfil</span>
+          </div>
+          <p style="font-size:0.78rem; color:var(--muted); margin:0;">
+            ✓ Facturación fiscal ARCA. Podés dar de baja tu plan en cualquier momento sin trabas ni penalidades (Res. 271/2020).
+          </p>
+        </div>
+
+        <form id="form-suscripcion-mp">
+          <div class="field" style="margin-bottom: 14px;">
+            <label for="sub-email">Email de tu cuenta FIXYA</label>
+            <input type="email" id="sub-email" name="email" required placeholder="tu-email@fixya.io" />
+          </div>
+
+          <div class="field" style="margin-bottom: 18px;">
+            <label for="sub-metodo">Medio de pago preferido</label>
+            <select id="sub-metodo" name="metodo">
+              <option value="mp_wallet">Dinero en cuenta Mercado Pago</option>
+              <option value="tarjeta_debito">Tarjeta de débito</option>
+              <option value="tarjeta_credito">Tarjeta de crédito</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="btn-confirmar-sub" style="width: 100%; min-height: 50px;">
+            Confirmar y Pagar con Mercado Pago
+          </button>
+        </form>
+
+        <div id="sub-status-box" style="display: none; margin-top: 16px; text-align: center; padding: 12px; border-radius: 8px;"></div>
+      </div>
+    </div>
+
+    <!-- Pie de Página Estándar -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <img src="assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
+          <p>Marketplace oficial de servicios con técnicos matriculados y custodia transparente Mercado Pago en Argentina.</p>
+        </div>
+        <div>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de Técnicos</a></li>
+            <li><a href="/registro">Registrarse como Profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y Soporte</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Seguridad y Legal (Argentina)</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago (BCRA)</a></li>
+            <li><a href="/arrepentimiento" style="color:var(--orange); font-weight:700;">Botón de Arrepentimiento</a></li>
+            <li><a href="/baja">Botón de Baja de Suscripción</a></li>
+            <li><a href="/terminos">Términos (Ley 24.240)</a></li>
+            <li><a href="/privacidad">Privacidad (Ley 25.326)</a></li>
+            <li><a href="https://www.argentina.gob.ar/defensadelconsumidor" target="_blank" rel="noreferrer">Defensa del Consumidor</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="year"></span> FIXYA.io — Cumplimiento Ley 24.240, Ley 25.326 y Res. 271/2020 · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      // Simulador de Ganancias ROI
+      const sliderTrabajos = document.getElementById('slider-trabajos');
+      const sliderTicket = document.getElementById('slider-ticket');
+      const labelTrabajos = document.getElementById('label-trabajos');
+      const labelTicket = document.getElementById('label-ticket');
+      const simFacturacion = document.getElementById('sim-facturacion');
+      const simOtras = document.getElementById('sim-otras');
+      const simAhorro = document.getElementById('sim-ahorro');
+
+      function actualizarSimulador() {
+        if (!sliderTrabajos || !sliderTicket) return;
+        const nTrabajos = parseInt(sliderTrabajos.value, 10);
+        const ticket = parseInt(sliderTicket.value, 10);
+
+        if (labelTrabajos) labelTrabajos.textContent = nTrabajos;
+        if (labelTicket) labelTicket.textContent = `$${ticket.toLocaleString('es-AR')}`;
+
+        const total = nTrabajos * ticket;
+        const costoOtras = Math.round(total * 0.15);
+        const costoFixyaPro = 14990;
+        const ahorro = Math.max(0, costoOtras - costoFixyaPro);
+
+        if (simFacturacion) simFacturacion.textContent = `$${total.toLocaleString('es-AR')}`;
+        if (simOtras) simOtras.textContent = `-$${costoOtras.toLocaleString('es-AR')}`;
+        if (simAhorro) simAhorro.textContent = `+$${ahorro.toLocaleString('es-AR')} ARS`;
+      }
+
+      if (sliderTrabajos && sliderTicket) {
+        sliderTrabajos.addEventListener('input', actualizarSimulador);
+        sliderTicket.addEventListener('input', actualizarSimulador);
+        actualizarSimulador();
+      }
+
+      // Modal de Suscripción PRO
+      const modalSub = document.getElementById('modal-suscripcion');
+      const modalClose = document.getElementById('modal-close-btn');
+      const btnsSuscribir = document.querySelectorAll('.btn-suscribir');
+      const modalPlanTitle = document.getElementById('modal-plan-title');
+      const modalPlanNombre = document.getElementById('modal-plan-nombre');
+      const modalPlanPrecio = document.getElementById('modal-plan-precio');
+      const formSub = document.getElementById('form-suscripcion-mp');
+      const statusBox = document.getElementById('sub-status-box');
+
+      let currentPlanSeleccionado = 'pro';
+
+      btnsSuscribir.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const plan = btn.getAttribute('data-plan') || 'pro';
+          const monto = btn.getAttribute('data-monto') || '14990';
+          const nombre = btn.getAttribute('data-nombre') || 'Profesional PRO';
+
+          currentPlanSeleccionado = plan;
+          if (modalPlanTitle) modalPlanTitle.textContent = `Activar ${nombre}`;
+          if (modalPlanNombre) modalPlanNombre.textContent = nombre;
+          if (modalPlanPrecio) modalPlanPrecio.textContent = `$${parseInt(monto, 10).toLocaleString('es-AR')} ARS / mes`;
+
+          if (modalSub) modalSub.style.display = 'flex';
+        });
+      });
+
+      if (modalClose && modalSub) {
+        modalClose.addEventListener('click', () => {
+          modalSub.style.display = 'none';
+        });
+      }
+
+      if (modalSub) {
+        modalSub.addEventListener('click', (e) => {
+          if (e.target === modalSub) modalSub.style.display = 'none';
+        });
+      }
+
+      if (formSub) {
+        formSub.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const emailInput = document.getElementById('sub-email');
+          const emailVal = emailInput ? emailInput.value.trim() : '';
+
+          if (!emailVal) return;
+
+          const btnConfirmar = document.getElementById('btn-confirmar-sub');
+          if (btnConfirmar) {
+            btnConfirmar.disabled = true;
+            btnConfirmar.textContent = 'Conectando con Mercado Pago...';
+          }
+
+          try {
+            const res = await fetch('/api/suscribir_pro', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: emailVal, plan: currentPlanSeleccionado }),
+            });
+            const data = await res.json();
+
+            if (data.ok) {
+              if (statusBox) {
+                statusBox.style.display = 'block';
+                statusBox.style.background = '#ecfdf5';
+                statusBox.style.color = '#065f46';
+                statusBox.style.border = '1px solid #a7f3d0';
+                statusBox.innerHTML = `
+                  <strong>✓ ¡Suscripción activada con éxito!</strong><br />
+                  <span style="font-size:0.88rem;">Tu perfil ahora cuenta con la insignia PRO destacada en el directorio. Código de suscripción MP: <code>${data.codigo_mp || 'MP-SUB-8291'}</code></span>
+                  <div style="margin-top:10px;">
+                    <a href="/dashboard" class="btn btn-primary btn-small">Ir a mi Panel de Control</a>
+                  </div>
+                `;
+              }
+              if (btnConfirmar) btnConfirmar.style.display = 'none';
+            } else {
+              if (statusBox) {
+                statusBox.style.display = 'block';
+                statusBox.style.background = '#fef2f2';
+                statusBox.style.color = '#991b1b';
+                statusBox.textContent = data.error || 'Error al procesar la suscripción.';
+              }
+              if (btnConfirmar) {
+                btnConfirmar.disabled = false;
+                btnConfirmar.textContent = 'Confirmar y Pagar con Mercado Pago';
+              }
+            }
+          } catch (err) {
+            if (statusBox) {
+              statusBox.style.display = 'block';
+              statusBox.style.background = '#fef2f2';
+              statusBox.style.color = '#991b1b';
+              statusBox.textContent = 'Error de conexión con la pasarela.';
+            }
+            if (btnConfirmar) {
+              btnConfirmar.disabled = false;
+              btnConfirmar.textContent = 'Confirmar y Pagar con Mercado Pago';
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

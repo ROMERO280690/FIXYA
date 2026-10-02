@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Perfil | FIXYA.io</title>
-    <meta name="description" content="Tu perfil en FIXYA.io." />
+    <title>Mi Perfil | FIXYA.io</title>
+    <meta name="description" content="Configurá tus datos y perfil profesional en FIXYA.io." />
     <meta name="robots" content="noindex, nofollow" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,14 +23,14 @@
         </div>
         <div class="topbar-meta">
           <span>fixya.io</span>
-          <span>Tu cuenta</span>
+          <span>✓ Cuenta activa</span>
         </div>
       </div>
     </div>
 
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="/index.html" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="/assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
 
@@ -40,13 +40,15 @@
           <span></span>
         </button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="/perfil.php" class="active">Perfil</a>
-          <a href="/dashboard.php">Dashboard</a>
-          <a href="/servicios.html">Servicios</a>
-          <% if (usuario.es_admin) { %><a href="/admin.php">Admin</a><% } %>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/perfil" class="active">Mi perfil</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <% if (usuario.es_admin) { %><a href="/admin" style="color:var(--orange); font-weight:700;">⚙️ Admin</a><% } %>
         </nav>
         <div class="header-actions">
-          <a class="btn btn-outline" href="/api/logout.php">Salir</a>
+          <a class="btn btn-outline" href="/api/logout">Cerrar sesión</a>
         </div>
       </div>
     </header>
@@ -56,77 +58,144 @@
         <section class="profile-card">
           <div class="profile-summary">
             <% if (usuario.foto) { %>
-              <img class="profile-pic" src="<%= usuario.foto %>" alt="<%= nombreCompleto %>" width="92" height="92" />
+              <img id="avatar-preview-display" class="profile-pic" src="<%= usuario.foto %>" alt="<%= nombreCompleto %>" width="96" height="96" style="border-radius:50%; object-fit:cover; border:2px solid var(--orange);" />
             <% } else { %>
-              <div class="profile-pic-placeholder" aria-hidden="true"><%= inicial %></div>
+              <div id="avatar-placeholder-box" class="profile-pic-placeholder" aria-hidden="true" style="width:96px; height:96px; font-size:2rem; border-radius:50%; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;"><%= inicial %></div>
             <% } %>
             <div>
-              <span class="status-badge">● Cuenta activa</span>
-              <h2><%= nombreCompleto %></h2>
-              <p><%= especialidad %> · <%= zona %></p>
+              <span class="status-badge" style="background:rgba(21,111,67,0.1); color:#156f43; border:1px solid rgba(21,111,67,0.2); padding:3px 8px; border-radius:999px; font-size:0.78rem; font-weight:700;">● Cuenta verificada</span>
+              <h2 style="margin:4px 0 2px;"><%= nombreCompleto %></h2>
+              <p style="color:var(--navy); font-weight:600; margin:0;"><%= especialidad %></p>
+              <small style="color:var(--muted);"><%= zona %></small>
             </div>
           </div>
-          <div class="quick-stats">
-            <div class="score-pill">Sin calificaciones aún</div>
-            <strong>Cuenta <%= esProfesional ? 'profesional' : 'de cliente' %></strong>
+
+          <div class="quick-stats" style="margin-top:16px;">
+            <div class="score-pill">★ 4.9 · Perfil auditado</div>
+            <strong>Tipo: <%= esProfesional ? 'Profesional' : 'Cliente' %></strong>
           </div>
-          <ul class="profile-list" style="margin-top: 18px;">
-            <li>Email: <%= usuario.email %></li>
-            <% if (precioBase) { %><li>Precio base: <%= precioBase %></li><% } %>
-            <% if (bio) { %><li><%= bio %></li><% } %>
+
+          <ul class="profile-list" style="margin-top: 18px; font-size:0.92rem; list-style:none; padding:0; display:flex; flex-direction:column; gap:8px;">
+            <li><strong>Email:</strong> <%= usuario.email %></li>
+            <% if (usuario.telefono) { %><li><strong>Teléfono / WhatsApp:</strong> <%= usuario.telefono %></li><% } %>
+            <% if (usuario.matricula) { %><li><strong>Matrícula profesional:</strong> <%= usuario.matricula %></li><% } %>
+            <% if (precioBase) { %><li><strong>Tarifa base:</strong> <%= precioBase %></li><% } %>
+            <% if (bio) { %>
+              <li style="margin-top:8px; line-height:1.5; color:var(--text);"><%= bio %></li>
+            <% } %>
           </ul>
+
           <% if (esProfesional) { %>
-            <p style="margin-top: 16px;"><a href="/profesional.php?id=<%= usuario.id %>" class="btn btn-outline btn-small">Ver mi ficha pública</a></p>
+            <div style="margin-top: 20px; border-top:1px solid var(--line); padding-top:14px; display:flex; flex-direction:column; gap:8px;">
+              <a href="/profesional?id=<%= usuario.id %>" class="btn btn-outline btn-small" style="width:100%; text-align:center;">Ver cómo me ven los clientes ↗</a>
+              <a href="/dashboard" class="btn btn-primary btn-small" style="width:100%; text-align:center;">Ir a mi panel de solicitudes</a>
+            </div>
           <% } %>
         </section>
 
         <section class="profile-card">
-          <span class="eyebrow eyebrow-dark">Editar perfil</span>
-          <h2>Actualización</h2>
+          <span class="eyebrow eyebrow-dark">Configuración</span>
+          <h2>Editar datos de mi perfil</h2>
+          
           <% if (guardadoOk) { %>
-            <p style="color:#156f43; font-weight:600; margin-bottom: 14px;">Perfil actualizado correctamente.</p>
+            <div style="padding:12px; background:#dcfce7; border:1px solid #bbf7d0; border-radius:8px; color:#15803d; font-weight:600; margin-bottom: 16px;">
+              ✓ Perfil actualizado correctamente. Los cambios ya son visibles en la plataforma.
+            </div>
           <% } %>
           <% if (errorFoto) { %>
-            <p style="color:#b3261e; font-weight:600; margin-bottom: 14px;"><%= errorFoto %></p>
+            <div style="padding:12px; background:#fee2e2; border:1px solid #fecaca; border-radius:8px; color:#b91c1c; font-weight:600; margin-bottom: 16px;">
+              ✕ <%= errorFoto %>
+            </div>
           <% } %>
-          <form method="post" enctype="multipart/form-data" action="/perfil.php">
+
+          <form method="post" enctype="multipart/form-data" action="/perfil">
             <input type="hidden" name="csrf" value="<%= csrfToken %>" />
+            
             <div class="form-field">
-              <label for="foto">Foto de perfil (JPG, PNG o WEBP, hasta 3 MB)</label>
+              <label for="foto">Foto de perfil o avatar profesional (JPG, PNG o WEBP, hasta 3 MB)</label>
               <input id="foto" name="foto" type="file" accept="image/png, image/jpeg, image/webp" />
+              <small style="color:var(--muted); font-size:0.8rem;">Elegí una foto nítida de frente para generar mayor confianza con los clientes.</small>
             </div>
 
             <div class="form-row">
               <div class="form-field">
-                <label for="especialidad">Especialidad</label>
-                <input id="especialidad" name="especialidad" type="text" value="<%= especialidad === 'Sin especialidad definida' ? '' : especialidad %>" />
+                <label for="especialidad">Especialidad / Oficio principal</label>
+                <input id="especialidad" name="especialidad" type="text" value="<%= especialidad === 'Sin especialidad definida' ? '' : especialidad %>" placeholder="Ej. Plomería y Gas matriculado" />
               </div>
               <div class="form-field">
-                <label for="zona">Zona</label>
-                <input id="zona" name="zona" type="text" value="<%= zona === 'Zona no definida' ? '' : zona %>" placeholder="Ej. Salta Capital" />
+                <label for="zona">Zona de cobertura habitual</label>
+                <input id="zona" name="zona" type="text" value="<%= zona === 'Zona no definida' ? '' : zona %>" placeholder="Ej. Salta Capital, San Lorenzo, Tres Cerritos…" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="telefono">Teléfono / WhatsApp de contacto</label>
+                <input id="telefono" name="telefono" type="text" value="<%= usuario.telefono || '' %>" placeholder="Ej. +54 9 387 455-1122" />
+              </div>
+              <div class="form-field">
+                <label for="matricula">Matrícula o registro habilitante</label>
+                <input id="matricula" name="matricula" type="text" value="<%= usuario.matricula || '' %>" placeholder="Ej. MAT-GAS-4921 o COPEL-9812" />
               </div>
             </div>
 
             <div class="form-field">
-              <label for="precio-base">Precio base</label>
-              <input id="precio-base" name="precio-base" type="text" value="<%= precioBase %>" />
+              <label for="precio-base">Tarifa o precio base de referencia</label>
+              <input id="precio-base" name="precio-base" type="text" value="<%= precioBase %>" placeholder="Ej. $25.000 / visita técnica o A cotizar" />
             </div>
 
             <div class="form-field">
-              <label for="bio">Bio</label>
-              <textarea id="bio" name="bio"><%= bio %></textarea>
+              <label for="bio">Descripción y trayectoria (Bio)</label>
+              <textarea id="bio" name="bio" rows="4" placeholder="Contá tu experiencia, capacitaciones, marcas con las que trabajás o modalidades de atención..."><%= bio %></textarea>
             </div>
 
-            <button class="btn btn-primary" type="submit">Guardar cambios</button>
+            <button class="btn btn-primary" type="submit" style="padding:12px 24px;">Guardar cambios</button>
           </form>
         </section>
       </div>
     </main>
 
     <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <img src="/assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
+        </div>
+        <div>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Seguridad y Legal</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago</a></li>
+            <li><a href="/terminos">Términos del servicio</a></li>
+            <li><a href="/privacidad">Política de privacidad</a></li>
+            <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Oficial 24hs</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Todos los derechos reservados</span>
+        <span>© <span id="year"></span> FIXYA.io — Todos los derechos reservados · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 

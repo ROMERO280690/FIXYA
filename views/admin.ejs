@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin | FIXYA.io</title>
+    <title>Consola de Administración | FIXYA.io</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,94 +16,138 @@
     <div class="topbar">
       <div class="container topbar-inner">
         <div class="topbar-links">
-          <span>Panel de administración</span>
+          <span>⚙️ Consola Central de Operaciones & Auditoría FIXYA</span>
         </div>
         <div class="topbar-meta">
-          <span><%= admin.nombre %></span>
+          <span>Admin: <strong><%= admin.nombre %> <%= admin.apellido %></strong></span>
+          <span>✓ Acceso seguro verificado</span>
         </div>
       </div>
     </div>
 
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="/index.html" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="/assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
         <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
           <span></span><span></span><span></span>
         </button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="/admin.php" class="active">Admin</a>
-          <a href="/perfil.php">Mi perfil</a>
-          <a href="/dashboard.php">Dashboard</a>
+          <a href="/admin" class="active">Consola Admin</a>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/perfil">Mi perfil</a>
+          <a href="/profesionales">Directorio público</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
         </nav>
         <div class="header-actions">
-          <a class="btn btn-outline" href="/api/logout.php">Salir</a>
+          <a class="btn btn-outline" href="/api/logout">Cerrar sesión</a>
         </div>
       </div>
     </header>
 
     <main class="page-shell">
       <div class="container">
-        <div class="page-head">
+        <div class="page-head" style="margin-bottom:24px;">
           <div class="page-head-copy">
-            <span class="eyebrow eyebrow-dark">Admin</span>
-            <h1>Panel de gestión</h1>
-            <p>Solicitudes de servicio, mensajes de contacto y profesionales registrados.</p>
+            <span class="eyebrow eyebrow-dark">Operaciones & Auditoría</span>
+            <h1>Panel de Control General</h1>
+            <p>Monitoreo centralizado de pedidos de servicio (checkout), mensajes entrantes, métricas y profesionales registrados.</p>
           </div>
         </div>
 
+        <!-- Notification Toast Container -->
+        <div id="toast-notif" style="display:none; position:fixed; bottom:24px; right:24px; background:#0b1f3a; color:#fff; padding:14px 20px; border-radius:10px; box-shadow:var(--shadow); z-index:9999; font-weight:600; font-size:0.92rem; border-left:4px solid #10b981;">
+          Estado actualizado correctamente.
+        </div>
+
+        <!-- Métricas ejecutivas -->
         <section class="metrics-grid">
           <article class="metric-box">
             <strong><%= solicitudes.length %></strong>
-            <span>Solicitudes de servicio</span>
+            <span>Solicitudes totales</span>
           </article>
           <article class="metric-box">
-            <strong><%= pendientes %></strong>
-            <span>Pendientes</span>
+            <strong style="color:#d97706;"><%= pendientes %></strong>
+            <span>Pendientes de atención</span>
           </article>
           <article class="metric-box">
-            <strong><%= profesionales.length %></strong>
-            <span>Profesionales</span>
+            <strong style="color:#2563eb;"><%= profesionales.length %></strong>
+            <span>Profesionales activos</span>
           </article>
           <article class="metric-box">
-            <strong><%= totalClientes %></strong>
-            <span>Clientes</span>
+            <strong style="color:#10b981;"><%= totalClientes %></strong>
+            <span>Clientes registrados</span>
           </article>
         </section>
 
-        <section class="dashboard-card" style="margin-top: 24px;">
-          <h3>Solicitudes de servicio (checkout)</h3>
+        <!-- Solicitudes de servicio -->
+        <section class="dashboard-card" style="margin-top: 28px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+            <div>
+              <h3 style="margin:0;">Solicitudes de servicio recibidas (<%= solicitudes.length %>)</h3>
+              <p style="margin:4px 0 0; font-size:0.86rem; color:var(--muted);">Actualizá el estado del pedido en tiempo real para coordinar con el cliente.</p>
+            </div>
+            
+            <!-- Filtro de estado en solicitudes -->
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button type="button" class="btn btn-small btn-primary filter-req-btn" data-estado="todos">Todas (<%= solicitudes.length %>)</button>
+              <button type="button" class="btn btn-small btn-outline filter-req-btn" data-estado="pendiente">Pendientes (<%= pendientes %>)</button>
+              <button type="button" class="btn btn-small btn-outline filter-req-btn" data-estado="contactado">Contactados</button>
+              <button type="button" class="btn btn-small btn-outline filter-req-btn" data-estado="en_proceso">En proceso</button>
+              <button type="button" class="btn btn-small btn-outline filter-req-btn" data-estado="cerrado">Concluidos</button>
+            </div>
+          </div>
+
           <div class="table-wrap">
-            <table class="data-table">
+            <table class="data-table" id="tabla-solicitudes">
               <thead>
                 <tr>
-                  <th>Fecha</th>
+                  <th>Orden / Fecha</th>
                   <th>Cliente</th>
                   <th>Contacto</th>
                   <th>Servicio</th>
-                  <th>Descripción</th>
-                  <th>Estado</th>
+                  <th>Descripción del trabajo</th>
+                  <th>Estado del pedido</th>
+                  <th>Acción</th>
                 </tr>
               </thead>
               <tbody>
                 <% if (solicitudes.length === 0) { %>
-                  <tr><td colspan="6">Todavía no hay solicitudes.</td></tr>
+                  <tr><td colspan="7" style="text-align:center; padding:24px; color:var(--muted);">No hay solicitudes registradas en la base.</td></tr>
                 <% } %>
                 <% for (const s of solicitudes) { %>
                   <% const fechaStr = s.creado_en ? new Date(s.creado_en).toLocaleString('es-AR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : ''; %>
-                  <tr>
-                    <td><%= fechaStr %></td>
-                    <td><%= s.nombre %> <%= s.apellido %></td>
-                    <td><%= s.email %><br><%= s.telefono %></td>
-                    <td><%= s.servicio %></td>
-                    <td style="max-width: 220px;"><%= s.descripcion && s.descripcion.length > 100 ? s.descripcion.substring(0, 100) + '…' : (s.descripcion || '') %></td>
+                  <tr data-row-estado="<%= s.estado %>">
                     <td>
-                      <select class="admin-estado" data-id="<%= s.id %>" style="min-height:36px; padding:4px 8px; border-radius:8px; border:1px solid rgba(11,31,58,0.12);">
+                      <strong style="color:var(--navy); font-family:monospace; display:block;"><%= s.codigo || ('FIX-' + s.id) %></strong>
+                      <small style="color:var(--muted);"><%= fechaStr %></small>
+                    </td>
+                    <td><strong><%= s.nombre %> <%= s.apellido %></strong></td>
+                    <td>
+                      <div style="font-size:0.86rem;">
+                        <a href="tel:<%= s.telefono %>" style="color:var(--navy); font-weight:600;"><%= s.telefono %></a><br />
+                        <small style="color:var(--muted);"><%= s.email %></small>
+                      </div>
+                    </td>
+                    <td>
+                      <span style="font-weight:700; color:var(--navy); text-transform:capitalize;"><%= s.servicio %></span>
+                      <small style="display:block; color:var(--muted);"><%= s.zona || 'Salta' %></small>
+                    </td>
+                    <td style="max-width: 220px; font-size:0.86rem;">
+                      <%= s.descripcion ? (s.descripcion.length > 85 ? s.descripcion.substring(0, 85) + '…' : s.descripcion) : 'Sin detalle' %>
+                    </td>
+                    <td>
+                      <select class="admin-estado" data-id="<%= s.id %>" style="min-height:36px; padding:4px 10px; border-radius:8px; border:1px solid var(--line); font-weight:600; background:#fff; cursor:pointer;">
                         <% for (const [val, label] of Object.entries(estadoLabel)) { %>
                           <option value="<%= val %>" <%= s.estado === val ? 'selected' : '' %>><%= label %></option>
                         <% } %>
                       </select>
+                    </td>
+                    <td>
+                      <a href="https://wa.me/<%= s.telefono.replace(/[^0-9]/g, '') %>?text=<%= encodeURIComponent('Hola ' + s.nombre + ', te contactamos de FIXYA sobre tu solicitud ' + (s.codigo || '') + '.') %>" target="_blank" rel="noreferrer" class="btn btn-outline btn-small" style="padding:4px 8px; font-size:0.8rem;">
+                        WhatsApp
+                      </a>
                     </td>
                   </tr>
                 <% } %>
@@ -112,31 +156,45 @@
           </div>
         </section>
 
-        <section class="dashboard-card" style="margin-top: 24px;">
-          <h3>Mensajes de contacto</h3>
+        <!-- Mensajes de contacto -->
+        <section class="dashboard-card" style="margin-top: 28px;">
+          <h3 style="margin-bottom:6px;">Mensajes de contacto recibidos (<%= mensajes.length %>)</h3>
+          <p style="margin:0 0 16px; font-size:0.86rem; color:var(--muted);">Consultas enviadas a través del formulario público de contacto.</p>
+          
           <div class="table-wrap">
             <table class="data-table">
               <thead>
                 <tr>
                   <th>Fecha</th>
-                  <th>Nombre</th>
+                  <th>Remitente</th>
                   <th>Contacto</th>
-                  <th>Interés</th>
+                  <th>Motivo / Interés</th>
                   <th>Mensaje</th>
+                  <th>Respuesta</th>
                 </tr>
               </thead>
               <tbody>
                 <% if (mensajes.length === 0) { %>
-                  <tr><td colspan="5">Todavía no hay mensajes.</td></tr>
+                  <tr><td colspan="6" style="text-align:center; padding:24px; color:var(--muted);">Todavía no hay mensajes de contacto.</td></tr>
                 <% } %>
                 <% for (const m of mensajes) { %>
                   <% const fechaStr = m.creado_en ? new Date(m.creado_en).toLocaleString('es-AR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : ''; %>
                   <tr>
-                    <td><%= fechaStr %></td>
-                    <td><%= m.nombre %></td>
-                    <td><%= m.email %><br><%= m.telefono || '' %></td>
-                    <td><%= m.interes || '' %></td>
-                    <td style="max-width: 260px;"><%= m.mensaje && m.mensaje.length > 120 ? m.mensaje.substring(0, 120) + '…' : (m.mensaje || '') %></td>
+                    <td><small style="color:var(--muted);"><%= fechaStr %></small></td>
+                    <td><strong><%= m.nombre %></strong></td>
+                    <td>
+                      <div style="font-size:0.86rem;">
+                        <a href="mailto:<%= m.email %>" style="color:var(--navy);"><%= m.email %></a><br />
+                        <small style="color:var(--muted);"><%= m.telefono || 'Sin teléfono' %></small>
+                      </div>
+                    </td>
+                    <td><span style="font-weight:600;"><%= m.interes || 'General' %></span></td>
+                    <td style="max-width: 280px; font-size:0.88rem;"><%= m.mensaje %></td>
+                    <td>
+                      <a href="mailto:<%= m.email %>?subject=<%= encodeURIComponent('Respuesta FIXYA — ' + (m.interes || 'Consulta')) %>" class="btn btn-outline btn-small" style="padding:4px 8px; font-size:0.8rem;">
+                        Responder
+                      </a>
+                    </td>
                   </tr>
                 <% } %>
               </tbody>
@@ -144,31 +202,56 @@
           </div>
         </section>
 
-        <section class="dashboard-card" style="margin-top: 24px;">
-          <h3>Profesionales registrados</h3>
+        <!-- Profesionales Registrados -->
+        <section class="dashboard-card" style="margin-top: 28px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h3 style="margin:0;">Profesionales de la red (<%= profesionales.length %>)</h3>
+              <p style="margin:4px 0 0; font-size:0.86rem; color:var(--muted);">Técnicos habilitados para recibir contrataciones.</p>
+            </div>
+            <a href="/registro" class="btn btn-primary btn-small">+ Alta de profesional</a>
+          </div>
+
           <div class="table-wrap">
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Fecha</th>
-                  <th>Nombre</th>
-                  <th>Email</th>
+                  <th>Alta</th>
+                  <th>Nombre y Apellido</th>
+                  <th>Email / Teléfono</th>
                   <th>Especialidad</th>
                   <th>Zona</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <% if (profesionales.length === 0) { %>
-                  <tr><td colspan="5">Todavía no hay profesionales registrados.</td></tr>
+                  <tr><td colspan="7" style="text-align:center; padding:24px; color:var(--muted);">No hay profesionales en el sistema.</td></tr>
                 <% } %>
                 <% for (const pr of profesionales) { %>
                   <% const fechaStr = pr.creado_en ? new Date(pr.creado_en).toLocaleDateString('es-AR') : ''; %>
                   <tr>
-                    <td><%= fechaStr %></td>
-                    <td><%= pr.nombre %> <%= pr.apellido %></td>
-                    <td><%= pr.email %></td>
-                    <td><%= pr.especialidad || '—' %></td>
-                    <td><%= pr.zona || '—' %></td>
+                    <td><small style="color:var(--muted);"><%= fechaStr %></small></td>
+                    <td><strong><%= pr.nombre %> <%= pr.apellido %></strong></td>
+                    <td>
+                      <div style="font-size:0.86rem;">
+                        <%= pr.email %><br />
+                        <small style="color:var(--muted);"><%= pr.telefono || 'Sin teléfono' %></small>
+                      </div>
+                    </td>
+                    <td><span style="color:var(--navy); font-weight:600;"><%= pr.especialidad || 'Sin especialidad' %></span></td>
+                    <td><%= pr.zona || 'Salta' %></td>
+                    <td>
+                      <button type="button" class="btn btn-small btn-toggle-verify <%= pr.verificado ? 'btn-primary' : 'btn-outline' %>" data-id="<%= pr.id %>" style="padding:3px 8px; font-size:0.75rem;">
+                        <%= pr.verificado ? '✓ Verificado' : 'Pausado' %>
+                      </button>
+                    </td>
+                    <td>
+                      <a href="/profesional?id=<%= pr.id %>" target="_blank" class="btn btn-outline btn-small" style="padding:4px 8px; font-size:0.8rem;">
+                        Ver ficha ↗
+                      </a>
+                    </td>
                   </tr>
                 <% } %>
               </tbody>
@@ -179,30 +262,147 @@
     </main>
 
     <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <img src="/assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
+        </div>
+        <div>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Seguridad y Legal</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago</a></li>
+            <li><a href="/terminos">Términos del servicio</a></li>
+            <li><a href="/privacidad">Política de privacidad</a></li>
+            <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Oficial 24hs</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Panel interno</span>
+        <span>© <span id="year"></span> FIXYA.io — Consola administrativa de operaciones · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 
     <script>
       const csrfAdmin = <%= JSON.stringify(csrfToken) %>;
+      const toast = document.getElementById('toast-notif');
+
+      function mostrarToast(msg) {
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.style.display = 'block';
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 3000);
+      }
+
       document.querySelectorAll('.admin-estado').forEach((select) => {
         select.addEventListener('change', async () => {
           const id = select.dataset.id;
           const estado = select.value;
+          const tr = select.closest('tr');
+
           try {
-            await fetch('/api/admin_estado.php', {
+            const res = await fetch('/api/admin_estado', {
               method: 'POST',
               credentials: 'same-origin',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ id, estado, csrf: csrfAdmin }),
             });
+            const data = await res.json();
+            if (data.ok) {
+              if (tr) tr.setAttribute('data-row-estado', estado);
+              const optLabel =
+                select.options && select.selectedIndex >= 0
+                  ? select.options[select.selectedIndex]?.text
+                  : estado;
+              mostrarToast(`Estado actualizado a: ${optLabel}`);
+            } else {
+              mostrarToast('Error al actualizar: ' + (data.error || 'intente de nuevo'));
+            }
           } catch (e) {
-            console.error('No se pudo actualizar el estado.');
+            mostrarToast('Error de conexión al actualizar el estado.');
           }
         });
       });
+
+      // Toggle verificación de profesional
+      document.querySelectorAll('.btn-toggle-verify').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.id;
+          try {
+            const res = await fetch('/api/admin_verificar_pro', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id }),
+            });
+            const data = await res.json();
+            if (data.ok) {
+              if (data.verificado) {
+                btn.textContent = '✓ Verificado';
+                btn.classList.remove('btn-outline');
+                btn.classList.add('btn-primary');
+              } else {
+                btn.textContent = 'Pausado';
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline');
+              }
+              mostrarToast(data.mensaje);
+            }
+          } catch (e) {
+            mostrarToast('Error al modificar verificación.');
+          }
+        });
+      });
+
+      // Filtros rápidos por estado
+      const reqButtons = document.querySelectorAll('.filter-req-btn');
+      const reqRows = document.querySelectorAll('#tabla-solicitudes tbody tr');
+
+      reqButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          reqButtons.forEach((b) => {
+            b.classList.remove('btn-primary');
+            b.classList.add('btn-outline');
+          });
+          btn.classList.remove('btn-outline');
+          btn.classList.add('btn-primary');
+
+          const targetEstado = btn.dataset.estado;
+
+          reqRows.forEach((row) => {
+            const rowEstado = row.getAttribute('data-row-estado');
+            if (targetEstado === 'todos' || rowEstado === targetEstado) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      });
+
       const yearEl = document.getElementById('year');
       if (yearEl) yearEl.textContent = new Date().getFullYear();
     </script>

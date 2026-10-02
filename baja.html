@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Botón de Baja de Servicios | Ley 24.240 y Res. 271/2020 | FIXYA.io</title>
+    <link rel="canonical" href="https://fixya.io/baja" />
+    <meta name="description" content="Solicitá la baja inmediata de tu suscripción o servicio conforme al Art. 10 ter de la Ley 24.240 y Resolución 271/2020 de la Secretaría de Comercio Interior. Trámite simple sin penalizaciones." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/extras/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/assets/extras/favicon-180.png" />
+    <meta name="theme-color" content="#0b1f3a" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-links">
+          <a href="tel:+5493873522920">+54 9 387 352-2920</a>
+          <a href="mailto:info@fixya.io">info@fixya.io</a>
+        </div>
+        <div class="topbar-meta">
+          <span>Defensa del Consumidor · Ley 24.240</span>
+          <span>✓ Baja inmediata sin trabas</span>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
+          <img src="/assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria">Categorías</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn-outline" href="/login">Iniciar sesión</a>
+          <a class="btn btn-primary" href="/dashboard">Mi panel</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="container">
+        <section class="page-head" style="margin-bottom: 24px;">
+          <div class="page-head-copy">
+            <span class="eyebrow eyebrow-dark">Rescisión de Servicios</span>
+            <h1>Botón de Baja de Suscripción</h1>
+            <p>Conforme al <strong>Artículo 10 ter de la Ley 24.240</strong> y la <strong>Resolución 271/2020 de la Secretaría de Comercio Interior</strong>, podés solicitar la baja de tu suscripción FIXYA PRO o servicio en cualquier momento con la misma facilidad con que contrataste.</p>
+          </div>
+        </section>
+
+        <section class="content-card" style="max-width: 640px; margin: 0 auto 36px; padding: 32px;">
+          <div style="background:#f8fafc; border-left:4px solid #64748b; padding:12px 16px; border-radius:6px; margin-bottom:20px; font-size:0.88rem; color:#334155;">
+            🔒 <strong>Constancia de baja inmediata:</strong> La baja opera a partir del momento de envío sin ningún cargo de cancelación o penalidad. Se emitirá una constancia formal con número de trámite.
+          </div>
+
+          <form id="form-baja">
+            <div class="form-field" style="margin-bottom:16px;">
+              <label for="email_baja"><strong>Email de tu cuenta FIXYA *</strong></label>
+              <input type="email" id="email_baja" name="email" required placeholder="tu-email@ejemplo.com" style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;" />
+            </div>
+
+            <div class="form-field" style="margin-bottom:16px;">
+              <label for="servicio_baja"><strong>Servicio o plan a rescindir *</strong></label>
+              <select id="servicio_baja" name="servicio_baja" style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;">
+                <option value="plan_pro">Plan Profesional PRO</option>
+                <option value="plan_empresa">Plan Empresa & Cuadrillas</option>
+                <option value="cuenta_general">Baja total de cuenta y datos</option>
+              </select>
+            </div>
+
+            <div class="form-field" style="margin-bottom:20px;">
+              <label for="motivo_baja">Motivo de la baja (opcional para mejorar el servicio)</label>
+              <textarea id="motivo_baja" name="motivo" rows="3" placeholder="Contanos el motivo de tu baja..." style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;"></textarea>
+            </div>
+
+            <button type="submit" id="btn-submit-baja" class="btn btn-primary" style="width:100%; padding:14px; background:#475569; border-color:#475569; font-size:1.05rem;">
+              Confirmar solicitud de baja
+            </button>
+          </form>
+
+          <div id="resultado-baja" style="display:none; margin-top:24px; padding:20px; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:10px; text-align:center;">
+            <div style="font-size:2rem; color:#475569; margin-bottom:8px;">✓</div>
+            <h3 style="margin:0 0 6px; color:#1e293b;">Baja Registrada y Confirmada</h3>
+            <p style="margin:0 0 10px; font-size:0.92rem; color:#334155;">
+              Tu solicitud fue procesada bajo el <strong>Código de Constancia de Baja:</strong>
+            </p>
+            <div id="codigo-baja-display" style="font-size:1.4rem; font-weight:800; color:#0b1f3a; font-family:monospace; background:#fff; padding:10px; border-radius:8px; border:1px dashed #64748b; margin-bottom:14px;">
+              BAJA-00000
+            </div>
+            <p style="font-size:0.86rem; color:#475569; margin:0 0 16px;">
+              La rescisión ha quedado firme. No se computarán nuevos cobros en los períodos venideros (Res. 271/2020).
+            </p>
+            <a href="/" class="btn btn-outline btn-small">Volver al inicio</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <img src="/assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
+        </div>
+        <div>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Defensa del Consumidor</h3>
+          <ul>
+            <li><a href="/arrepentimiento">Botón de Arrepentimiento</a></li>
+            <li><a href="/baja" style="color:var(--orange); font-weight:700;">Botón de Baja de Suscripción</a></li>
+            <li><a href="/terminos">Términos del servicio</a></li>
+            <li><a href="/privacidad">Política de privacidad</a></li>
+            <li><a href="https://www.argentina.gob.ar/defensadelconsumidor" target="_blank" rel="noreferrer">Ventanilla Única de Reclamos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contacto y Soporte</h3>
+          <ul>
+            <li><a href="/contacto">Mesa de ayuda FIXYA</a></li>
+            <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Oficial 24hs</a></li>
+            <li><span>Salta Capital, Argentina</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="year"></span> FIXYA.io — Cumplimiento estricto Ley 24.240 y Res. 271/2020 · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
+      </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+      const formBaja = document.getElementById('form-baja');
+      const resultadoBaja = document.getElementById('resultado-baja');
+      const displayCodigoBaja = document.getElementById('codigo-baja-display');
+      const btnSubmitBaja = document.getElementById('btn-submit-baja');
+
+      if (formBaja) {
+        formBaja.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          if (btnSubmitBaja) {
+            btnSubmitBaja.disabled = true;
+            btnSubmitBaja.textContent = 'Procesando baja...';
+          }
+          const payload = Object.fromEntries(new FormData(formBaja).entries());
+          try {
+            const res = await fetch('/api/baja_suscripcion', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            const data = await res.json();
+            if (data.ok) {
+              formBaja.style.display = 'none';
+              if (displayCodigoBaja) displayCodigoBaja.textContent = data.codigo;
+              if (resultadoBaja) resultadoBaja.style.display = 'block';
+            } else {
+              alert(data.error || 'Error al procesar la baja.');
+              if (btnSubmitBaja) {
+                btnSubmitBaja.disabled = false;
+                btnSubmitBaja.textContent = 'Confirmar solicitud de baja';
+              }
+            }
+          } catch (err) {
+            alert('Error de conexión con el servidor.');
+            if (btnSubmitBaja) {
+              btnSubmitBaja.disabled = false;
+              btnSubmitBaja.textContent = 'Confirmar solicitud de baja';
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

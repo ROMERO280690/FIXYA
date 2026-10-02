@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Términos y Condiciones | FIXYA.io</title>
-    <link rel="canonical" href="https://fixya.io/terminos.html" />
+    <link rel="canonical" href="https://fixya.io/terminos" />
     <meta name="description" content="Términos y condiciones de uso de la plataforma FIXYA.io." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,23 +30,24 @@
 
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="index.html" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
         <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
           <span></span><span></span><span></span>
         </button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="index.html">Inicio</a>
-          <a href="servicios.html">Servicios</a>
-          <a href="categoria.html">Categorías</a>
-          <a href="profesionales.php">Profesionales</a>
-          <a href="nosotros.html">Nosotros</a>
-          <a href="contacto.html">Contacto</a>
+          <a href="/">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria">Categorías</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
         </nav>
         <div class="header-actions">
-          <a class="btn btn-outline" href="login.html">Iniciar sesión</a>
-          <a class="btn btn-primary" href="index.html#buscar">Buscar</a>
+          <a class="btn btn-outline" href="/login">Iniciar sesión</a>
+          <a class="btn btn-primary" href="/checkout">Pedir presupuesto</a>
         </div>
       </div>
     </header>
@@ -61,34 +62,64 @@
           </div>
         </section>
 
-        <section class="content-card" style="max-width: 820px; margin: 0 auto 24px; padding: 32px;">
-          <h2>1. Qué es FIXYA</h2>
-          <p>FIXYA.io es una plataforma que conecta a clientes con profesionales independientes de hogar, industria y campo. FIXYA facilita el contacto, la cotización y el pago, pero no es empleador de los profesionales listados: cada uno actúa por cuenta propia.</p>
+        <section class="content-card" style="max-width: 860px; margin: 0 auto 24px; padding: 36px;">
+          <div style="background:#eff6ff; border-left:4px solid #2563eb; padding:14px 18px; border-radius:6px; margin-bottom:24px; font-size:0.92rem; color:#1e40af;">
+            ⚖️ <strong>Marco normativo aplicable:</strong> Este contrato se rige estrictamente por las leyes de la República Argentina, en especial la <strong>Ley 24.240 de Defensa del Consumidor</strong>, el <strong>Código Civil y Comercial de la Nación</strong>, el <strong>Decreto 274/2019 de Lealtad Comercial</strong>, las Resoluciones <strong>424/2020</strong> (Botón de Arrepentimiento) y <strong>271/2020</strong> (Botón de Baja) de la Secretaría de Comercio Interior, y la <strong>Ley 25.326 de Protección de los Datos Personales</strong>.
+          </div>
 
-          <h2>2. Cuentas de usuario</h2>
-          <p>Sos responsable de la información que cargás y de mantener tu contraseña segura. Podés registrarte como cliente o como profesional; los datos de tu cuenta pueden editarse desde tu perfil en cualquier momento.</p>
+          <h2>1. Identificación del Titular y Rol de la Plataforma</h2>
+          <p>FIXYA (en adelante, "la Plataforma"), con domicilio legal en la Ciudad de Salta, Provincia de Salta, República Argentina, CUIT 30-71894201-8, opera como un marketplace digital e intermediario tecnológico que facilita el encuentro, la presupuestación previa y la contratación de servicios técnicos, del hogar, comercio e industria entre clientes y profesionales independientes o empresas prestadoras.</p>
+          <p>La Plataforma no es empleadora de los técnicos independientes registrados. Cada profesional ejerce su actividad de forma autónoma y es responsable exclusivo del cumplimiento de las normativas de su oficio y habilitaciones pertinentes.</p>
 
-          <h2>3. Verificación de profesionales</h2>
-          <p>FIXYA revisa la identidad y los datos de contacto de los profesionales que se suman a la red. Esta verificación no constituye una garantía de la calidad del trabajo realizado; te recomendamos revisar reseñas y coordinar el alcance del trabajo antes de contratar.</p>
-
-          <h2>4. Pagos</h2>
-          <p>Los pagos se procesan a través de Mercado Pago. FIXYA no almacena datos de tarjetas ni de cuentas bancarias: esa información es gestionada directamente por Mercado Pago bajo sus propios términos de seguridad.</p>
-
-          <h2>5. Uso aceptable</h2>
-          <ul class="feature-list">
-            <li>No usar la plataforma para fines fraudulentos o ilegales</li>
-            <li>No publicar información falsa sobre tu identidad o servicios</li>
-            <li>Tratar con respeto a otros usuarios y profesionales</li>
+          <h2>2. Profesionales Matriculados vs. Oficios Generales</h2>
+          <p>Conforme al principio de veracidad y lealtad comercial (Ley 24.240 y Dec. 274/2019), FIXYA distingue taxativamente entre:</p>
+          <ul>
+            <li><strong>Profesionales con Matrícula Oficial Habilitante:</strong> En rubros regulados por el Estado Nacional o Provincial (como instalaciones de gas natural bajo normativa <strong>ENARGAS / NAG-200</strong> y distribuidoras licenciadas, o instalaciones eléctricas bajo la <strong>Ley de Seguridad Eléctrica</strong> y colegios de ingenieros/técnicos como COPIME/CIEC), la matrícula informada es auditada mediante constancia pública de registro.</li>
+            <li><strong>Oficios Técnicos Generales:</strong> En tareas que no requieren habilitación estatal obligatoria (pintura, albañilería menor, jardinería, etc.), la verificación se limita a identidad fehaciente (DNI / Renaper), antecedentes y domicilio. En ningún caso se atribuirán matrículas inexistentes.</li>
           </ul>
 
-          <h2>6. Límite de responsabilidad</h2>
-          <p>FIXYA actúa como intermediario tecnológico. La relación contractual por el trabajo contratado es directamente entre el cliente y el profesional; FIXYA no es parte de esa relación ni responsable por el resultado del trabajo realizado.</p>
+          <h2>3. Presupuesto Previo Obligatorio (Art. 21 Ley 24.240)</h2>
+          <p>Antes de la iniciación de cualquier trabajo o cobro definitivo, el prestador o la plataforma confeccionará un <strong>Presupuesto Previo por Escrito</strong> que incluirá:</p>
+          <ul>
+            <li>Nombre, apellido, CUIT y datos de contacto del prestador.</li>
+            <li>Descripción detallada y técnica de la labor a realizar.</li>
+            <li>Desglose discriminado de costos de mano de obra y de materiales a utilizar en Pesos Argentinos (ARS) con IVA incluido.</li>
+            <li>Plazo previsto para la iniciación y conclusión del trabajo.</li>
+            <li>Plazo de validez formal del presupuesto, el cual <strong>en ningún caso podrá ser inferior a diez (10) días corridos</strong> contados desde su recepción por el cliente.</li>
+          </ul>
 
-          <h2>7. Cambios en estos términos</h2>
-          <p>Podemos actualizar estos términos para reflejar cambios en el servicio. Publicaremos la fecha de la última actualización al inicio de esta página.</p>
+          <h2>4. Derecho de Arrepentimiento (Art. 34 Ley 24.240 y Res. 424/2020)</h2>
+          <div style="background:#fff7ed; border:1px solid #ffedd5; padding:16px; border-radius:8px; margin:16px 0;">
+            <p style="margin:0 0 8px;"><strong>✓ Botón de Arrepentimiento Legal:</strong> En cumplimiento de la <strong>Resolución 424/2020</strong> de la Secretaría de Comercio Interior y el Art. 34 de la Ley 24.240, el consumidor tiene derecho irrenunciable a <strong>revocar la aceptación de la contratación dentro de los diez (10) días corridos</strong> contados a partir de la fecha en que se celebró el contrato o se solicitó el servicio a distancia.</p>
+            <p style="margin:0 0 10px; font-size:0.9rem; color:#9a3412;">El ejercicio de este derecho no implicará gasto, penalización ni retención alguna para el consumidor. Todos los importes abonados o retenidos en custodia serán reintegrados de inmediato por el mismo medio de pago.</p>
+            <a href="/arrepentimiento" class="btn btn-primary btn-small" style="background:#ea580c; border-color:#ea580c; display:inline-block;">Acceder al Botón de Arrepentimiento ↩</a>
+          </div>
 
-          <h2>8. Contacto</h2>
-          <p>Consultas sobre estos términos: <a href="mailto:info@fixya.io">info@fixya.io</a> · <a href="tel:+5493873522920">+54 9 387 352-2920</a>.</p>
+          <h2>5. Botón de Baja de Suscripciones y Servicios (Res. 271/2020)</h2>
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:16px; border-radius:8px; margin:16px 0;">
+            <p style="margin:0 0 8px;"><strong>✓ Rescisión Simple e Inmediata:</strong> En los términos de la <strong>Resolución 271/2020</strong> de la Secretaría de Comercio Interior y el Art. 10 ter de la Ley 24.240, los usuarios y profesionales que hayan contratado suscripciones periódicas (FIXYA PRO) o servicios continuados tienen derecho a rescindir y dar de baja el servicio mediante un solo clic, sin exigencias presenciales ni trabas operativas.</p>
+            <a href="/baja" class="btn btn-outline btn-small" style="display:inline-block;">Acceder al Botón de Baja de Suscripción ✕</a>
+          </div>
+
+          <h2>6. Garantía Legal Escrita de Servicios y Reparaciones (Arts. 11 a 17 Ley 24.240)</h2>
+          <p>De conformidad con los Arts. 11, 12, 14 y concordantes de la Ley 24.240 y Art. 1256 del Código Civil y Comercial de la Nación:</p>
+          <ul>
+            <li>Toda reparación, refacción o servicio técnico goza de una <strong>garantía legal obligatoria por vicios, defectos o fallas de mano de obra</strong> por un plazo no menor a <strong>noventa (90) días corridos</strong> desde la entrega de la obra.</li>
+            <li>Durante el período de garantía, el prestador estará obligado a corregir sin costo alguno para el cliente cualquier defecto en el trabajo ejecutado o en las piezas provistas.</li>
+            <li>Se emite constancia de garantía escrita en formato digital dentro del Expediente Digital de la Orden.</li>
+          </ul>
+
+          <h2>7. Régimen de Pago y Fondos en Custodia (Normas BCRA)</h2>
+          <p>Los pagos se procesan a través de la pasarela oficial <strong>Mercado Pago</strong> (MercadoLibre S.R.L.), Proveedor de Servicios de Pago que ofrece Cuentas de Pago (PSPCP) inscripto ante el Banco Central de la República Argentina (BCRA). FIXYA no realiza intermediación financiera no autorizada. Los fondos abonados por el cliente quedan en custodia transitoria y son liquidados al prestador una vez prestada la debida conformidad de la labor o transcurridos los plazos de garantía legal.</p>
+
+          <h2>8. Facturación y Obligaciones Tributarias</h2>
+          <p>Toda transacción y comisión de intermediación es facturada conforme a las normas de la <strong>Agencia de Recaudación y Control Aduanero (ARCA / ex-AFIP)</strong>. Los profesionales independientes deberán emitir al cliente la factura fiscal correspondiente (Factura A, B, C o recibo oficial) por el monto final de la mano de obra convenida.</p>
+
+          <h2>9. Protección de Datos Personales (Ley 25.326)</h2>
+          <p>Los datos recabados son tratados conforme a la <strong>Ley 25.326</strong>. El titular de los datos personales tiene la facultad de ejercer el derecho de acceso en forma gratuita a intervalos no inferiores a seis meses. La <strong>Agencia de Acceso a la Información Pública (AAIP)</strong>, órgano de control de la Ley 25.326, tiene la atribución de atender denuncias y reclamos relativos al incumplimiento de las normas sobre protección de datos.</p>
+
+          <h2>10. Defensa del Consumidor y Resolución de Conflictos</h2>
+          <p>En caso de controversia, el consumidor podrá acudir al sistema de mediación interno de FIXYA o recurrir ante la <strong>Dirección Nacional de Defensa del Consumidor y Arbitraje del Consumo</strong> a través de la <strong>Ventanilla Única Federal de Reclamos</strong> en <a href="https://www.argentina.gob.ar/defensadelconsumidor" target="_blank" rel="noreferrer" style="color:var(--orange); font-weight:700;">www.argentina.gob.ar/defensadelconsumidor</a> o ante los Tribunales Ordinarios competentes.</p>
         </section>
       </div>
     </main>
@@ -97,24 +128,43 @@
       <div class="container footer-grid">
         <div>
           <img src="assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
-          <p>Marketplace de servicios con profesionales verificados y pago seguro.</p>
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
         </div>
         <div>
-          <h3>Servicios</h3>
-          <ul><li><a href="producto.php?s=plomeria">Plomería</a></li><li><a href="producto.php?s=electricidad">Electricidad</a></li><li><a href="producto.php?s=gas">Gas</a></li><li><a href="producto.php?s=pintura">Pintura</a></li><li><a href="categoria.html">Ver todas</a></li></ul>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
         </div>
         <div>
-          <h3>Empresa</h3>
-          <ul><li><a href="nosotros.html">Nosotros</a></li><li><a href="profesionales.php">Profesionales</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="privacidad.html">Privacidad</a></li><li><a href="terminos.html">Términos</a></li></ul>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
+          </ul>
         </div>
         <div>
-          <h3>Contacto</h3>
-          <ul><li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li><li><a href="mailto:info@fixya.io">info@fixya.io</a></li><li>Salta, Argentina</li></ul>
+          <h3>Seguridad y Legal</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago</a></li>
+            <li><a href="/terminos">Términos del servicio</a></li>
+            <li><a href="/privacidad">Política de privacidad</a></li>
+            <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Oficial 24hs</a></li>
+          </ul>
         </div>
       </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Todos los derechos reservados</span>
+        <span>© <span id="year"></span> FIXYA.io — Todos los derechos reservados · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 

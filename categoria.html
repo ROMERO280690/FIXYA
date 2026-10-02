@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Categorías | FIXYA.io</title>
-    <link rel="canonical" href="https://fixya.io/categoria.html" />
-    <meta name="description" content="Explora servicios por categoría en FIXYA.io." />
+    <title>Todas las categorías de servicio | FIXYA.io</title>
+    <link rel="canonical" href="https://fixya.io/categoria" />
+    <meta name="description" content="Explorá los rubros de servicios técnicos, del hogar e industria en FIXYA. Cotizaciones transparentes y técnicos verificados." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -16,8 +16,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="FIXYA.io" />
     <meta property="og:locale" content="es_AR" />
-    <meta property="og:title" content="Categorías | FIXYA.io" />
-    <meta property="og:description" content="Explora servicios por categoría en FIXYA.io." />
+    <meta property="og:title" content="Todas las categorías de servicio | FIXYA.io" />
+    <meta property="og:description" content="Explorá los rubros de servicios técnicos y del hogar en FIXYA. Cotizaciones transparentes y técnicos verificados." />
     <meta property="og:image" content="https://fixya.io/assets/marketing/og-share.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
@@ -30,30 +30,32 @@
         </div>
         <div class="topbar-meta">
           <span>fixya.io</span>
-          <span>✓ Mercado Pago</span>
+          <span>✓ Especialidades verificadas</span>
+          <span>✓ Custodia Mercado Pago</span>
         </div>
       </div>
     </div>
 
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="index.html" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
         <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
           <span></span><span></span><span></span>
         </button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="index.html">Inicio</a>
-          <a href="servicios.html">Servicios</a>
-          <a href="categoria.html" class="active">Categorías</a>
-          <a href="profesionales.php">Profesionales</a>
-          <a href="nosotros.html">Nosotros</a>
-          <a href="contacto.html">Contacto</a>
+          <a href="/">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria" class="active">Categorías</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
         </nav>
         <div class="header-actions">
-          <a class="btn btn-outline" href="login.html">Iniciar sesión</a>
-          <a class="btn btn-primary" href="registro.html">Registrarse</a>
+          <a class="btn btn-outline" href="/login">Iniciar sesión</a>
+          <a class="btn btn-primary" href="/registro">Registrarse</a>
         </div>
       </div>
     </header>
@@ -62,179 +64,246 @@
       <div class="container">
         <section class="page-head">
           <div class="page-head-copy">
-            <span class="eyebrow eyebrow-dark">Categorías</span>
-            <h1>Buscá por especialidad o urgencia</h1>
-            <p>Todo lo que necesitás resolver en un solo lugar, con profesionales cercanos, precios claros y trabajo verificado.</p>
-            <div class="page-actions">
-              <a class="btn btn-primary" href="index.html#buscar">Buscar servicio</a>
-              <a class="btn btn-outline" href="servicios.html">Ver servicios</a>
+            <span class="eyebrow eyebrow-dark">Catálogo oficial</span>
+            <h1>Especialidades técnicas para cada necesidad</h1>
+            <p>Elegí el rubro que necesitás resolver. Cada categoría cuenta con técnicos revisados, alcance detallado de tareas y precios claros de referencia con custodia garantizada.</p>
+            
+            <div style="margin-top: 20px;">
+              <input type="text" id="filtro-categoria-input" placeholder="🔍 Filtrar categoría por nombre o tarea (ej. gas, pérdida, tablero, aire, rejas…)" style="width:100%; max-width:540px; padding:12px 18px; border-radius:10px; border:2px solid var(--line); font-size:0.95rem;" />
             </div>
           </div>
           <div class="page-head-card">
-            <img src="assets/corporativas/corp-03-taller.webp" alt="Taller FIXYA" width="960" height="540" loading="lazy" decoding="async" />
+            <img src="assets/corporativas/corp-03-taller.webp" alt="Taller FIXYA" width="960" height="540" fetchpriority="high" />
           </div>
         </section>
 
-        <section class="filter-bar">
-          <div class="filter-item">
-            <strong>Proveedor</strong>
-            <div>Profesionales verificados</div>
-          </div>
-          <div class="filter-item">
-            <strong>Zona</strong>
-            <div>Salta y alrededores</div>
-          </div>
-          <div class="filter-item">
-            <strong>Urgencia</strong>
-            <div>Hoy o 24 hs</div>
-          </div>
-          <div class="filter-item">
-            <strong>Pagos</strong>
-            <div>Mercado Pago</div>
-          </div>
-        </section>
+        <!-- Filtros rápidos por tipo -->
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin: 28px 0 16px; align-items:center;">
+          <span style="font-weight:700; color:var(--navy); font-size:0.9rem;">Filtrar por grupo:</span>
+          <button type="button" class="btn btn-small btn-primary filter-cat-btn" data-tag="todos">Todos los rubros</button>
+          <button type="button" class="btn btn-small btn-outline filter-cat-btn" data-tag="urgencias">Urgencias domiciliarias</button>
+          <button type="button" class="btn btn-small btn-outline filter-cat-btn" data-tag="instalaciones">Instalaciones técnicas</button>
+          <button type="button" class="btn btn-small btn-outline filter-cat-btn" data-tag="mantenimiento">Mantenimiento y reformas</button>
+        </div>
 
-        <section class="catalog-grid">
-          <article class="product-card">
-            <img src="assets/categorias/cat-plomeria.webp" alt="Plomería" width="192" height="192" loading="lazy" decoding="async" />
+        <section class="catalog-grid" id="catalogo-grid">
+          <!-- Plomería -->
+          <article class="product-card" data-tags="urgencias instalaciones" data-keywords="plomeria fugas perdidas canos destape bano cocina desagote termofusion">
+            <img src="assets/categorias/cat-plomeria.webp" alt="Plomería" width="192" height="192" loading="lazy" />
             <div class="product-body">
               <h3>Plomería</h3>
-              <p>Reparaciones, instalaciones y urgencias domiciliarias.</p>
+              <p>Reparaciones urgentes, detección no destructiva de fugas, destapes mecánicos y termofusión.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=plomeria">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=plomeria">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=plomeria">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-electricidad.webp" alt="Electricidad" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Electricidad -->
+          <article class="product-card" data-tags="urgencias instalaciones" data-keywords="electricidad tableros cortocircuito disyuntor luces cableado iluminacion">
+            <img src="assets/categorias/cat-electricidad.webp" alt="Electricidad" width="192" height="192" loading="lazy" />
             <div class="product-body">
               <h3>Electricidad</h3>
-              <p>Tableros, instalaciones, mantenimiento y reformas.</p>
+              <p>Tableros eléctricos, certificación de seguridad, recableados, disyuntores y urgencias.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=electricidad">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=electricidad">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=electricidad">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-gas.webp" alt="Gas" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Gas -->
+          <article class="product-card" data-tags="urgencias instalaciones" data-keywords="gas matriculado olor estufa calefon cocina perdida regulador enargas">
+            <img src="assets/categorias/cat-gas.webp" alt="Gas" width="192" height="192" loading="lazy" />
             <div class="product-body">
-              <h3>Gas</h3>
-              <p>Instalaciones, revisión y mantenimientos seguros.</p>
+              <h3>Gas matriculado</h3>
+              <p>Instalación de calefones, estufas, pruebas de hermeticidad y habilitaciones oficiales.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=gas">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=gas">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=gas">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-cerrajeria.webp" alt="Cerrajería" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Cerrajería -->
+          <article class="product-card" data-tags="urgencias" data-keywords="cerrajeria cerraduras llaves apertura puerta candado seguridad blindada">
+            <img src="assets/categorias/cat-cerrajeria.webp" alt="Cerrajería" width="192" height="192" loading="lazy" />
             <div class="product-body">
-              <h3>Cerrajería</h3>
-              <p>Aperturas, cerraduras e instalaciones de seguridad.</p>
+              <h3>Cerrajería 24hs</h3>
+              <p>Aperturas técnicas de urgencia las 24 hs, cambio de combinación y cerraduras de seguridad.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=cerrajeria">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=cerrajeria">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=cerrajeria">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-aire.webp" alt="Aire" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Aire acondicionado -->
+          <article class="product-card" data-tags="instalaciones mantenimiento" data-keywords="aire acondicionado split refrigeracion gas r410 limpieza inverter">
+            <img src="assets/categorias/cat-aire.webp" alt="Aire acondicionado" width="192" height="192" loading="lazy" />
             <div class="product-body">
               <h3>Aire acondicionado</h3>
-              <p>Instalación, limpieza y diagnóstico técnico.</p>
+              <p>Colocación de split/inverter, desinfección, carga de gas refrigerante ecológico y service.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=aire">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=aire">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=aire">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-pintura.webp" alt="Pintura" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Pintura -->
+          <article class="product-card" data-tags="mantenimiento" data-keywords="pintura latex sintetico humedad impermeabilizacion paredes techos fachada">
+            <img src="assets/categorias/cat-pintura.webp" alt="Pintura" width="192" height="192" loading="lazy" />
             <div class="product-body">
-              <h3>Pintura</h3>
-              <p>Acabados, reformas y trabajos de interior y exterior.</p>
+              <h3>Pintura y acabados</h3>
+              <p>Pintura de interior, exterior, tratamiento de humedad y revestimientos texturados.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=pintura">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=pintura">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=pintura">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-carpinteria.webp" alt="Carpintería" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Herrería -->
+          <article class="product-card" data-tags="instalaciones mantenimiento" data-keywords="herreria rejas portones soldadura techos chapa hierro seguridad">
+            <img src="assets/categorias/cat-herreria.png" alt="Herrería" width="192" height="192" loading="lazy" />
+            <div class="product-body">
+              <h3>Herrería y estructuras</h3>
+              <p>Rejas de seguridad perimetrales, portones corredizos, techos y soldaduras de precisión.</p>
+              <div class="price-row">
+                <a class="btn btn-outline btn-small" href="/producto?s=herreria">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=herreria">Cotizar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Carpintería -->
+          <article class="product-card" data-tags="mantenimiento" data-keywords="carpinteria madera muebles aberturas puertas ventanas reparacion melamina">
+            <img src="assets/categorias/cat-carpinteria.webp" alt="Carpintería" width="192" height="192" loading="lazy" />
             <div class="product-body">
               <h3>Carpintería</h3>
-              <p>Arreglos, reparación y trabajos a medida.</p>
+              <p>Arreglos de puertas, colocación de muebles a medida, restauraciones y aberturas.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=carpinteria">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=carpinteria">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=carpinteria">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-jardineria.webp" alt="Jardinería" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Jardinería -->
+          <article class="product-card" data-tags="mantenimiento" data-keywords="jardineria cesped poda corte arboles riego plantas jardin">
+            <img src="assets/categorias/cat-jardineria.webp" alt="Jardinería" width="192" height="192" loading="lazy" />
             <div class="product-body">
-              <h3>Jardinería</h3>
-              <p>Mantenimiento, diseño y cuidado integral del exterior.</p>
+              <h3>Jardinería y parques</h3>
+              <p>Corte de césped, poda de altura, diseño de espacios verdes y sistemas de riego.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=jardineria">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=jardineria">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=jardineria">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-limpieza.webp" alt="Limpieza" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Limpieza -->
+          <article class="product-card" data-tags="mantenimiento" data-keywords="limpieza profunda obra oficinas casas desinfeccion vidrios">
+            <img src="assets/categorias/cat-limpieza.webp" alt="Limpieza" width="192" height="192" loading="lazy" />
             <div class="product-body">
-              <h3>Limpieza</h3>
-              <p>Limpieza general, profunda y post-obra.</p>
+              <h3>Limpieza profesional</h3>
+              <p>Limpieza profunda de fin de obra, oficinas, locales comerciales y mantenimiento periódico.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=limpieza">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=limpieza">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=limpieza">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-mudanzas.webp" alt="Mudanzas" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Mudanzas -->
+          <article class="product-card" data-tags="mantenimiento" data-keywords="mudanzas fletes fletes cortos traslado muebles embalaje camion">
+            <img src="assets/categorias/cat-mudanzas.webp" alt="Mudanzas" width="192" height="192" loading="lazy" />
             <div class="product-body">
-              <h3>Mudanzas</h3>
-              <p>Mudanzas y fletes con embalaje y seguimiento.</p>
+              <h3>Mudanzas y fletes</h3>
+              <p>Traslados locales y de larga distancia, servicio de embalaje y vehículos equipados.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=mudanzas">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=mudanzas">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=mudanzas">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-tecnicos.webp" alt="Técnicos" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Técnicos electrohogar -->
+          <article class="product-card" data-tags="instalaciones" data-keywords="tecnicos electrodomesticos lavarropas heladera microondas televisor">
+            <img src="assets/categorias/cat-tecnicos.webp" alt="Técnicos" width="192" height="192" loading="lazy" />
             <div class="product-body">
-              <h3>Técnicos</h3>
-              <p>Reparación de electrodomésticos y equipos técnicos.</p>
+              <h3>Técnicos de electrohogar</h3>
+              <p>Service de lavarropas, heladeras no-frost, termotanques y microondas con repuestos.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=tecnicos">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=tecnicos">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=tecnicos">Cotizar</a>
               </div>
             </div>
           </article>
 
-          <article class="product-card">
-            <img src="assets/categorias/cat-otros.webp" alt="Otros servicios" width="192" height="192" loading="lazy" decoding="async" />
+          <!-- Informática y Redes -->
+          <article class="product-card" data-tags="instalaciones" data-keywords="informatica redes wifi camaras cctv internet cableado utp router soporte">
+            <img src="assets/categorias/cat-informatica.png" alt="Informática y redes" width="192" height="192" loading="lazy" />
             <div class="product-body">
-              <h3>Otros servicios</h3>
-              <p>¿No encontrás tu categoría? Contanos qué necesitás.</p>
+              <h3>Informática y redes Wi-Fi</h3>
+              <p>Cableado estructurado Cat 6, cámaras de seguridad CCTV, sistemas Mesh y soporte a pymes.</p>
               <div class="price-row">
-                <strong>Cotización a medida</strong>
-                <a class="btn btn-primary btn-small" href="producto.php?s=otros">Ver</a>
+                <a class="btn btn-outline btn-small" href="/producto?s=informatica">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=informatica">Cotizar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Albañilería -->
+          <article class="product-card" data-tags="mantenimiento" data-keywords="albanileria revoque ceramicos porcelanatos durlock yeso grietas refaccion">
+            <img src="assets/categorias/cat-albanileria.png" alt="Albañilería" width="192" height="192" loading="lazy" />
+            <div class="product-body">
+              <h3>Albañilería y reformas</h3>
+              <p>Colocación de cerámicos y porcelanatos, construcción en seco Durlock y refacciones.</p>
+              <div class="price-row">
+                <a class="btn btn-outline btn-small" href="/producto?s=albanileria">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=albanileria">Cotizar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Vidriería -->
+          <article class="product-card" data-tags="instalaciones" data-keywords="vidrieria vidrios mamparas espejos aluminio aberturas blindex templado">
+            <img src="assets/categorias/cat-vidrieria.png" alt="Vidriería" width="192" height="192" loading="lazy" />
+            <div class="product-body">
+              <h3>Vidriería y mamparas</h3>
+              <p>Colocación de mamparas de baño, vidrios laminados de seguridad y cerramientos.</p>
+              <div class="price-row">
+                <a class="btn btn-outline btn-small" href="/producto?s=vidrieria">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=vidrieria">Cotizar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Piscinas -->
+          <article class="product-card" data-tags="mantenimiento" data-keywords="piscinas piletas bombas filtros cloro pintura agua bombas recirculacion">
+            <img src="assets/categorias/cat-piscinas.png" alt="Piscinas" width="192" height="192" loading="lazy" />
+            <div class="product-body">
+              <h3>Piscinas y piletas</h3>
+              <p>Limpieza y mantenimiento químico, reparación de bombas de filtrado y pintura de temporada.</p>
+              <div class="price-row">
+                <a class="btn btn-outline btn-small" href="/producto?s=piscinas">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=piscinas">Cotizar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Otros -->
+          <article class="product-card" data-tags="todos" data-keywords="otros personalizado especial a medida proyectos">
+            <img src="assets/categorias/cat-otros.webp" alt="Otros servicios" width="192" height="192" loading="lazy" />
+            <div class="product-body">
+              <h3>Otros servicios especiales</h3>
+              <p>Soluciones a medida para proyectos combinados, industrias o requerimientos específicos.</p>
+              <div class="price-row">
+                <a class="btn btn-outline btn-small" href="/producto?s=otros">Ver detalle</a>
+                <a class="btn btn-primary btn-small" href="/checkout?servicio=otros">Cotizar</a>
               </div>
             </div>
           </article>
@@ -246,27 +315,90 @@
       <div class="container footer-grid">
         <div>
           <img src="assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
-          <p>Marketplace de servicios con profesionales verificados y pago seguro.</p>
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
         </div>
         <div>
-          <h3>Servicios</h3>
-          <ul><li><a href="producto.php?s=plomeria">Plomería</a></li><li><a href="producto.php?s=electricidad">Electricidad</a></li><li><a href="producto.php?s=gas">Gas</a></li><li><a href="producto.php?s=pintura">Pintura</a></li><li><a href="categoria.html">Ver todas</a></li></ul>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
         </div>
         <div>
-          <h3>Empresa</h3>
-          <ul><li><a href="nosotros.html">Nosotros</a></li><li><a href="profesionales.php">Profesionales</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="privacidad.html">Privacidad</a></li><li><a href="terminos.html">Términos</a></li></ul>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
+          </ul>
         </div>
         <div>
-          <h3>Contacto</h3>
-          <ul><li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li><li><a href="mailto:info@fixya.io">info@fixya.io</a></li><li>Salta, Argentina</li></ul>
+          <h3>Seguridad y Legal</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago</a></li>
+            <li><a href="/terminos">Términos del servicio</a></li>
+            <li><a href="/privacidad">Política de privacidad</a></li>
+            <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Oficial 24hs</a></li>
+          </ul>
         </div>
       </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Todos los derechos reservados</span>
+        <span>© <span id="year"></span> FIXYA.io — Todos los derechos reservados · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+      // Filtro en tiempo real por texto y por tags
+      const filtroInput = document.getElementById('filtro-categoria-input');
+      const cards = document.querySelectorAll('#catalogo-grid .product-card');
+      const filterBtns = document.querySelectorAll('.filter-cat-btn');
+
+      let currentTag = 'todos';
+
+      function aplicarFiltros() {
+        const query = filtroInput ? filtroInput.value.toLowerCase().trim() : '';
+
+        cards.forEach((card) => {
+          const texto = card.innerText.toLowerCase();
+          const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+          const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+
+          const coincideTexto = !query || texto.includes(query) || keywords.includes(query);
+          const coincideTag = currentTag === 'todos' || tags.includes(currentTag);
+
+          if (coincideTexto && coincideTag) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      if (filtroInput) {
+        filtroInput.addEventListener('input', aplicarFiltros);
+      }
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach((b) => {
+            b.classList.remove('btn-primary');
+            b.classList.add('btn-outline');
+          });
+          btn.classList.remove('btn-outline');
+          btn.classList.add('btn-primary');
+          currentTag = btn.dataset.tag;
+          aplicarFiltros();
+        });
+      });
+    </script>
   </body>
 </html>

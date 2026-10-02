@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iniciar sesión | FIXYA.io</title>
-    <link rel="canonical" href="https://fixya.io/login.html" />
-    <meta name="description" content="Iniciá sesión en FIXYA.io." />
+    <link rel="canonical" href="https://fixya.io/login" />
+    <meta name="description" content="Iniciá sesión en FIXYA.io para gestionar tus servicios, presupuestos y perfil." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -30,14 +30,14 @@
         </div>
         <div class="topbar-meta">
           <span>fixya.io</span>
-          <span>✓ Seguridad</span>
+          <span>✓ Acceso protegido</span>
         </div>
       </div>
     </div>
 
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="index.html" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
 
@@ -47,13 +47,16 @@
           <span></span>
         </button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="index.html">Inicio</a>
-          <a href="servicios.html">Servicios</a>
-          <a href="categoria.html">Categorías</a>
-          <a href="profesionales.php">Profesionales</a>
+          <a href="/">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria">Categorías</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
         </nav>
         <div class="header-actions">
-          <a class="btn btn-outline" href="registro.html">Registrarme</a>
+          <a class="btn btn-outline" href="/registro">Registrarme</a>
         </div>
       </div>
     </header>
@@ -61,47 +64,128 @@
     <main class="page-shell">
       <div class="container auth-grid">
         <div class="auth-card">
-          <span class="eyebrow eyebrow-dark">Acceso</span>
+          <span class="eyebrow eyebrow-dark">Acceso seguro</span>
           <h1>Iniciar sesión</h1>
+          <p style="color:var(--muted); font-size:0.92rem; margin-bottom:18px;">Ingresá con tu email y contraseña para ver tu panel.</p>
+
+          <!-- Acceso rápido de prueba / Demo -->
+          <div style="margin-bottom: 22px; padding: 14px; background: #f0f7ff; border: 1px solid #bfdbfe; border-radius: 10px; font-size: 0.86rem;">
+            <strong style="color: #1e40af; display:block; margin-bottom:6px;">Acceso rápido de prueba:</strong>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="btn btn-small btn-outline" style="background:#fff; font-size:0.8rem; padding:4px 10px;" onclick="document.getElementById('email').value='admin@fixya.io'; document.getElementById('contrasena').value='admin1234';">
+                ⚙️ Admin
+              </button>
+              <button type="button" class="btn btn-small btn-outline" style="background:#fff; font-size:0.8rem; padding:4px 10px;" onclick="document.getElementById('email').value='carlos.plomero@fixya.io'; document.getElementById('contrasena').value='fixya2025';">
+                👷 Profesional
+              </button>
+              <button type="button" class="btn btn-small btn-outline" style="background:#fff; font-size:0.8rem; padding:4px 10px;" onclick="document.getElementById('email').value='martin.electricista@fixya.io'; document.getElementById('contrasena').value='fixya2025';">
+                ⚡ Electricista
+              </button>
+            </div>
+          </div>
+
           <form class="login-form">
-            <p class="form-message" role="status" aria-live="polite" style="display:none; margin-bottom: 8px; font-weight: 600;"></p>
+            <p class="form-message" role="status" aria-live="polite" style="display:none; margin-bottom: 12px; font-weight: 600; padding:10px; border-radius:8px;"></p>
+            
             <div class="form-field">
-              <label for="email">Email</label>
+              <label for="email">Email registrado</label>
               <input id="email" name="email" autocomplete="email" required type="email" placeholder="tuemail@mail.com" />
             </div>
 
             <div class="form-field">
-              <label for="contrasena">Contraseña</label>
-              <input id="contrasena" name="contrasena" autocomplete="current-password" minlength="8" required type="password" placeholder="••••••••" />
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <label for="contrasena">Contraseña</label>
+                <button type="button" id="toggle-pw" style="background:none; border:none; color:var(--orange); font-size:0.8rem; cursor:pointer; font-weight:600;">Mostrar</button>
+              </div>
+              <input id="contrasena" name="contrasena" autocomplete="current-password" minlength="6" required type="password" placeholder="••••••••" />
             </div>
 
-            <button class="btn btn-primary" type="submit">Entrar</button>
+            <button class="btn btn-primary" type="submit" style="width:100%; padding:12px; margin-top:8px;">Ingresar a mi cuenta</button>
           </form>
+
+          <p style="text-align:center; font-size:0.9rem; color:var(--muted); margin-top:20px;">
+            ¿No tenés cuenta todavía? <a href="/registro" style="color:var(--orange); font-weight:700;">Crear cuenta gratuita</a>
+          </p>
         </div>
 
-        <div class="auth-card">
-          <span class="eyebrow eyebrow-dark">Beneficios</span>
-          <h2>Tu cuenta FIXYA</h2>
-          <ul class="feature-list">
-            <li>Gestioná tus servicios y reservas</li>
-            <li>Recibí presupuestos y pagos</li>
-            <li>Guardá tu perfil profesional</li>
-            <li>Accedé desde móvil o desktop</li>
+        <div class="auth-card" style="background:linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);">
+          <span class="eyebrow eyebrow-dark">Tu cuenta FIXYA</span>
+          <h2>Beneficios de tu panel</h2>
+          <ul class="feature-list" style="margin-top:16px;">
+            <li><strong>Seguimiento en tiempo real:</strong> Estado de tus solicitudes y coordinación con técnicos.</li>
+            <li><strong>Historial documentado:</strong> Expediente fotográfico con fecha y comprobantes de garantía.</li>
+            <li><strong>Custodia protegida:</strong> Verificación de pagos a través de Mercado Pago.</li>
+            <li><strong>Perfil profesional:</strong> Mostrá tu experiencia, matrícula y recibí contrataciones directas.</li>
           </ul>
-          <div class="page-actions">
-            <a class="btn btn-primary" href="registro.html">Crear cuenta</a>
+
+          <div style="margin-top: 32px; padding: 16px; background: var(--bg); border-radius: var(--radius-md); border: 1px solid var(--line);">
+            <strong style="color:var(--navy); font-size:0.95rem; display:block; margin-bottom:4px;">¿Sos técnico independiente?</strong>
+            <p style="font-size:0.86rem; color:var(--muted); margin-bottom:12px;">Comenzá a recibir pedidos de clientes calificados en tu zona sin costo de inscripción.</p>
+            <a class="btn btn-outline" style="width:100%; text-align:center; font-size:0.88rem;" href="/registro">Sumarme como profesional</a>
           </div>
         </div>
       </div>
     </main>
 
     <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <img src="assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
+        </div>
+        <div>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Seguridad y Legal</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago</a></li>
+            <li><a href="/terminos">Términos del servicio</a></li>
+            <li><a href="/privacidad">Política de privacidad</a></li>
+            <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Oficial 24hs</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Todos los derechos reservados</span>
+        <span>© <span id="year"></span> FIXYA.io — Todos los derechos reservados · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+      const togglePw = document.getElementById('toggle-pw');
+      const pwInput = document.getElementById('contrasena');
+      if (togglePw && pwInput) {
+        togglePw.addEventListener('click', () => {
+          if (pwInput.type === 'password') {
+            pwInput.type = 'text';
+            togglePw.textContent = 'Ocultar';
+          } else {
+            pwInput.type = 'password';
+            togglePw.textContent = 'Mostrar';
+          }
+        });
+      }
+    </script>
   </body>
 </html>

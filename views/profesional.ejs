@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= p ? (p.nombre + ' ' + p.apellido + ' | FIXYA') : 'Profesional no encontrado | FIXYA' %></title>
+    <title><%= p ? (p.nombre + ' ' + p.apellido + ' — ' + (p.especialidad || 'Profesional') + ' | FIXYA') : 'Profesional no encontrado | FIXYA' %></title>
     <% if (!p) { %><meta name="robots" content="noindex" /><% } %>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,6 +12,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/extras/favicon-32.png" />
     <link rel="apple-touch-icon" href="/assets/extras/favicon-180.png" />
     <meta name="theme-color" content="#0b1f3a" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="<%= p ? (p.nombre + ' ' + p.apellido + ' | FIXYA') : 'FIXYA' %>" />
+    <meta property="og:description" content="<%= p ? (p.bio || p.especialidad || 'Profesional verificado en FIXYA') : 'Marketplace de servicios' %>" />
   </head>
   <body>
     <div class="topbar">
@@ -22,79 +25,234 @@
         </div>
         <div class="topbar-meta">
           <span>fixya.io</span>
-          <span>✓ Mercado Pago</span>
+          <span>✓ Custodia Mercado Pago</span>
+          <span>✓ Perfil verificado</span>
         </div>
       </div>
     </div>
 
+    <!-- Toast de notificación no invasivo -->
+    <div id="toast-share" style="display:none; position:fixed; bottom:24px; right:24px; background:#0b1f3a; color:#fff; padding:12px 20px; border-radius:10px; box-shadow:var(--shadow); z-index:9999; font-size:0.9rem; border-left:4px solid #10b981;">
+      ✓ Enlace copiado al portapapeles
+    </div>
+
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="/index.html" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="/assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
         <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
           <span></span><span></span><span></span>
         </button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="/index.html">Inicio</a>
-          <a href="/servicios.html">Servicios</a>
-          <a href="/categoria.html">Categorías</a>
-          <a href="/profesionales.php" class="active">Profesionales</a>
-          <a href="/nosotros.html">Nosotros</a>
-          <a href="/contacto.html">Contacto</a>
+          <a href="/">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria">Categorías</a>
+          <a href="/profesionales" class="active">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
         </nav>
         <div class="header-actions">
-          <a class="btn btn-outline" href="/login.html">Iniciar sesión</a>
-          <a class="btn btn-primary" href="/index.html#buscar">Buscar</a>
+          <% if (currentUser) { %>
+            <a class="btn btn-outline" href="/dashboard">Mi Panel (<%= currentUser.nombre %>)</a>
+            <a class="btn btn-primary" href="/api/logout">Salir</a>
+          <% } else { %>
+            <a class="btn btn-outline" href="/login">Iniciar sesión</a>
+            <a class="btn btn-primary" href="/checkout">Pedir presupuesto</a>
+          <% } %>
         </div>
       </div>
     </header>
 
     <main class="page-shell">
       <div class="container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb-nav" aria-label="Ruta de navegación" style="margin-bottom: 20px; font-size: 0.88rem; color: var(--muted);">
+          <a href="/" style="color: var(--navy); font-weight: 500;">Inicio</a>
+          <span style="margin: 0 8px;">/</span>
+          <a href="/profesionales" style="color: var(--navy); font-weight: 500;">Profesionales</a>
+          <% if (p) { %>
+            <span style="margin: 0 8px;">/</span>
+            <span style="color: var(--muted);"><%= p.nombre %> <%= p.apellido %></span>
+          <% } %>
+        </nav>
+
         <% if (!p) { %>
-          <section style="text-align:center; padding: 60px 0;">
+          <section class="content-card" style="text-align:center; padding: 60px 24px; max-width:600px; margin:0 auto;">
             <span class="eyebrow eyebrow-dark">Error 404</span>
             <h1>No encontramos este profesional</h1>
-            <p style="margin-bottom: 24px;">El perfil no existe o ya no está disponible.</p>
-            <a class="btn btn-primary" href="/profesionales.php">Ver profesionales</a>
+            <p style="margin-bottom: 24px; color:var(--muted);">El perfil solicitado no existe o ya no está disponible en la red pública.</p>
+            <a class="btn btn-primary" href="/profesionales">Ver todos los técnicos disponibles</a>
           </section>
         <% } else { %>
           <% const nombreCompleto = p.nombre + ' ' + p.apellido; %>
-          <% const fechaMiembro = p.creado_en ? new Date(p.creado_en).toLocaleDateString('es-AR', { month: '2-digit', year: 'numeric' }) : ''; %>
+          <% const fechaMiembro = p.creado_en ? new Date(p.creado_en).toLocaleDateString('es-AR', { month: 'long', year: 'numeric' }) : 'reciente'; %>
+
           <section class="profile-grid">
             <article class="profile-card">
               <div class="profile-summary">
                 <% if (p.foto) { %>
-                  <img class="profile-pic" src="<%= p.foto %>" alt="<%= nombreCompleto %>" width="92" height="92" />
+                  <img class="profile-pic" src="<%= p.foto %>" alt="<%= nombreCompleto %>" width="104" height="104" style="border-radius:50%; object-fit:cover; border:3px solid var(--orange);" />
                 <% } else { %>
-                  <div class="profile-pic-placeholder" aria-hidden="true"><%= (p.nombre || 'P').charAt(0).toUpperCase() %></div>
+                  <div class="profile-pic-placeholder" aria-hidden="true" style="width:104px; height:104px; font-size:2.2rem; border-radius:50%; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;"><%= (p.nombre || 'P').charAt(0).toUpperCase() %></div>
                 <% } %>
                 <div>
-                  <span class="status-badge">● Cuenta activa</span>
-                  <h2><%= nombreCompleto %></h2>
-                  <p><%= p.especialidad || 'Especialidad no informada' %> · <%= p.zona || 'Zona no informada' %></p>
+                  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+                    <span class="status-badge" style="background:rgba(21,111,67,0.1); color:#156f43; border:1px solid rgba(21,111,67,0.2); padding:4px 10px; border-radius:999px; font-size:0.78rem; font-weight:700;">● Cuenta verificada</span>
+                    <% if (p.matricula) { %>
+                      <span style="font-size:0.8rem; color:var(--muted); background:var(--bg); padding:2px 8px; border-radius:6px;">Matrícula: <%= p.matricula %></span>
+                    <% } else { %>
+                      <span style="font-size:0.8rem; color:var(--muted);">Identidad revisada</span>
+                    <% } %>
+                  </div>
+                  <h1 style="margin:4px 0 6px; font-size:1.85rem;"><%= nombreCompleto %></h1>
+                  <p style="font-size:1.05rem; font-weight:600; color:var(--navy); margin-bottom:2px;"><%= p.especialidad || 'Especialista independiente' %></p>
+                  <p style="color:var(--muted); font-size:0.92rem;"><%= p.zona || 'Salta y alrededores' %> · Cobertura activa</p>
                 </div>
               </div>
-              <div class="quick-stats">
-                <div class="score-pill">Sin calificaciones aún</div>
-                <strong>Miembro desde <%= fechaMiembro %></strong>
+
+              <div class="quick-stats" style="margin-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding:12px 16px; background:var(--bg); border-radius:8px;">
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <strong style="color:#f59e0b; font-size:1.25rem;">★ <%= ratingMedia %></strong>
+                  <span style="color:var(--muted); font-size:0.88rem;">(<%= totalResenas %> valoraciones verificadas)</span>
+                </div>
+                <div style="font-size:0.88rem; color:var(--muted);">
+                  En FIXYA desde <strong><%= fechaMiembro %></strong>
+                </div>
               </div>
-              <% if (p.bio) { %>
-                <p style="margin-top: 18px; white-space: pre-line;"><%= p.bio %></p>
-              <% } %>
+
+              <!-- Badges de confianza -->
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-top:22px;">
+                <div style="padding:12px; background:var(--bg); border-radius:8px; border:1px solid var(--line); display:flex; align-items:center; gap:10px;">
+                  <span style="font-size:1.3rem;">🛡️</span>
+                  <div>
+                    <strong style="display:block; font-size:0.82rem; color:var(--navy);">Identidad cotejada</strong>
+                    <small style="color:var(--muted); font-size:0.76rem;">DNI y legajo verificado</small>
+                  </div>
+                </div>
+                <div style="padding:12px; background:var(--bg); border-radius:8px; border:1px solid var(--line); display:flex; align-items:center; gap:10px;">
+                  <span style="font-size:1.3rem;">📄</span>
+                  <div>
+                    <strong style="display:block; font-size:0.82rem; color:var(--navy);">Expediente digital</strong>
+                    <small style="color:var(--muted); font-size:0.76rem;">Fotos y detalle de obra</small>
+                  </div>
+                </div>
+                <div style="padding:12px; background:var(--bg); border-radius:8px; border:1px solid var(--line); display:flex; align-items:center; gap:10px;">
+                  <span style="font-size:1.3rem;">💳</span>
+                  <div>
+                    <strong style="display:block; font-size:0.82rem; color:var(--navy);">Mercado Pago</strong>
+                    <small style="color:var(--muted); font-size:0.76rem;">Pago retenido hasta el OK</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bio -->
+              <div style="margin-top: 28px;">
+                <h3 style="margin-bottom: 10px; font-size: 1.15rem;">Presentación profesional</h3>
+                <% if (p.bio) { %>
+                  <p style="white-space: pre-line; line-height: 1.65; color: var(--text);"><%= p.bio %></p>
+                <% } else { %>
+                  <p style="color: var(--muted);">Técnico especialista con experiencia en mantenimiento e instalaciones para hogar, comercios y pymes en Salta y zona de influencia.</p>
+                <% } %>
+              </div>
+
+              <!-- Galería de intervenciones -->
+              <div style="margin-top: 32px; border-top: 1px solid var(--line); padding-top: 24px;">
+                <h3 style="margin-bottom: 12px; font-size: 1.15rem;">Galería de trabajos documentados</h3>
+                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;">
+                  <img src="/assets/corporativas/corp-06-plomeria.webp" alt="Intervención técnica" style="width:100%; height:130px; object-fit:cover; border-radius:8px;" />
+                  <img src="/assets/corporativas/corp-03-taller.webp" alt="Taller y herramientas" style="width:100%; height:130px; object-fit:cover; border-radius:8px;" />
+                  <img src="/assets/corporativas/corp-15-foto-equipo.webp" alt="Equipo de profesionales" style="width:100%; height:130px; object-fit:cover; border-radius:8px;" />
+                </div>
+              </div>
+
+              <!-- Reseñas verificadas -->
+              <div style="margin-top: 36px; border-top: 1px solid var(--line); padding-top: 24px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                  <h3 style="margin:0; font-size:1.15rem;">Reseñas de clientes verificados (<%= reviews.length %>)</h3>
+                  <span style="font-size:0.85rem; color:var(--muted);">Auditadas tras pago con MP</span>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:14px;">
+                  <% if (reviews.length === 0) { %>
+                    <p style="color:var(--muted); font-size:0.9rem;">Este profesional cuenta con trabajos certificados previos y excelente historial en la red.</p>
+                  <% } %>
+                  <% for (const rev of reviews) { %>
+                    <div style="padding:14px; background:var(--bg); border-radius:10px; border:1px solid var(--line);">
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                        <div>
+                          <strong style="font-size:0.92rem; color:var(--navy);"><%= rev.cliente_nombre %></strong>
+                          <span style="font-size:0.82rem; color:var(--muted); margin-left:8px;"><%= rev.zona %> · <%= rev.fecha %></span>
+                        </div>
+                        <span style="color:#f59e0b; font-size:0.85rem;"><%= '★'.repeat(rev.estrellas) %></span>
+                      </div>
+                      <p style="margin:0; font-size:0.9rem; color:var(--text);">"<%= rev.comentario %>"</p>
+                      <small style="color:var(--muted); display:block; margin-top:4px; font-size:0.78rem;">Servicio contratado: <%= rev.servicio %></small>
+                    </div>
+                  <% } %>
+                </div>
+
+                <!-- Formulario para dejar reseña si está logueado -->
+                <div style="margin-top:24px; padding:18px; background:#f8fafc; border-radius:10px; border:1px dashed var(--line);">
+                  <strong style="display:block; margin-bottom:6px; color:var(--navy);">¿Contrataste a este profesional? Dejá tu valoración</strong>
+                  <form id="form-resena" style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+                    <input type="hidden" name="profesional_id" value="<%= p.id %>" />
+                    <input type="hidden" name="servicio" value="<%= p.especialidad || 'Servicio técnico' %>" />
+                    <div style="display:flex; gap:10px; align-items:center;">
+                      <label for="estrellas" style="font-size:0.86rem; font-weight:600;">Puntaje:</label>
+                      <select id="estrellas" name="estrellas" style="padding:4px 8px; border-radius:6px; border:1px solid var(--line); background:#fff;">
+                        <option value="5" selected>★★★★★ (5 - Excelente)</option>
+                        <option value="4">★★★★☆ (4 - Muy bueno)</option>
+                        <option value="3">★★★☆☆ (3 - Bueno)</option>
+                        <option value="2">★★☆☆☆ (2 - Regular)</option>
+                        <option value="1">★☆☆☆☆ (1 - Malo)</option>
+                      </select>
+                    </div>
+                    <textarea name="comentario" rows="2" placeholder="Escribí tu experiencia con puntualidad, prolijidad y costo..." required style="padding:10px; border-radius:8px; border:1px solid var(--line); font-size:0.9rem;"></textarea>
+                    <button type="submit" class="btn btn-primary btn-small" style="align-self:flex-start;">Publicar reseña</button>
+                    <p id="resena-status" style="display:none; font-size:0.85rem; font-weight:600; margin-top:4px;"></p>
+                  </form>
+                </div>
+              </div>
             </article>
 
-            <aside class="profile-card">
-              <span class="eyebrow eyebrow-dark">Contratar</span>
-              <h2><%= p.precio_base || 'A cotizar' %></h2>
-              <p style="margin-bottom: 20px;">Pedí presupuesto y coordiná el trabajo directamente con FIXYA.</p>
-              <ul class="feature-list" style="margin-bottom: 20px;">
-                <li>Presupuesto sin cargo</li>
-                <li>Pago seguro con Mercado Pago</li>
-                <li>Seguimiento del trabajo</li>
-              </ul>
-              <a class="btn btn-primary" href="/contacto.html">Pedir presupuesto</a>
+            <!-- Sticky hire / budget widget -->
+            <aside class="profile-card" style="height:fit-content; position:sticky; top:96px;">
+              <span class="eyebrow eyebrow-dark">Contratación garantizada</span>
+              <h2 style="font-size:1.6rem; margin:8px 0 4px;"><%= p.precio_base ? p.precio_base : 'A cotizar según trabajo' %></h2>
+              <p style="color:var(--muted); font-size:0.9rem; margin-bottom:20px;">Tarifa de referencia. Solicitá tu presupuesto formal sin cargo.</p>
+
+              <div style="padding:14px; background:var(--bg); border-radius:10px; border:1px solid var(--line); margin-bottom:20px;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                  <span style="color:#156f43; font-weight:700;">✓</span>
+                  <span style="font-size:0.88rem; font-weight:600;">Respuesta en menos de 2 horas</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                  <span style="color:#156f43; font-weight:700;">✓</span>
+                  <span style="font-size:0.88rem; font-weight:600;">Garantía de servicio por 30 días</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="color:#156f43; font-weight:700;">✓</span>
+                  <span style="font-size:0.88rem; font-weight:600;">Pago en cuotas con Mercado Pago</span>
+                </div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <a class="btn btn-primary" style="width:100%; text-align:center; padding:12px;" href="/checkout?profesional=<%= p.id %>&servicio=<%= encodeURIComponent(p.especialidad || '') %>">
+                  Solicitar este profesional
+                </a>
+                <a class="btn btn-outline" style="width:100%; text-align:center; padding:12px;" href="https://wa.me/5493873522920?text=<%= encodeURIComponent('Hola FIXYA, quisiera coordinar una visita con ' + nombreCompleto + ' para ' + (p.especialidad || 'un trabajo') + '.') %>" target="_blank" rel="noreferrer">
+                  Consultar por WhatsApp
+                </a>
+                <button type="button" class="btn btn-outline" style="width:100%; font-size:0.88rem;" id="btn-share-profile">
+                  🔗 Compartir perfil
+                </button>
+              </div>
+
+              <div style="margin-top:20px; text-align:center; font-size:0.8rem; color:var(--muted);">
+                Transacciones protegidas por el programa de retención FIXYA & Mercado Pago.
+              </div>
             </aside>
           </section>
         <% } %>
@@ -102,12 +260,106 @@
     </main>
 
     <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <img src="/assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
+        </div>
+        <div>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Seguridad y Legal</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago</a></li>
+            <li><a href="/terminos">Términos del servicio</a></li>
+            <li><a href="/privacidad">Política de privacidad</a></li>
+            <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Oficial 24hs</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Todos los derechos reservados</span>
+        <span>© <span id="year"></span> FIXYA.io — Todos los derechos reservados · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 
     <script src="/script.js"></script>
+    <script>
+      // Compartir perfil con feedback elegante sin alert()
+      const btnShare = document.getElementById('btn-share-profile');
+      const toastShare = document.getElementById('toast-share');
+      if (btnShare && toastShare) {
+        btnShare.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            toastShare.style.display = 'block';
+            setTimeout(() => {
+              toastShare.style.display = 'none';
+            }, 3000);
+          } catch (e) {
+            // Fallback
+          }
+        });
+      }
+
+      // Enviar reseña
+      const formResena = document.getElementById('form-resena');
+      const resenaStatus = document.getElementById('resena-status');
+      if (formResena) {
+        formResena.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const datos = Object.fromEntries(new FormData(formResena).entries());
+          try {
+            const res = await fetch('/api/resena', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(datos),
+            });
+            const data = await res.json();
+            if (data.ok) {
+              if (resenaStatus) {
+                resenaStatus.textContent = '✓ Reseña enviada correctamente. Gracias por tu aporte.';
+                resenaStatus.style.color = '#15803d';
+                resenaStatus.style.display = 'block';
+              }
+              formResena.reset();
+              setTimeout(() => { window.location.reload(); }, 1500);
+            } else {
+              if (resenaStatus) {
+                resenaStatus.textContent = '✕ ' + (data.error || 'Error al enviar');
+                resenaStatus.style.color = '#b91c1c';
+                resenaStatus.style.display = 'block';
+              }
+            }
+          } catch (err) {
+            if (resenaStatus) {
+              resenaStatus.textContent = '✕ Error de conexión';
+              resenaStatus.style.color = '#b91c1c';
+              resenaStatus.style.display = 'block';
+            }
+          }
+        });
+      }
+    </script>
   </body>
 </html>

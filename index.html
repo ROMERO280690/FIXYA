@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="FIXYA.io conecta clientes con profesionales verificados para hogar, industria y campo en Argentina."
+      content="Marketplace de servicios profesionales con técnicos verificados para hogar, industria y campo en Argentina."
     />
-    <title>FIXYA.io | Marketplace profesional</title>
-    <link rel="canonical" href="https://fixya.io/index.html" />
+    <title>FIXYA</title>
+    <link rel="canonical" href="https://fixya.io/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,12 +18,13 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/extras/favicon-32.png" />
     <link rel="apple-touch-icon" href="assets/extras/favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#0b1f3a" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="FIXYA.io" />
     <meta property="og:locale" content="es_AR" />
-    <meta property="og:title" content="FIXYA.io | Marketplace profesional" />
-    <meta property="og:description" content="FIXYA.io conecta clientes con profesionales verificados para hogar, industria y campo en Argentina." />
+    <meta property="og:title" content="FIXYA" />
+    <meta property="og:description" content="Marketplace de servicios profesionales con técnicos verificados para hogar, industria y campo en Argentina." />
     <meta property="og:image" content="https://fixya.io/assets/marketing/og-share.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json">
@@ -41,7 +42,7 @@
         "addressCountry": "AR"
       },
       "areaServed": "AR",
-      "description": "FIXYA.io conecta clientes con profesionales verificados para hogar, industria y campo en Argentina."
+      "description": "FIXYA conecta clientes con profesionales verificados para hogar, industria y campo en Argentina con pago protegido por Mercado Pago."
     }
     </script>
   </head>
@@ -56,13 +57,14 @@
           <span>fixya.io</span>
           <span>✓ Mercado Pago</span>
           <span>✓ Identidad verificada</span>
+          <span>✓ Cobertura nacional</span>
         </div>
       </div>
     </div>
 
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="#inicio" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
 
@@ -73,22 +75,24 @@
         </button>
 
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="index.html" class="active">Inicio</a>
-          <a href="#servicios">Servicios</a>
-          <a href="categoria.html">Categorías</a>
-          <a href="profesionales.php">Profesionales</a>
-          <a href="nosotros.html">Nosotros</a>
-          <a href="contacto.html">Contacto</a>
+          <a href="/" class="active">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria">Categorías</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
         </nav>
 
         <div class="header-actions">
-          <a class="btn btn-outline" href="login.html">Iniciar sesión</a>
-          <a class="btn btn-primary" href="#buscar">Buscar</a>
+          <a class="btn btn-outline" href="/login">Iniciar sesión</a>
+          <a class="btn btn-primary" href="#buscar">Buscar técnico</a>
         </div>
       </div>
     </header>
 
     <main id="inicio">
+      <!-- Hero Principal -->
       <section class="hero section">
         <div class="container hero-grid">
           <div class="hero-copy">
@@ -98,45 +102,50 @@
               con <span>técnicos verificados</span>
             </h1>
             <p class="lead">
-              Encontrá profesionales para hogar, industria y campo. Consultá presupuesto,
-              compará perfiles y pagá con seguridad desde una sola plataforma.
+              Encontrá especialistas para tu hogar, comercio o empresa. Pedí presupuesto sin cargo,
+              compará valoraciones reales y pagá con total seguridad a través de Mercado Pago.
             </p>
 
-            <div class="brand-pill-row">
-              <span class="brand-pill">fixya.io</span>
-              <span class="brand-pill brand-pill-muted">fixya.fun</span>
-            </div>
-
-            <form class="search-panel" id="buscar" action="profesionales.php" method="get">
+            <form class="search-panel" id="buscar" action="/profesionales" method="get">
               <div class="field">
                 <label for="servicio">Servicio</label>
-                <input id="servicio" name="servicio" type="text" placeholder="Ej. Plomería, electricidad…" />
+                <input id="servicio" name="servicio" type="text" placeholder="Ej. Plomería, electricidad, gas…" />
               </div>
               <div class="field">
                 <label for="zona">Zona</label>
-                <input id="zona" name="zona" type="text" placeholder="Tu barrio o ciudad" />
+                <input id="zona" name="zona" type="text" placeholder="Salta Capital, San Lorenzo…" />
               </div>
               <div class="field select-field">
                 <label for="radio">Radio</label>
-                <select id="radio">
-                  <option>5 km</option>
-                  <option selected>10 km</option>
-                  <option>25 km</option>
-                  <option>50 km</option>
+                <select id="radio" name="radio">
+                  <option value="5">5 km</option>
+                  <option value="10" selected>10 km</option>
+                  <option value="25">25 km</option>
+                  <option value="50">50 km</option>
                 </select>
               </div>
               <button class="btn btn-primary" type="submit">Buscar</button>
             </form>
 
-            <div class="hero-trust" aria-label="Confianza FIXYA">
-              <span><i class="dot"></i> Mercado Pago</span>
-              <span><i class="dot"></i> Identidad revisada</span>
-              <span><i class="dot"></i> Cobertura nacional</span>
+            <!-- Atajos rápidos de búsqueda -->
+            <div style="margin-top: 14px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; font-size:0.85rem;">
+              <span style="color:rgba(255,255,255,0.7); font-size:0.8rem;">Sugerencias:</span>
+              <button type="button" class="tag-quick" onclick="document.getElementById('servicio').value='Plomería'; document.getElementById('buscar').submit();">Plomería</button>
+              <button type="button" class="tag-quick" onclick="document.getElementById('servicio').value='Electricidad'; document.getElementById('buscar').submit();">Electricidad</button>
+              <button type="button" class="tag-quick" onclick="document.getElementById('servicio').value='Gas'; document.getElementById('buscar').submit();">Gas matriculado</button>
+              <button type="button" class="tag-quick" onclick="document.getElementById('servicio').value='Aire'; document.getElementById('buscar').submit();">Aire split</button>
+              <button type="button" class="tag-quick" onclick="document.getElementById('servicio').value='Pintura'; document.getElementById('buscar').submit();">Pintura</button>
+            </div>
+
+            <div class="hero-trust" aria-label="Confianza FIXYA" style="margin-top:24px;">
+              <span><i class="dot"></i> Custodia Mercado Pago</span>
+              <span><i class="dot"></i> Matrícula y antecedentes revisados</span>
+              <span><i class="dot"></i> 24 provincias</span>
             </div>
           </div>
 
           <div class="hero-visual">
-            <img src="assets/marketing/hero-principal.webp" alt="Profesional FIXYA" width="1280" height="720" fetchpriority="high" />
+            <img src="assets/marketing/hero-principal.webp" alt="Profesional FIXYA atendiendo cliente" width="1280" height="720" fetchpriority="high" />
             <div class="float-card">
               <div class="float-icon">OK</div>
               <div>
@@ -148,188 +157,426 @@
         </div>
       </section>
 
-      <section class="section categories-section academy-band" id="fixya-fun">
-        <div class="container academy-band-inner">
-          <div>
-            <span class="eyebrow eyebrow-dark">FIXYA.fun</span>
-            <h2>Capacitación profesional y cursos de especialidad</h2>
-            <p>Además del marketplace, FIXYA crea conocimiento: cursos, especializaciones y formación práctica para potenciar el talento personal y profesional de cada usuario.</p>
-          </div>
-          <a class="btn btn-primary" href="../06-fixya-fun/index.html">Ver FIXYA.fun</a>
-        </div>
-      </section>
-
+      <!-- Grid de Categorías Interactivas -->
       <section class="section categories-section" id="servicios">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow eyebrow-dark">Servicios</span>
-            <h2>¿Qué necesitás resolver hoy?</h2>
-            <p>Elegí una categoría y pedí presupuesto a técnicos cerca de tu zona.</p>
+            <span class="eyebrow eyebrow-dark">Rubros de servicio</span>
+            <h2>¿Qué necesitás solucionar hoy?</h2>
+            <p>Elegí una categoría para ver precios de referencia, qué incluye el servicio y profesionales listos para atenderte.</p>
           </div>
 
           <div class="category-grid">
-            <article class="category-card">
+            <a class="category-card" href="/producto?s=plomeria" title="Ver servicios de Plomería">
               <img src="assets/categorias/cat-plomeria.webp" alt="Plomería" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Plomería</h3>
-            </article>
-            <article class="category-card">
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=electricidad" title="Ver servicios de Electricidad">
               <img src="assets/categorias/cat-electricidad.webp" alt="Electricidad" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Electricidad</h3>
-            </article>
-            <article class="category-card">
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=gas" title="Ver servicios de Gas">
               <img src="assets/categorias/cat-gas.webp" alt="Gas" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Gas</h3>
-            </article>
-            <article class="category-card">
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=cerrajeria" title="Ver servicios de Cerrajería">
               <img src="assets/categorias/cat-cerrajeria.webp" alt="Cerrajería" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Cerrajería</h3>
-            </article>
-            <article class="category-card">
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=aire" title="Ver servicios de Aire Acondicionado">
               <img src="assets/categorias/cat-aire.webp" alt="Aire acondicionado" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Aire acondicionado</h3>
-            </article>
-            <article class="category-card">
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=pintura" title="Ver servicios de Pintura">
               <img src="assets/categorias/cat-pintura.webp" alt="Pintura" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Pintura</h3>
-            </article>
-            <article class="category-card">
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=carpinteria" title="Ver servicios de Carpintería">
               <img src="assets/categorias/cat-carpinteria.webp" alt="Carpintería" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Carpintería</h3>
-            </article>
-            <article class="category-card">
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=jardineria" title="Ver servicios de Jardinería">
               <img src="assets/categorias/cat-jardineria.webp" alt="Jardinería" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Jardinería</h3>
-            </article>
-            <article class="category-card">
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=limpieza" title="Ver servicios de Limpieza">
               <img src="assets/categorias/cat-limpieza.webp" alt="Limpieza" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Limpieza</h3>
-            </article>
-            <article class="category-card">
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=mudanzas" title="Ver servicios de Mudanzas">
               <img src="assets/categorias/cat-mudanzas.webp" alt="Mudanzas" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Mudanzas</h3>
-            </article>
-            <article class="category-card">
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=tecnicos" title="Ver servicios Técnicos">
               <img src="assets/categorias/cat-tecnicos.webp" alt="Técnicos" width="192" height="192" loading="lazy" decoding="async" />
               <h3>Técnicos</h3>
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+            <a class="category-card" href="/producto?s=otros" title="Ver otros servicios">
+              <img src="assets/categorias/cat-otros.webp" alt="Otros" width="192" height="192" loading="lazy" decoding="async" />
+              <h3>Otros servicios</h3>
+              <span class="cat-action">Ver especialistas →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Profesionales Destacados -->
+      <section class="section alt-section" id="destacados">
+        <div class="container">
+          <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+            <div>
+              <span class="eyebrow eyebrow-dark">Red activa</span>
+              <h2>Técnicos calificados disponibles hoy</h2>
+              <p>Profesionales con identidad verificada, seguros al día y excelentes reseñas.</p>
+            </div>
+            <a class="btn btn-outline" href="/profesionales">Ver todos los profesionales →</a>
+          </div>
+
+          <div class="pro-grid">
+            <article class="pro-card">
+              <div class="pro-body" style="padding-top: 24px;">
+                <div class="user-meta">
+                  <img class="avatar" src="assets/corporativas/corp-06-plomeria.webp" alt="Carlos Romero" width="56" height="56" loading="lazy" style="border-radius:50%; object-fit:cover; border:2px solid var(--orange);" />
+                  <div>
+                    <h3 style="margin:0;">Carlos Romero <span style="background:#f59e0b; color:#fff; font-size:0.7rem; font-weight:800; padding:2px 6px; border-radius:4px;">⭐ PRO</span></h3>
+                    <p style="margin:2px 0 0; font-size:0.86rem; color:var(--muted);">Salta Capital · Plomería y Gas</p>
+                  </div>
+                </div>
+                <div style="margin:12px 0 6px; font-size:0.84rem; color:var(--muted);">
+                  <strong style="color:#f59e0b;">★★★★★ 4.9</strong> (38 trabajos concluidos)
+                </div>
+                <p style="margin:8px 0 16px; font-size:0.9rem;">Plomero matriculado. Termofusión, detección de fugas no destructiva y destapes urgentes.</p>
+                <div class="price-row" style="border-top:1px solid var(--line); padding-top:12px;">
+                  <div>
+                    <small>Desde</small>
+                    <strong>$25.000</strong>
+                  </div>
+                  <a href="/profesional?id=2" class="btn btn-primary btn-small">Ver perfil</a>
+                </div>
+              </div>
             </article>
-            <article class="category-card">
-              <img src="assets/categorias/cat-otros.webp" alt="Otros servicios" width="192" height="192" loading="lazy" decoding="async" />
-              <h3>Otros</h3>
+
+            <article class="pro-card">
+              <div class="pro-body" style="padding-top: 24px;">
+                <div class="user-meta">
+                  <img class="avatar" src="assets/corporativas/corp-07-electricista.webp" alt="Martín Gómez" width="56" height="56" loading="lazy" style="border-radius:50%; object-fit:cover; border:2px solid var(--orange);" />
+                  <div>
+                    <h3 style="margin:0;">Martín Gómez <span style="background:#f59e0b; color:#fff; font-size:0.7rem; font-weight:800; padding:2px 6px; border-radius:4px;">⭐ PRO</span></h3>
+                    <p style="margin:2px 0 0; font-size:0.86rem; color:var(--muted);">Salta y alrededores · Electricidad</p>
+                  </div>
+                </div>
+                <div style="margin:12px 0 6px; font-size:0.84rem; color:var(--muted);">
+                  <strong style="color:#f59e0b;">★★★★★ 5.0</strong> (29 trabajos concluidos)
+                </div>
+                <p style="margin:8px 0 16px; font-size:0.9rem;">Técnico electromecánico. Tableros, recableados reglamentarios y certificación eléctrica.</p>
+                <div class="price-row" style="border-top:1px solid var(--line); padding-top:12px;">
+                  <div>
+                    <small>Desde</small>
+                    <strong>$30.000</strong>
+                  </div>
+                  <a href="/profesional?id=3" class="btn btn-primary btn-small">Ver perfil</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="pro-card">
+              <div class="pro-body" style="padding-top: 24px;">
+                <div class="user-meta">
+                  <img class="avatar" src="assets/corporativas/corp-08-aire.webp" alt="Laura Vargas" width="56" height="56" loading="lazy" style="border-radius:50%; object-fit:cover; border:2px solid var(--orange);" />
+                  <div>
+                    <h3 style="margin:0;">Laura Vargas <span style="background:#f59e0b; color:#fff; font-size:0.7rem; font-weight:800; padding:2px 6px; border-radius:4px;">⭐ PRO</span></h3>
+                    <p style="margin:2px 0 0; font-size:0.86rem; color:var(--muted);">Tres Cerritos y Centro · Aire split</p>
+                  </div>
+                </div>
+                <div style="margin:12px 0 6px; font-size:0.84rem; color:var(--muted);">
+                  <strong style="color:#f59e0b;">★★★★★ 4.9</strong> (42 trabajos concluidos)
+                </div>
+                <p style="margin:8px 0 16px; font-size:0.9rem;">Especialista en climatización split e inverter, carga de refrigerante ecológico y service.</p>
+                <div class="price-row" style="border-top:1px solid var(--line); padding-top:12px;">
+                  <div>
+                    <small>Desde</small>
+                    <strong>$35.000</strong>
+                  </div>
+                  <a href="/profesional?id=4" class="btn btn-primary btn-small">Ver perfil</a>
+                </div>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section alt-section" id="como-funciona">
+      <!-- Cómo funciona -->
+      <section class="section" id="como-funciona">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow eyebrow-dark">Cómo funciona</span>
-            <h2>Un flujo simple para clientes y profesionales</h2>
+            <span class="eyebrow eyebrow-dark">El método FIXYA</span>
+            <h2>Cómo resolvemos tu necesidad en 4 pasos simples</h2>
+            <p>Un flujo diseñado de punta a punta para que no tengas sorpresas ni en el precio ni en la calidad.</p>
           </div>
 
           <div class="steps-grid">
             <article class="step-card">
               <span class="step-number">1</span>
               <div class="step-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm10 2-4.35-4.35"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm10 2-4.35-4.35"/></svg>
               </div>
-              <h3>Consultá</h3>
-              <p>Contanos qué necesitás y en qué zona.</p>
+              <h3>1. Pedís presupuesto</h3>
+              <p>Detallás tu servicio, zona y urgencia. Recibís cotizaciones claras sin cargo.</p>
             </article>
             <article class="step-card">
               <span class="step-number">2</span>
               <div class="step-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg>
               </div>
-              <h3>Recibí presupuestos</h3>
-              <p>Compará perfiles, valoraciones y costos.</p>
+              <h3>2. Comparás perfiles</h3>
+              <p>Evaluás fotos de trabajos previos, matrícula oficial y opiniones de vecinos.</p>
             </article>
             <article class="step-card">
               <span class="step-number">3</span>
               <div class="step-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v10H4z"/><path d="M8 12h8"/><path d="M8 9h8"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M4 7h16v10H4z"/><path d="M8 12h8"/><path d="M8 9h8"/></svg>
               </div>
-              <h3>Pagá seguro</h3>
-              <p>Usá Mercado Pago y protegé tu operación.</p>
+              <h3>3. Pago en custodia</h3>
+              <p>Abonás por Mercado Pago. El dinero queda retenido y seguro hasta que apruebes la tarea.</p>
             </article>
             <article class="step-card">
               <span class="step-number">4</span>
               <div class="step-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 12 4 4 10-10 4 4-14 14-8-8Z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="m3 12 4 4 10-10 4 4-14 14-8-8Z"/></svg>
               </div>
-              <h3>Confirmá y cerrá</h3>
-              <p>La operación queda documentada y con seguimiento.</p>
+              <h3>4. Trabajo garantizado</h3>
+              <p>Queda asentado en el expediente digital con garantía de satisfacción por 30 días.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section features-section">
-        <div class="container">
-          <div class="section-head">
-            <span class="eyebrow eyebrow-dark">¿Por qué FIXYA?</span>
-            <h2>Más seguridad, más confianza y menos fricción</h2>
+      <!-- Banda FIXYA.fun Academia -->
+      <section class="section categories-section academy-band" id="fixya-fun">
+        <div class="container academy-band-inner">
+          <div>
+            <span class="eyebrow eyebrow-dark">Formación profesional</span>
+            <h2>FIXYA Academia · Capacitación en oficios técnicos</h2>
+            <p>Impulsamos la formación continua de los profesionales de nuestra red: cursos prácticos de especialidad, normativas de seguridad y certificaciones habilitantes.</p>
+          </div>
+          <a class="btn btn-primary" href="/servicios#como-trabajamos">Conocer programas de oficio</a>
+        </div>
+      </section>
+
+      <!-- Preguntas frecuentes -->
+      <section class="section" id="faq">
+        <div class="container faq-container">
+          <div class="section-head" style="text-align: center;">
+            <span class="eyebrow eyebrow-dark">Claridad total</span>
+            <h2>Preguntas frecuentes</h2>
+            <p style="margin: 0 auto;">Todo lo que necesitás saber antes de contratar tu primer servicio o sumarte a la red.</p>
           </div>
 
-          <div class="feature-grid">
-            <article class="feature-card">
-              <img src="assets/ui/ui-identidad-verificada.webp" alt="Identidad verificada" width="192" height="192" loading="lazy" decoding="async" />
-              <h3>Identidad revisada</h3>
-              <p>Verificamos perfiles para generar confianza desde el primer contacto.</p>
-            </article>
-            <article class="feature-card">
-              <img src="assets/ui/ui-mercado-pago.webp" alt="Mercado Pago" width="192" height="192" loading="lazy" decoding="async" />
-              <h3>Pagos protegidos</h3>
-              <p>Pagá con seguimiento y seguridad para tus servicios y trabajos.</p>
-            </article>
-            <article class="feature-card">
-              <img src="assets/ui/ui-expediente.webp" alt="Expediente" width="192" height="192" loading="lazy" decoding="async" />
-              <h3>Expediente digital</h3>
-              <p>Todo queda documentado para clientes y profesionales.</p>
-            </article>
-            <article class="feature-card">
-              <img src="assets/features/feat-cobertura.webp" alt="Cobertura" width="192" height="192" loading="lazy" decoding="async" />
-              <h3>Cobertura nacional</h3>
-              <p>Conectamos técnicos en distintas ciudades y regiones.</p>
-            </article>
+          <!-- FAQ Search Input -->
+          <div class="faq-search-wrapper">
+            <span class="faq-search-icon" aria-hidden="true">🔍</span>
+            <input
+              type="text"
+              id="faq-search-input"
+              class="faq-search-input"
+              placeholder="Buscar en preguntas frecuentes (ej. pago, garantía, presupuesto, cancelación, matrícula...)"
+              aria-label="Buscar en preguntas frecuentes"
+              autocomplete="off"
+            />
+            <button
+              type="button"
+              id="faq-search-clear"
+              class="faq-search-clear"
+              aria-label="Limpiar búsqueda"
+              style="display: none;"
+            >✕</button>
+          </div>
+
+          <!-- FAQ Filter Categories -->
+          <div class="faq-filters-row" role="tablist" aria-label="Categorías de preguntas frecuentes">
+            <span class="faq-filter-label">Tema:</span>
+            <button type="button" class="faq-filter-pill is-active" data-faq-cat="todas">
+              <span class="pill-label">Todas</span>
+              <span class="pill-badge">8</span>
+            </button>
+            <button type="button" class="faq-filter-pill" data-faq-cat="pagos">
+              <span class="pill-label">Pagos y Mercado Pago</span>
+              <span class="pill-badge">2</span>
+            </button>
+            <button type="button" class="faq-filter-pill" data-faq-cat="garantia">
+              <span class="pill-label">Garantía y Seguridad</span>
+              <span class="pill-badge">2</span>
+            </button>
+            <button type="button" class="faq-filter-pill" data-faq-cat="contratacion">
+              <span class="pill-label">Contratación y Plazos</span>
+              <span class="pill-badge">3</span>
+            </button>
+            <button type="button" class="faq-filter-pill" data-faq-cat="profesionales">
+              <span class="pill-label">Para Profesionales</span>
+              <span class="pill-badge">1</span>
+            </button>
+          </div>
+
+          <!-- FAQ Meta Bar with Counter & Expand/Collapse Toggle -->
+          <div class="faq-meta-bar">
+            <span id="faq-meta-count" class="faq-meta-count">Mostrando <strong>8</strong> preguntas</span>
+            <button type="button" id="faq-toggle-all-btn" class="btn btn-outline btn-small" style="padding: 4px 12px; font-size: 0.78rem; min-height: 32px;">
+              Expandir todas
+            </button>
+          </div>
+
+          <!-- FAQ Items List -->
+          <div class="faq-list" id="faq-list">
+            <!-- 1 -->
+            <details class="faq-item" data-faq-cat="garantia" data-keywords="profesional confiable matricula dni verificacion antecedentes seguridad resenas reputacion">
+              <summary class="faq-summary">
+                <div>
+                  <span class="faq-category-tag">Garantía y Seguridad</span>
+                  <div class="faq-question-text">¿Cómo me asegura FIXYA que el profesional es confiable?</div>
+                </div>
+                <span class="faq-icon-indicator" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                Cada profesional atraviesa un proceso de admisión riguroso donde verificamos DNI, antecedentes, matrícula técnica vigente y domicilio fiscal. Además, las reseñas solo pueden ser publicadas por clientes reales que hayan contratado y pagado a través de la plataforma.
+              </div>
+            </details>
+
+            <!-- 2 -->
+            <details class="faq-item" data-faq-cat="pagos" data-keywords="libera pago tecnico mercado pago custodia retencion liberacion dinero mediacion reembolso">
+              <summary class="faq-summary">
+                <div>
+                  <span class="faq-category-tag">Pagos y Mercado Pago</span>
+                  <div class="faq-question-text">¿Cuándo se libera el pago al técnico y cómo funciona la custodia?</div>
+                </div>
+                <span class="faq-icon-indicator" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                Tu pago queda en custodia segura de Mercado Pago. Una vez concluida la intervención en tu domicilio y comprobado el correcto funcionamiento, autorizás la liberación formal. Si surge algún desacuerdo, nuestro equipo de mediación interviene en menos de 24 horas para resolverlo o reembolsar los fondos.
+              </div>
+            </details>
+
+            <!-- 3 -->
+            <details class="faq-item" data-faq-cat="garantia" data-keywords="expediente digital garantia 30 dias fotos diagnostico comprobante arreglo reparacion">
+              <summary class="faq-summary">
+                <div>
+                  <span class="faq-category-tag">Garantía y Seguridad</span>
+                  <div class="faq-question-text">¿Qué es el Expediente Digital y qué garantía cubre mi trabajo?</div>
+                </div>
+                <span class="faq-icon-indicator" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                Es el registro digital fotográfico donde el profesional documenta el diagnóstico previo, los repuestos utilizados y la terminación final. Todas las contrataciones en FIXYA cuentan con una garantía de 30 días con certificación oficial y respaldo técnico ante cualquier inconveniente.
+              </div>
+            </details>
+
+            <!-- 4 -->
+            <details class="faq-item" data-faq-cat="contratacion" data-keywords="costo presupuesto sin cargo gratis cotizacion valor precio pedir diagnostico">
+              <summary class="faq-summary">
+                <div>
+                  <span class="faq-category-tag">Contratación y Plazos</span>
+                  <div class="faq-question-text">¿Tiene algún costo solicitar un presupuesto o diagnóstico inicial?</div>
+                </div>
+                <span class="faq-icon-indicator" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                No, la solicitud de presupuesto y el primer contacto son 100% gratuitos y sin compromiso. Podés comparar propuestas, revisar el perfil del técnico y coordinar la visita con total libertad antes de confirmar el trabajo.
+              </div>
+            </details>
+
+            <!-- 5 -->
+            <details class="faq-item" data-faq-cat="contratacion" data-keywords="cancelar no asiste reprogramar cancelacion visita guardia reasignar reembolso devolucion">
+              <summary class="faq-summary">
+                <div>
+                  <span class="faq-category-tag">Contratación y Plazos</span>
+                  <div class="faq-question-text">¿Qué sucede si el profesional no asiste o necesito cancelar la visita?</div>
+                </div>
+                <span class="faq-icon-indicator" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                Podés cancelar o reprogramar la cita sin costo directamente desde tu panel o por WhatsApp. Si el profesional no asiste o surge un imprevisto, te reasignamos un técnico de guardia de forma prioritaria o te reintegramos el 100% de los fondos retenidos de inmediato.
+              </div>
+            </details>
+
+            <!-- 6 -->
+            <details class="faq-item" data-faq-cat="pagos" data-keywords="medios de pago cuotas tarjetas debito credito transferencia mercadopago efectivo">
+              <summary class="faq-summary">
+                <div>
+                  <span class="faq-category-tag">Pagos y Mercado Pago</span>
+                  <div class="faq-question-text">¿Qué medios de pago puedo utilizar y está disponible el pago en cuotas?</div>
+                </div>
+                <span class="faq-icon-indicator" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                Aceptamos saldo en cuenta de Mercado Pago, tarjetas de débito, tarjetas de crédito (con opciones de cuotas bancarias) y transferencia directa. Para tu seguridad y cobertura de garantía, no es necesario abonar dinero en efectivo al profesional.
+              </div>
+            </details>
+
+            <!-- 7 -->
+            <details class="faq-item" data-faq-cat="contratacion" data-keywords="coordinar horario direccion tiempo respuesta llamada whatsapp contacto urgencia">
+              <summary class="faq-summary">
+                <div>
+                  <span class="faq-category-tag">Contratación y Plazos</span>
+                  <div class="faq-question-text">¿Cómo coordino el horario exacto y la dirección de la visita?</div>
+                </div>
+                <span class="faq-icon-indicator" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                Una vez confirmada la solicitud en el checkout, el profesional asignado te contacta por WhatsApp o llamada en menos de 2 horas (o inmediatamente en servicios con guardia de urgencia) para acordar el día y horario que mejor se adapte a tu agenda.
+              </div>
+            </details>
+
+            <!-- 8 -->
+            <details class="faq-item" data-faq-cat="profesionales" data-keywords="tecnico sumarse red matriculado empresa contratistas registro gratis requisitos trabajar">
+              <summary class="faq-summary">
+                <div>
+                  <span class="faq-category-tag">Para Profesionales</span>
+                  <div class="faq-question-text">¿Sos técnico matriculado o empresa y querés sumarte a la red?</div>
+                </div>
+                <span class="faq-icon-indicator" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                El registro para profesionales es 100% gratuito. Solo necesitás registrarte con tu DNI, certificado de matrícula o referencias de experiencia comprobables. Una vez validado tu perfil por nuestro equipo, comenzás a recibir solicitudes de clientes verificados en tu zona geográfica.
+              </div>
+            </details>
+          </div>
+
+          <!-- Empty State (hidden by default) -->
+          <div id="faq-empty-state" class="faq-empty-state" style="display: none;">
+            <div class="faq-empty-icon" aria-hidden="true">🔍</div>
+            <h3>No encontramos preguntas con ese término</h3>
+            <p id="faq-empty-text">Probá con palabras más generales como "pago", "garantía", "presupuesto" o consultá directamente a nuestro equipo de soporte.</p>
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+              <button type="button" id="faq-reset-btn" class="btn btn-primary btn-small">Ver todas las preguntas</button>
+              <a href="https://wa.me/5493873522920?text=Hola%20FIXYA%2C%20tengo%20una%20consulta%20que%20no%20encontr%C3%A9%20en%20las%20preguntas%20frecuentes." target="_blank" rel="noreferrer" class="btn btn-outline btn-small">
+                Consultar por WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section alt-section showcase-section">
-        <div class="container showcase-grid">
-          <div class="showcase-text">
-            <span class="eyebrow eyebrow-dark">Todo en un solo lugar</span>
-            <h2>Una experiencia hecha para resolver rápido.</h2>
-            <p>
-              Desde la primera consulta hasta la entrega del trabajo, FIXYA centraliza la
-              documentación, el pago y la confianza entre cliente y profesional.
-            </p>
-            <ul class="check-list">
-              <li>Presupuestos claros</li>
-              <li>Profesionales verificados</li>
-              <li>Pago seguro con Mercado Pago</li>
-              <li>Seguimiento del trabajo</li>
-            </ul>
-          </div>
-
-          <div class="showcase-media">
-            <img src="assets/corporativas/corp-03-taller.webp" alt="Obra con profesionales FIXYA" width="960" height="540" loading="lazy" decoding="async" />
-          </div>
-        </div>
-      </section>
-
-      <section class="section cta-section" id="contacto">
+      <!-- CTA Band -->
+      <section class="section cta-section">
         <div class="container cta-box">
           <div>
-            <span class="eyebrow eyebrow-dark">¿Listo para empezar?</span>
-            <h2>Pedí presupuesto o sumate como profesional</h2>
+            <span class="eyebrow eyebrow-dark">Comenzá hoy</span>
+            <h2>Arreglá lo que necesitás con tranquilidad</h2>
+            <p style="margin-top:8px; opacity:0.9;">Presupuesto sin cargo, atención personalizada y técnicos matriculados cerca tuyo.</p>
           </div>
           <div class="cta-actions">
-            <a class="btn btn-primary" href="https://wa.me/5493873522920?text=Hola%20FIXYA%2C%20quiero%20pedir%20un%20presupuesto" target="_blank" rel="noreferrer">
-              Pedir presupuesto
-            </a>
-            <a class="btn btn-outline btn-dark" href="mailto:info@fixya.io">Escribir por email</a>
+            <a class="btn btn-primary" href="#buscar">Buscar un profesional</a>
+            <a class="btn btn-outline btn-dark" href="/registro">Soy profesional</a>
           </div>
         </div>
       </section>
@@ -339,44 +586,47 @@
       <div class="container footer-grid">
         <div>
           <img src="assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
-          <p>Marketplace de servicios con profesionales verificados y pago seguro.</p>
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
         </div>
-
         <div>
-          <h3>Servicios</h3>
+          <h3>Servicios populares</h3>
           <ul>
-            <li><a href="producto.php?s=plomeria">Plomería</a></li>
-            <li><a href="producto.php?s=electricidad">Electricidad</a></li>
-            <li><a href="producto.php?s=gas">Gas</a></li>
-            <li><a href="producto.php?s=carpinteria">Carpintería</a></li>
-            <li><a href="categoria.html">Ver todas</a></li>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
           </ul>
         </div>
-
         <div>
-          <h3>Empresa</h3>
+          <h3>Profesionales y Empresa</h3>
           <ul>
-            <li><a href="nosotros.html">Sobre FIXYA</a></li>
-            <li><a href="profesionales.php">Profesionales</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="privacidad.html">Privacidad</a></li>
-            <li><a href="terminos.html">Términos</a></li>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/servicios#como-trabajamos">Cómo trabajamos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
           </ul>
         </div>
-
         <div>
-          <h3>Contacto</h3>
+          <h3>Seguridad y Legal (Argentina)</h3>
           <ul>
+            <li><a href="/checkout">Custodia Mercado Pago (BCRA)</a></li>
+            <li><a href="/arrepentimiento" style="color:var(--orange); font-weight:700;">Botón de Arrepentimiento</a></li>
+            <li><a href="/baja">Botón de Baja de Suscripción</a></li>
+            <li><a href="/terminos">Términos (Ley 24.240)</a></li>
+            <li><a href="/privacidad">Privacidad (Ley 25.326)</a></li>
+            <li><a href="https://www.argentina.gob.ar/defensadelconsumidor" target="_blank" rel="noreferrer">Defensa del Consumidor</a></li>
             <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
-            <li><a href="mailto:info@fixya.io">info@fixya.io</a></li>
-            <li>Salta, Argentina</li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Urgencias 24hs</a></li>
           </ul>
         </div>
       </div>
-
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Todos los derechos reservados</span>
+        <span>© <span id="year"></span> FIXYA.io — Cumplimiento Ley 24.240, Ley 25.326 y Res. 424/2020 · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 

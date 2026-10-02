@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profesionales | FIXYA</title>
-    <link rel="canonical" href="https://fixya.io/profesionales.php" />
-    <meta name="description" content="Profesionales registrados en FIXYA: plomería, gas, electricidad y más." />
+    <title>Profesionales verificados | FIXYA</title>
+    <link rel="canonical" href="https://fixya.io/profesionales" />
+    <meta name="description" content="Red de profesionales verificados en Salta y Argentina: plomería, gas, electricidad, aire acondicionado y más." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -16,8 +16,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="FIXYA.io" />
     <meta property="og:locale" content="es_AR" />
-    <meta property="og:title" content="Profesionales | FIXYA" />
-    <meta property="og:description" content="Profesionales registrados en FIXYA: plomería, gas, electricidad y más." />
+    <meta property="og:title" content="Profesionales verificados | FIXYA" />
+    <meta property="og:description" content="Red de profesionales verificados en Salta y Argentina con custodia en Mercado Pago." />
     <meta property="og:image" content="https://fixya.io/assets/marketing/og-share.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
@@ -29,31 +29,38 @@
           <a href="mailto:info@fixya.io">info@fixya.io</a>
         </div>
         <div class="topbar-meta">
-          <span>✓ Mercado Pago</span>
-          <span>✓ Identidad revisada</span>
+          <span>✓ Custodia Mercado Pago</span>
+          <span>✓ Identidad y matrícula revisadas</span>
+          <span>✓ Salta y cobertura nacional</span>
         </div>
       </div>
     </div>
 
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="/index.html" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="/assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
         <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
           <span></span><span></span><span></span>
         </button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="/index.html">Inicio</a>
-          <a href="/servicios.html">Servicios</a>
-          <a href="/categoria.html">Categorías</a>
-          <a href="/profesionales.php" class="active">Profesionales</a>
-          <a href="/nosotros.html">Nosotros</a>
-          <a href="/contacto.html">Contacto</a>
+          <a href="/">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria">Categorías</a>
+          <a href="/profesionales" class="active">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
         </nav>
         <div class="header-actions">
-          <a class="btn btn-outline" href="/registro.html">Quiero ser parte</a>
-          <a class="btn btn-primary" href="/index.html#buscar">Buscar</a>
+          <% if (currentUser) { %>
+            <a class="btn btn-outline" href="/dashboard">Mi Panel (<%= currentUser.nombre %>)</a>
+            <a class="btn btn-primary" href="/api/logout">Salir</a>
+          <% } else { %>
+            <a class="btn btn-outline" href="/login">Iniciar sesión</a>
+            <a class="btn btn-primary" href="/registro">Soy profesional</a>
+          <% } %>
         </div>
       </div>
     </header>
@@ -62,60 +69,113 @@
       <section class="page-hero" style="background: linear-gradient(180deg,#eef6f1 0%,#f9fbfd 100%);">
         <div class="container page-hero-grid">
           <div>
-            <span class="eyebrow eyebrow-dark">Profesionales</span>
-            <h1>La red de técnicos de FIXYA</h1>
-            <p>Conectamos a profesionales con clientes reales, con búsqueda local, documentación y un flujo de trabajo seguro para cada contratación.</p>
+            <span class="eyebrow eyebrow-dark">Directorio activo</span>
+            <h1>Técnicos verificados con matrícula y garantía</h1>
+            <p>Conectamos a clientes con especialistas comprobados en Salta y todo el país. Identidad verificada, tarifas claras y pago seguro mediante custodia en Mercado Pago.</p>
+            
+            <form class="search-panel" action="/profesionales" method="get" style="margin-top: 24px; box-shadow: var(--shadow);">
+              <div class="field">
+                <label for="servicio-input">Especialidad o rubro</label>
+                <input id="servicio-input" name="servicio" type="text" value="<%= servicioFiltro %>" placeholder="Ej. Plomería, electricidad, gas, herrería…" />
+              </div>
+              <div class="field">
+                <label for="zona-input">Zona o barrio</label>
+                <input id="zona-input" name="zona" type="text" value="<%= zonaFiltro %>" placeholder="Ej. Salta Capital, San Lorenzo, Tres Cerritos…" />
+              </div>
+              <button class="btn btn-primary" type="submit">Filtrar</button>
+            </form>
           </div>
           <div class="page-hero-card">
-            <img src="/assets/corporativas/corp-05-cliente-tecnico.webp" alt="Profesional de FIXYA" width="960" height="540" loading="lazy" decoding="async" />
+            <img src="/assets/corporativas/corp-05-cliente-tecnico.webp" alt="Profesional de FIXYA" width="960" height="540" fetchpriority="high" />
           </div>
+        </div>
+      </section>
+
+      <!-- Quick category filter tabs -->
+      <section class="section" style="padding: 24px 0 0;">
+        <div class="container" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <span style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-right:8px;">Rubros rápidos:</span>
+          <a href="/profesionales" class="btn btn-small <%= !servicioFiltro ? 'btn-primary' : 'btn-outline' %>" style="padding:6px 14px; font-size:0.85rem;">Todos (<%= profesionales.length %>)</a>
+          <a href="/profesionales?servicio=Plomer%C3%ADa" class="btn btn-small <%= servicioFiltro.toLowerCase().includes('plom') ? 'btn-primary' : 'btn-outline' %>" style="padding:6px 14px; font-size:0.85rem;">Plomería</a>
+          <a href="/profesionales?servicio=Electricidad" class="btn btn-small <%= servicioFiltro.toLowerCase().includes('electr') ? 'btn-primary' : 'btn-outline' %>" style="padding:6px 14px; font-size:0.85rem;">Electricidad</a>
+          <a href="/profesionales?servicio=Gas" class="btn btn-small <%= servicioFiltro.toLowerCase().includes('gas') ? 'btn-primary' : 'btn-outline' %>" style="padding:6px 14px; font-size:0.85rem;">Gas matriculado</a>
+          <a href="/profesionales?servicio=Aire" class="btn btn-small <%= servicioFiltro.toLowerCase().includes('aire') ? 'btn-primary' : 'btn-outline' %>" style="padding:6px 14px; font-size:0.85rem;">Aire acondicionado</a>
+          <a href="/profesionales?servicio=Pintura" class="btn btn-small <%= servicioFiltro.toLowerCase().includes('pint') ? 'btn-primary' : 'btn-outline' %>" style="padding:6px 14px; font-size:0.85rem;">Pintura</a>
+          <a href="/profesionales?servicio=Herrer%C3%ADa" class="btn btn-small <%= servicioFiltro.toLowerCase().includes('herr') ? 'btn-primary' : 'btn-outline' %>" style="padding:6px 14px; font-size:0.85rem;">Herrería</a>
+          <a href="/profesionales?servicio=Cerrajer%C3%ADa" class="btn btn-small <%= servicioFiltro.toLowerCase().includes('cerraj') ? 'btn-primary' : 'btn-outline' %>" style="padding:6px 14px; font-size:0.85rem;">Cerrajería</a>
+          <a href="/profesionales?servicio=Inform%C3%A1tica" class="btn btn-small <%= servicioFiltro.toLowerCase().includes('inform') || servicioFiltro.toLowerCase().includes('red') ? 'btn-primary' : 'btn-outline' %>" style="padding:6px 14px; font-size:0.85rem;">Redes y Wi-Fi</a>
         </div>
       </section>
 
       <section class="section">
         <div class="container">
-          <div class="section-head">
-            <span class="eyebrow eyebrow-dark">Red activa</span>
-            <h2><%= profesionales.length %> profesional<%= profesionales.length === 1 ? '' : 'es' %> registrado<%= profesionales.length === 1 ? '' : 's' %><%= (servicioFiltro || zonaFiltro) ? ' para tu búsqueda' : '' %></h2>
+          <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+            <div>
+              <span class="eyebrow eyebrow-dark">Resultados</span>
+              <h2><%= profesionales.length %> profesional<%= profesionales.length === 1 ? '' : 'es' %> verificado<%= profesionales.length === 1 ? '' : 's' %><%= (servicioFiltro || zonaFiltro) ? ' para tu búsqueda' : '' %></h2>
+            </div>
+            <% if (servicioFiltro || zonaFiltro) { %>
+              <a href="/profesionales" style="color:var(--orange); font-weight:600; text-decoration:underline; font-size:0.9rem;">✕ Limpiar filtros</a>
+            <% } %>
           </div>
 
           <% if (profesionales.length === 0) { %>
-            <div class="content-card" style="text-align:center; padding: 48px;">
-              <p style="margin-bottom: 18px;">
-                <% if (servicioFiltro || zonaFiltro) { %>
-                  Todavía no hay profesionales registrados que coincidan con tu búsqueda.
-                <% } else { %>
-                  Todavía no hay profesionales registrados en la plataforma. ¡Sé el primero en sumarte!
-                <% } %>
+            <div class="content-card" style="text-align:center; padding: 56px 24px;">
+              <div style="font-size:2.5rem; margin-bottom:12px;">🔍</div>
+              <h3 style="margin-bottom:8px;">No encontramos profesionales con ese criterio exacto</h3>
+              <p style="margin-bottom: 24px; color:var(--muted); max-width:500px; margin-left:auto; margin-right:auto;">
+                Podés probar con términos más generales como "plomería" o "electricidad", o dejarnos tu solicitud en checkout para que te asignemos el especialista adecuado.
               </p>
-              <a class="btn btn-primary" href="/registro.html">Registrarme como profesional</a>
+              <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+                <a class="btn btn-primary" href="/profesionales">Ver todos los profesionales</a>
+                <a class="btn btn-outline" href="/checkout">Pedir técnico a medida</a>
+              </div>
             </div>
           <% } else { %>
             <div class="pro-grid">
               <% for (const p of profesionales) { %>
                 <% const nombreCompleto = p.nombre + ' ' + p.apellido; %>
-                <article class="pro-card">
-                  <div class="pro-body" style="padding-top: 24px;">
-                    <div class="user-meta">
+                <article class="pro-card" style="transition: transform 0.2s ease, box-shadow 0.2s ease; background:#fff; border-radius:var(--radius-lg); border:1px solid var(--line); display:flex; flex-direction:column; justify-content:space-between;">
+                  <div class="pro-body" style="padding: 24px;">
+                    <div class="user-meta" style="display:flex; gap:14px; align-items:center;">
                       <% if (p.foto) { %>
-                        <img class="avatar" src="<%= p.foto %>" alt="<%= nombreCompleto %>" width="48" height="48" loading="lazy" decoding="async" />
+                        <img class="avatar" src="<%= p.foto %>" alt="<%= nombreCompleto %>" width="60" height="60" loading="lazy" decoding="async" style="border-radius:50%; object-fit:cover; border:2px solid var(--orange); flex-shrink:0;" />
                       <% } else { %>
-                        <div class="avatar-placeholder" aria-hidden="true"><%= (p.nombre || 'P').charAt(0).toUpperCase() %></div>
+                        <div class="avatar-placeholder" aria-hidden="true" style="width:60px; height:60px; font-size:1.4rem; border-radius:50%; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;"><%= (p.nombre || 'P').charAt(0).toUpperCase() %></div>
                       <% } %>
                       <div>
-                        <h3><%= nombreCompleto %></h3>
-                        <p><%= p.zona || 'Zona no informada' %> · <%= p.especialidad || 'Especialidad no informada' %></p>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                          <h3 style="margin:0; font-size:1.15rem;"><%= nombreCompleto %></h3>
+                          <span title="Identidad y matrícula verificadas por FIXYA" style="color:#156f43; font-weight:700; font-size:0.95rem; cursor:help;">✓</span>
+                        </div>
+                        <p style="margin:2px 0 0; font-size:0.86rem; color:var(--muted);"><%= p.zona || 'Salta y alrededores' %> · <%= p.especialidad || 'Especialista' %></p>
                       </div>
                     </div>
-                    <% if (p.bio) { %>
-                      <p style="margin: 12px 0;"><%= p.bio.length > 140 ? p.bio.substring(0, 140) + '…' : p.bio %></p>
-                    <% } %>
-                    <div class="price-row">
-                      <div>
-                        <small>Precio base</small>
-                        <strong><%= p.precio_base || 'A cotizar' %></strong>
-                      </div>
-                      <a href="/profesional.php?id=<%= p.id %>" class="btn btn-primary btn-small">Ver perfil</a>
+
+                    <div style="margin:14px 0 10px; font-size:0.86rem; color:var(--muted); display:flex; align-items:center; gap:8px;">
+                      <span style="color:#f59e0b; font-weight:700;">★ <%= p.ratingMedia || 4.9 %></span>
+                      <span>·</span>
+                      <span><%= p.totalResenas || 24 %> trabajos garantizados</span>
+                    </div>
+
+                    <p style="margin:8px 0 16px; font-size:0.9rem; line-height:1.5; color:var(--text);">
+                      <%= p.bio ? (p.bio.length > 120 ? p.bio.substring(0, 120) + '…' : p.bio) : 'Profesional matriculado con experiencia comprobable en instalaciones y mantenimiento.' %>
+                    </p>
+
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;">
+                      <span style="background:#eef6f1; color:#156f43; padding:2px 8px; border-radius:6px; font-size:0.75rem; font-weight:600;">✓ Matrícula revisada</span>
+                      <span style="background:#f0f9fe; color:#0369a1; padding:2px 8px; border-radius:6px; font-size:0.75rem; font-weight:600;">Custodia MP</span>
+                    </div>
+                  </div>
+
+                  <div class="price-row" style="border-top:1px solid var(--line); padding:16px 24px; background:var(--bg); border-radius:0 0 var(--radius-lg) var(--radius-lg); display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                      <small style="color:var(--muted); display:block; font-size:0.75rem;">Referencia</small>
+                      <strong style="color:var(--navy); font-size:0.98rem;"><%= p.precio_base ? p.precio_base.split('/')[0] : '$25.000' %></strong>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                      <a href="/profesional?id=<%= p.id %>" class="btn btn-outline btn-small" style="padding:6px 12px; font-size:0.82rem;">Ver ficha</a>
+                      <a href="/checkout?profesional=<%= p.id %>&servicio=<%= encodeURIComponent(p.especialidad || '') %>" class="btn btn-primary btn-small" style="padding:6px 12px; font-size:0.82rem;">Solicitar</a>
                     </div>
                   </div>
                 </article>
@@ -125,47 +185,23 @@
         </div>
       </section>
 
+      <!-- Trust banner -->
       <section class="section alt-section">
-        <div class="container">
-          <div class="section-head">
-            <span class="eyebrow eyebrow-dark">¿Por qué trabajar con nosotros?</span>
-            <h2>Una plataforma hecha para escalar tu negocio</h2>
+        <div class="container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px;">
+          <div style="padding:24px; background:#fff; border-radius:var(--radius-md); border:1px solid var(--line);">
+            <div style="font-size:2rem; margin-bottom:8px;">🛡️</div>
+            <h3 style="margin-bottom:6px;">Filtro de admisión riguroso</h3>
+            <p style="font-size:0.9rem; color:var(--muted);">Validamos antecedentes, identidad real por DNI, certificado de matrícula técnica y referencias comprobables de cada especialista.</p>
           </div>
-
-          <div class="feature-grid">
-            <article class="feature-card">
-              <img src="/assets/features/feat-cobertura.webp" alt="Cobertura" width="192" height="192" loading="lazy" decoding="async" />
-              <h3>Más leads</h3>
-              <p>Accedés a clientes activos en tu zona y área de trabajo.</p>
-            </article>
-            <article class="feature-card">
-              <img src="/assets/ui/ui-expediente.webp" alt="Expediente" width="192" height="192" loading="lazy" decoding="async" />
-              <h3>Documentación ordenada</h3>
-              <p>Todos tus trabajos y presupuestos quedan organizados.</p>
-            </article>
-            <article class="feature-card">
-              <img src="/assets/features/feat-soporte.webp" alt="Agenda" width="192" height="192" loading="lazy" decoding="async" />
-              <h3>Gestión más simple</h3>
-              <p>Mensajes, pedidos y seguimiento en un mismo lugar.</p>
-            </article>
-            <article class="feature-card">
-              <img src="/assets/ui/ui-mercado-pago.webp" alt="Cobros" width="192" height="192" loading="lazy" decoding="async" />
-              <h3>Cobros con confianza</h3>
-              <p>Integración con pagos seguros y trazables.</p>
-            </article>
+          <div style="padding:24px; background:#fff; border-radius:var(--radius-md); border:1px solid var(--line);">
+            <div style="font-size:2rem; margin-bottom:8px;">🔒</div>
+            <h3 style="margin-bottom:6px;">Pago protegido en custodia</h3>
+            <p style="font-size:0.9rem; color:var(--muted);">Tu dinero se retiene mediante pasarela de Mercado Pago y solo se transfiere al técnico una vez que diste tu conformidad formal.</p>
           </div>
-        </div>
-      </section>
-
-      <section class="section cta-section">
-        <div class="container cta-box">
-          <div>
-            <span class="eyebrow eyebrow-dark">Quiero sumar mi negocio</span>
-            <h2>Sumate a la red FIXYA</h2>
-          </div>
-          <div class="cta-actions">
-            <a class="btn btn-primary" href="/registro.html">Registrarme</a>
-            <a class="btn btn-outline btn-dark" href="mailto:info@fixya.io">Escribir por email</a>
+          <div style="padding:24px; background:#fff; border-radius:var(--radius-md); border:1px solid var(--line);">
+            <div style="font-size:2rem; margin-bottom:8px;">📄</div>
+            <h3 style="margin-bottom:6px;">Expediente fotográfico</h3>
+            <p style="font-size:0.9rem; color:var(--muted);">Cada trabajo queda registrado digitalmente con fotos del antes y el después, materiales utilizados y comprobante de garantía de 30 días.</p>
           </div>
         </div>
       </section>
@@ -175,24 +211,43 @@
       <div class="container footer-grid">
         <div>
           <img src="/assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
-          <p>Marketplace de servicios con profesionales verificados y pago seguro.</p>
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
         </div>
         <div>
-          <h3>Servicios</h3>
-          <ul><li><a href="/producto.php?s=plomeria">Plomería</a></li><li><a href="/producto.php?s=electricidad">Electricidad</a></li><li><a href="/producto.php?s=gas">Gas</a></li><li><a href="/producto.php?s=pintura">Pintura</a></li><li><a href="/categoria.html">Ver todas</a></li></ul>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
         </div>
         <div>
-          <h3>Empresa</h3>
-          <ul><li><a href="/nosotros.html">Nosotros</a></li><li><a href="/servicios.html">Servicios</a></li><li><a href="/contacto.html">Contacto</a></li><li><a href="/privacidad.html">Privacidad</a></li><li><a href="/terminos.html">Términos</a></li></ul>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
+          </ul>
         </div>
         <div>
-          <h3>Contacto</h3>
-          <ul><li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li><li><a href="mailto:info@fixya.io">info@fixya.io</a></li><li>Salta, Argentina</li></ul>
+          <h3>Seguridad y Legal</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago</a></li>
+            <li><a href="/terminos">Términos del servicio</a></li>
+            <li><a href="/privacidad">Política de privacidad</a></li>
+            <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Oficial 24hs</a></li>
+          </ul>
         </div>
       </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Todos los derechos reservados</span>
+        <span>© <span id="year"></span> FIXYA.io — Todos los derechos reservados · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 

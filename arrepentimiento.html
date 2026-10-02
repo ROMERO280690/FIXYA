@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Botón de Arrepentimiento | Ley 24.240 y Res. 424/2020 | FIXYA.io</title>
+    <link rel="canonical" href="https://fixya.io/arrepentimiento" />
+    <meta name="description" content="Ejercé tu derecho legal de arrepentimiento conforme al Art. 34 de la Ley 24.240 y Resolución 424/2020 de la Secretaría de Comercio Interior. Revocación sin costo dentro de los 10 días." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/extras/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/assets/extras/favicon-180.png" />
+    <meta name="theme-color" content="#0b1f3a" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-links">
+          <a href="tel:+5493873522920">+54 9 387 352-2920</a>
+          <a href="mailto:info@fixya.io">info@fixya.io</a>
+        </div>
+        <div class="topbar-meta">
+          <span>Defensa del Consumidor · Ley 24.240</span>
+          <span>✓ Reintegro garantizado</span>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
+          <img src="/assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria">Categorías</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn-outline" href="/login">Iniciar sesión</a>
+          <a class="btn btn-primary" href="/dashboard">Mi panel</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="container">
+        <section class="page-head" style="margin-bottom: 24px;">
+          <div class="page-head-copy">
+            <span class="eyebrow eyebrow-dark">Derecho del Consumidor</span>
+            <h1>Botón de Arrepentimiento</h1>
+            <p>Conforme al <strong>Artículo 34 de la Ley 24.240 de Defensa del Consumidor</strong> y la <strong>Resolución 424/2020 de la Secretaría de Comercio Interior</strong>, tenés derecho a revocar la aceptación de cualquier contratación o servicio dentro del plazo de <strong>diez (10) días corridos</strong> contados a partir de la fecha en que se efectuó la solicitud.</p>
+          </div>
+        </section>
+
+        <section class="content-card" style="max-width: 640px; margin: 0 auto 36px; padding: 32px;">
+          <div style="background:#eff6ff; border-left:4px solid #2563eb; padding:12px 16px; border-radius:6px; margin-bottom:20px; font-size:0.88rem; color:#1e40af;">
+            ℹ️ <strong>Sin penalizaciones:</strong> El ejercicio del derecho de arrepentimiento no generará costo alguno para vos. Si realizaste un pago a través de Mercado Pago en custodia, el reintegro se tramitará automáticamente por el mismo medio.
+          </div>
+
+          <form id="form-arrepentimiento">
+            <div class="form-field" style="margin-bottom:16px;">
+              <label for="codigo_orden"><strong>Número de orden o código de servicio *</strong></label>
+              <input type="text" id="codigo_orden" name="codigo_orden" required placeholder="Ej. FIX-10492" style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;" />
+            </div>
+
+            <div class="form-field" style="margin-bottom:16px;">
+              <label for="email"><strong>Email asociado a la orden *</strong></label>
+              <input type="email" id="email" name="email" required placeholder="tu-email@ejemplo.com" style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;" />
+            </div>
+
+            <div class="form-field" style="margin-bottom:16px;">
+              <label for="telefono"><strong>Teléfono / WhatsApp de contacto *</strong></label>
+              <input type="tel" id="telefono" name="telefono" required placeholder="+54 9 387 ..." style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;" />
+            </div>
+
+            <div class="form-field" style="margin-bottom:20px;">
+              <label for="motivo">Motivo de revocación (opcional)</label>
+              <textarea id="motivo" name="motivo" rows="3" placeholder="Contanos brevemente por qué deseás revocar la contratación..." style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;"></textarea>
+            </div>
+
+            <button type="submit" id="btn-submit-arr" class="btn btn-primary" style="width:100%; padding:14px; background:#ea580c; border-color:#ea580c; font-size:1.05rem;">
+              Confirmar revocación de servicio
+            </button>
+          </form>
+
+          <div id="resultado-arrepentimiento" style="display:none; margin-top:24px; padding:20px; background:#dcfce7; border:1px solid #86efac; border-radius:10px; text-align:center;">
+            <div style="font-size:2rem; color:#15803d; margin-bottom:8px;">✓</div>
+            <h3 style="margin:0 0 6px; color:#15803d;">Trámite de Arrepentimiento Confirmado</h3>
+            <p style="margin:0 0 10px; font-size:0.92rem; color:#166534;">
+              Tu solicitud fue asentada bajo el <strong>Código de Trámite Legal:</strong>
+            </p>
+            <div id="codigo-tramite-display" style="font-size:1.4rem; font-weight:800; color:#0b1f3a; font-family:monospace; background:#fff; padding:10px; border-radius:8px; border:1px dashed #15803d; margin-bottom:14px;">
+              ARR-00000
+            </div>
+            <p style="font-size:0.86rem; color:#166534; margin:0 0 16px;">
+              Guardá este número como constancia fehaciente (Res. 424/2020). La orden ha sido cancelada y los fondos en custodia se han liberado para reintegro.
+            </p>
+            <a href="/dashboard" class="btn btn-primary btn-small">Ir a mi panel</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <img src="/assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
+        </div>
+        <div>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Defensa del Consumidor</h3>
+          <ul>
+            <li><a href="/arrepentimiento" style="color:var(--orange); font-weight:700;">Botón de Arrepentimiento</a></li>
+            <li><a href="/baja">Botón de Baja de Suscripción</a></li>
+            <li><a href="/terminos">Términos del servicio</a></li>
+            <li><a href="/privacidad">Política de privacidad</a></li>
+            <li><a href="https://www.argentina.gob.ar/defensadelconsumidor" target="_blank" rel="noreferrer">Ventanilla Única de Reclamos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contacto y Soporte</h3>
+          <ul>
+            <li><a href="/contacto">Mesa de ayuda FIXYA</a></li>
+            <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Oficial 24hs</a></li>
+            <li><span>Salta Capital, Argentina</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="year"></span> FIXYA.io — Cumplimiento estricto Ley 24.240 y Res. 424/2020 · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
+      </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+      const formArr = document.getElementById('form-arrepentimiento');
+      const resultadoArr = document.getElementById('resultado-arrepentimiento');
+      const displayCodigo = document.getElementById('codigo-tramite-display');
+      const btnSubmit = document.getElementById('btn-submit-arr');
+
+      if (formArr) {
+        formArr.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          if (btnSubmit) {
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = 'Procesando revocación...';
+          }
+          const payload = Object.fromEntries(new FormData(formArr).entries());
+          try {
+            const res = await fetch('/api/arrepentimiento', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            const data = await res.json();
+            if (data.ok) {
+              formArr.style.display = 'none';
+              if (displayCodigo) displayCodigo.textContent = data.codigo;
+              if (resultadoArr) resultadoArr.style.display = 'block';
+            } else {
+              alert(data.error || 'Error al procesar la revocación.');
+              if (btnSubmit) {
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = 'Confirmar revocación de servicio';
+              }
+            }
+          } catch (err) {
+            alert('Error de conexión con el servidor.');
+            if (btnSubmit) {
+              btnSubmit.disabled = false;
+              btnSubmit.textContent = 'Confirmar revocación de servicio';
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

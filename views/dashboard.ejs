@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard | FIXYA.io</title>
-    <meta name="description" content="Panel profesional de FIXYA.io." />
+    <title>Mi Panel | FIXYA.io</title>
+    <meta name="description" content="Panel de control de usuario y gestión de servicios en FIXYA.io." />
     <meta name="robots" content="noindex, nofollow" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,109 +23,811 @@
         </div>
         <div class="topbar-meta">
           <span>fixya.io</span>
-          <span>✓ Panel profesional</span>
+          <span>✓ Sesión activa: <strong><%= usuario.nombre %></strong></span>
         </div>
       </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div id="toast-dash" style="display:none; position:fixed; bottom:24px; right:24px; background:#0b1f3a; color:#fff; padding:14px 20px; border-radius:10px; box-shadow:var(--shadow); z-index:9999; font-size:0.9rem; border-left:4px solid #10b981;">
+      Estado actualizado correctamente.
+    </div>
+
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="/index.html" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="/assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
 
         <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span></span><span></span><span></span>
         </button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="/perfil.php">Perfil</a>
-          <a href="/dashboard.php" class="active">Dashboard</a>
-          <a href="/servicios.html">Servicios</a>
-          <% if (usuario.es_admin) { %><a href="/admin.php">Admin</a><% } %>
+          <a href="/dashboard" class="active">Dashboard</a>
+          <a href="/perfil">Mi perfil</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <% if (usuario.es_admin) { %><a href="/admin" style="color:var(--orange); font-weight:700;">⚙️ Admin</a><% } %>
         </nav>
         <div class="header-actions">
-          <a class="btn btn-outline" href="/api/logout.php">Salir</a>
+          <a class="btn btn-outline" href="/api/logout">Cerrar sesión</a>
         </div>
       </div>
     </header>
 
     <main class="page-shell">
       <div class="container">
-        <div class="page-head">
+        <div class="page-head" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:28px;">
           <div class="page-head-copy">
-            <span class="eyebrow eyebrow-dark">Dashboard</span>
-            <h1>Hola, <%= nombreCompleto %></h1>
-            <p>Controlá pedidos, seguimiento y rendimiento de tu actividad en FIXYA.</p>
+            <span class="eyebrow eyebrow-dark">Panel de operaciones</span>
+            <h1 style="margin:4px 0 6px;">Hola, <%= nombreCompleto %></h1>
+            <p>
+              Cuenta <strong><%= esProfesional ? 'Profesional Verificado' : 'Cliente' %></strong> · 
+              <% if (esProfesional) { %>
+                Especialidad: <strong><%= usuario.especialidad || 'Servicios' %></strong> · <%= usuario.zona || 'Salta' %>
+              <% } else { %>
+                Gestión de pedidos, seguimiento fotográfico y garantías activas.
+              <% } %>
+            </p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <% if (esProfesional) { %>
+              <button type="button" id="btn-abrir-emitir-pres" class="btn btn-primary">+ Emitir Presupuesto (Art. 21)</button>
+              <a href="/profesional?id=<%= usuario.id %>" class="btn btn-outline">Ver mi ficha pública</a>
+              <a href="/perfil" class="btn btn-outline">Editar mi perfil</a>
+            <% } else { %>
+              <a href="/checkout" class="btn btn-primary">+ Solicitar nuevo servicio</a>
+              <button type="button" id="btn-abrir-arr-dash" class="btn btn-outline" style="color:#c2410c; border-color:#fed7aa;">Botón de Arrepentimiento</button>
+            <% } %>
           </div>
         </div>
 
+        <!-- Tarjetas de métricas -->
         <section class="metrics-grid">
-          <article class="metric-box">
-            <strong><%= solicitudesAsignadas ? solicitudesAsignadas.length : 0 %></strong>
-            <span>Servicios este mes</span>
-          </article>
-          <article class="metric-box">
-            <strong>$0</strong>
-            <span>Ingresos</span>
-          </article>
-          <article class="metric-box">
-            <strong>—</strong>
-            <span>Calificación</span>
-          </article>
-          <article class="metric-box">
-            <strong><%= solicitudesAsignadas ? solicitudesAsignadas.length : 0 %></strong>
-            <span>Solicitudes nuevas</span>
-          </article>
+          <% if (esProfesional) { %>
+            <article class="metric-box">
+              <strong><%= solicitudesAsignadas.length %></strong>
+              <span>Solicitudes recibidas</span>
+            </article>
+            <article class="metric-box">
+              <strong style="color:#d97706;"><%= solicitudesAsignadas.filter(s => s.estado === 'pendiente').length %></strong>
+              <span>Nuevas por atender</span>
+            </article>
+            <article class="metric-box">
+              <strong style="color:#2563eb;"><%= presupuestos.length %></strong>
+              <span>Presupuestos Art. 21</span>
+            </article>
+            <article class="metric-box">
+              <strong style="color:#10b981;">90 días</strong>
+              <span>Garantía legal (Ley 24.240)</span>
+            </article>
+          <% } else { %>
+            <article class="metric-box">
+              <strong><%= solicitudesAsignadas.length %></strong>
+              <span>Servicios pedidos</span>
+            </article>
+            <article class="metric-box">
+              <strong style="color:#d97706;"><%= presupuestos.filter(p => p.estado === 'pendiente').length %></strong>
+              <span>Presupuestos a revisar</span>
+            </article>
+            <article class="metric-box">
+              <strong style="color:#2563eb;"><%= solicitudesAsignadas.filter(s => s.estado === 'en_proceso' || s.estado === 'contactado').length %></strong>
+              <span>En ejecución</span>
+            </article>
+            <article class="metric-box">
+              <strong style="color:#10b981;">90 días</strong>
+              <span>Garantía legal (Ley 24.240)</span>
+            </article>
+          <% } %>
         </section>
 
-        <section class="dashboard-grid" style="margin-top: 24px;">
-          <div class="dashboard-card">
-            <h3>Solicitudes recientes</h3>
+        <!-- Banner de Monetización FIXYA PRO para Profesionales -->
+        <% if (esProfesional) { %>
+          <% const esPro = usuario.plan_pro === 'pro' || usuario.plan_pro === 'empresa'; %>
+          <div style="margin-top: 24px; padding: 20px 24px; border-radius: var(--radius-md); <%= esPro ? 'background: linear-gradient(135deg, #0b1f3a 0%, #173660 100%); color: #fff; border: 1px solid #ff8a00;' : 'background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border: 1px solid #fed7aa;' %> display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <span style="font-size: 2.2rem;"><%= esPro ? '⭐' : '🚀' %></span>
+              <div>
+                <% if (esPro) { %>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <strong style="font-size: 1.1rem; color: #fff;">Plan <%= usuario.plan_pro === 'empresa' ? 'Empresa & Cuadrillas' : 'Profesional PRO' %> Activo</strong>
+                    <span style="background: var(--orange); color: #fff; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;">0% COMISIÓN</span>
+                  </div>
+                  <p style="margin: 4px 0 0; font-size: 0.88rem; color: #cbd5e1;">Tu perfil tiene prioridad #1 en búsquedas, insignia dorada y cobro en 24hs por Mercado Pago.</p>
+                <% } else { %>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <strong style="font-size: 1.1rem; color: #9a3412;">Multiplicá tus ganancias con FIXYA PRO</strong>
+                    <span style="background: #ea580c; color: #fff; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;">RECOMENDADO</span>
+                  </div>
+                  <p style="margin: 4px 0 0; font-size: 0.88rem; color: #7c2d12;">Bajá tu comisión a <strong>0%</strong>, recibí alertas directas por WhatsApp y destacate en tu rubro. Ahorrá hasta $45.000/mes.</p>
+                <% } %>
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <a href="/planes-pro" class="btn <%= esPro ? 'btn-outline' : 'btn-primary' %>" style="<%= esPro ? 'background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color:#fff;' : '' %>">
+                <%= esPro ? 'Ver beneficios y facturación' : 'Pasarme a FIXYA PRO ⭐' %>
+              </a>
+            </div>
+          </div>
+        <% } %>
+
+        <!-- Filtros de estado para la tabla -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:32px; margin-bottom:14px;">
+          <div>
+            <h2 style="margin:0; font-size:1.35rem;"><%= esProfesional ? 'Pedidos y solicitudes asignadas' : 'Tus servicios contratados' %></h2>
+            <p style="font-size:0.86rem; color:var(--muted); margin-top:2px;">Gestioná el estado del trabajo, contactá al cliente y accedé al expediente digital.</p>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-small btn-primary filter-dash-btn" data-estado="todos">Todos (<%= solicitudesAsignadas.length %>)</button>
+            <button type="button" class="btn btn-small btn-outline filter-dash-btn" data-estado="pendiente">Pendientes</button>
+            <button type="button" class="btn btn-small btn-outline filter-dash-btn" data-estado="en_proceso">En proceso</button>
+            <button type="button" class="btn btn-small btn-outline filter-dash-btn" data-estado="cerrado">Concluidos</button>
+          </div>
+        </div>
+
+        <!-- Tabla interactiva de solicitudes -->
+        <div class="dashboard-card" style="padding:0; overflow:hidden;">
+          <div class="table-wrap">
+            <table class="data-table" id="tabla-dash">
+              <thead>
+                <tr>
+                  <th>Orden / Fecha</th>
+                  <th><%= esProfesional ? 'Cliente' : 'Servicio' %></th>
+                  <th>Contacto</th>
+                  <th>Descripción / Ubicación</th>
+                  <th>Estado actual</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (!solicitudesAsignadas || solicitudesAsignadas.length === 0) { %>
+                  <tr>
+                    <td colspan="6" style="text-align:center; padding:48px 24px; color:var(--muted);">
+                      <div style="font-size:2rem; margin-bottom:8px;">📋</div>
+                      <p style="margin:0;">No tenés servicios registrados todavía.</p>
+                      <% if (!esProfesional) { %>
+                        <a href="/checkout" class="btn btn-primary btn-small" style="margin-top:14px;">Pedir un servicio ahora</a>
+                      <% } %>
+                    </td>
+                  </tr>
+                <% } %>
+                <% for (const s of solicitudesAsignadas) { %>
+                  <% const fechaStr = s.creado_en ? new Date(s.creado_en).toLocaleString('es-AR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : ''; %>
+                  <tr data-row-estado="<%= s.estado %>">
+                    <td>
+                      <strong style="color:var(--navy); font-family:monospace; display:block;"><%= s.codigo || ('FIX-' + (10000 + s.id)) %></strong>
+                      <small style="color:var(--muted);"><%= fechaStr %></small>
+                    </td>
+                    <td>
+                      <strong><%= s.nombre %> <%= s.apellido %></strong>
+                      <small style="display:block; color:var(--muted); text-transform:capitalize;">Rubro: <%= s.servicio %></small>
+                    </td>
+                    <td>
+                      <a href="tel:<%= s.telefono %>" style="color:var(--navy); font-weight:600;"><%= s.telefono %></a><br />
+                      <small style="color:var(--muted);"><%= s.email %></small>
+                    </td>
+                    <td style="max-width:240px; font-size:0.86rem;">
+                      <div><%= s.descripcion || 'Sin detalle de tarea' %></div>
+                      <small style="color:var(--muted); display:block; margin-top:2px;">📍 <%= s.zona || 'Salta' %></small>
+                    </td>
+                    <td>
+                      <select class="dash-estado-select" data-id="<%= s.id %>" style="min-height:36px; padding:4px 8px; border-radius:8px; border:1px solid var(--line); font-weight:600; background:#fff; cursor:pointer;">
+                        <% for (const [k, lbl] of Object.entries(estadoLabel)) { %>
+                          <option value="<%= k %>" <%= s.estado === k ? 'selected' : '' %>><%= lbl %></option>
+                        <% } %>
+                      </select>
+                    </td>
+                    <td>
+                      <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <a href="https://wa.me/<%= s.telefono.replace(/[^0-9]/g, '') %>?text=<%= encodeURIComponent('Hola ' + s.nombre + ', te contactamos de FIXYA sobre tu orden ' + (s.codigo || '') + '.') %>" target="_blank" rel="noreferrer" class="btn btn-outline btn-small" style="padding:4px 8px; font-size:0.78rem;">
+                          WhatsApp
+                        </a>
+                        <button type="button" class="btn btn-outline btn-small btn-expediente" data-codigo="<%= s.codigo || ('FIX-' + s.id) %>" data-cliente="<%= s.nombre %> <%= s.apellido %>" data-servicio="<%= s.servicio %>" data-estado="<%= s.estado %>" style="padding:4px 8px; font-size:0.78rem;">
+                          📄 Expediente
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Sección de Presupuestos Previos Formales (Art. 21 Ley 24.240) -->
+        <section style="margin-top: 40px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <h2 style="margin:0; font-size:1.35rem;">Presupuestos Previos Formales</h2>
+                <span style="background:#eff6ff; color:#1d4ed8; font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:999px; border:1px solid #bfdbfe;">Art. 21 Ley 24.240</span>
+              </div>
+              <p style="font-size:0.86rem; color:var(--muted); margin-top:2px;">
+                Presupuestos por escrito con desglose de mano de obra, materiales y plazo mínimo de validez de 10 días corridos garantizado por ley.
+              </p>
+            </div>
+            <% if (esProfesional) { %>
+              <button type="button" class="btn btn-primary btn-small btn-abrir-emitir-pres">+ Emitir nuevo presupuesto</button>
+            <% } %>
+          </div>
+
+          <div class="dashboard-card" style="padding:0; overflow:hidden;">
             <div class="table-wrap">
               <table class="data-table">
                 <thead>
                   <tr>
-                    <th>Cliente</th>
-                    <th>Servicio</th>
+                    <th>Presupuesto / Orden</th>
+                    <th><%= esProfesional ? 'Cliente' : 'Profesional' %></th>
+                    <th>Detalle técnico</th>
+                    <th>Mano de obra</th>
+                    <th>Materiales</th>
+                    <th>Total (ARS)</th>
+                    <th>Validez formal</th>
                     <th>Estado</th>
+                    <th>Acción</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <% if (!solicitudesAsignadas || solicitudesAsignadas.length === 0) { %>
-                    <tr><td colspan="3">Todavía no tenés solicitudes asignadas.</td></tr>
-                  <% } else { %>
-                    <% for (const s of solicitudesAsignadas) { %>
-                      <tr>
-                        <td><%= s.nombre %> <%= s.apellido %></td>
-                        <td><%= s.servicio %></td>
-                        <td><%= s.estado %></td>
-                      </tr>
-                    <% } %>
+                  <% if (!presupuestos || presupuestos.length === 0) { %>
+                    <tr>
+                      <td colspan="9" style="text-align:center; padding:36px 20px; color:var(--muted);">
+                        No hay presupuestos formales emitidos en este momento.
+                      </td>
+                    </tr>
+                  <% } %>
+                  <% for (const p of presupuestos) { %>
+                    <% const fechaVenc = new Date(p.fecha_vencimiento).toLocaleDateString('es-AR'); %>
+                    <% const ahora = new Date(); %>
+                    <% const diasRestantes = Math.ceil((new Date(p.fecha_vencimiento).getTime() - ahora.getTime()) / (1000 * 60 * 60 * 24)); %>
+                    <tr>
+                      <td>
+                        <strong style="color:var(--navy); font-family:monospace; display:block;"><%= p.codigo %></strong>
+                        <small style="color:var(--muted);">Orden: <%= p.orden_codigo %></small>
+                      </td>
+                      <td>
+                        <strong><%= esProfesional ? p.cliente_nombre : p.profesional_nombre %></strong>
+                        <% if (!esProfesional && p.profesional_matricula) { %>
+                          <small style="display:block; color:#15803d; font-size:0.75rem;">Matrícula: <%= p.profesional_matricula %></small>
+                        <% } %>
+                      </td>
+                      <td style="max-width:240px; font-size:0.86rem;">
+                        <%= p.descripcion_trabajo %>
+                      </td>
+                      <td><strong>$<%= p.mano_de_obra.toLocaleString('es-AR') %></strong></td>
+                      <td><%= p.materiales > 0 ? '$' + p.materiales.toLocaleString('es-AR') : 'Sin costo adicional' %></td>
+                      <td><strong style="color:var(--navy); font-size:1.05rem;">$<%= p.total.toLocaleString('es-AR') %></strong></td>
+                      <td>
+                        <span style="display:block; font-size:0.86rem;"><%= fechaVenc %></span>
+                        <% if (diasRestantes > 0 && p.estado === 'pendiente') { %>
+                          <small style="color:#15803d; font-weight:700;"><%= diasRestantes %> días restantes</small>
+                        <% } else if (diasRestantes <= 0 && p.estado === 'pendiente') { %>
+                          <small style="color:#b91c1c; font-weight:700;">Vencido</small>
+                        <% } %>
+                      </td>
+                      <td>
+                        <% if (p.estado === 'aceptado') { %>
+                          <span style="color:#15803d; font-weight:700; font-size:0.85rem;">✓ Aceptado</span>
+                        <% } else if (p.estado === 'rechazado') { %>
+                          <span style="color:#b91c1c; font-weight:700; font-size:0.85rem;">✕ Declinado</span>
+                        <% } else { %>
+                          <span style="color:#d97706; font-weight:700; font-size:0.85rem;">● En análisis</span>
+                        <% } %>
+                      </td>
+                      <td>
+                        <% if (!esProfesional && p.estado === 'pendiente' && diasRestantes > 0) { %>
+                          <div style="display:flex; gap:6px;">
+                            <button type="button" class="btn btn-primary btn-small btn-responder-pres" data-id="<%= p.id %>" data-accion="aceptar" style="padding:4px 8px; font-size:0.75rem; background:#15803d; border-color:#15803d;">
+                              Aceptar
+                            </button>
+                            <button type="button" class="btn btn-outline btn-small btn-responder-pres" data-id="<%= p.id %>" data-accion="rechazar" style="padding:4px 8px; font-size:0.75rem; color:#b91c1c; border-color:#fca5a5;">
+                              Rechazar
+                            </button>
+                          </div>
+                        <% } else { %>
+                          <button type="button" class="btn btn-outline btn-small btn-ver-presupuesto" data-pres='<%= JSON.stringify(p) %>' style="padding:4px 8px; font-size:0.75rem;">
+                            Ver constancia
+                          </button>
+                        <% } %>
+                      </td>
+                    </tr>
                   <% } %>
                 </tbody>
               </table>
             </div>
           </div>
+        </section>
 
-          <div class="dashboard-card">
-            <h3>Agenda</h3>
-            <ul class="timeline-list">
-              <li>No tenés turnos programados.</li>
-            </ul>
+        <!-- Centro de Protección al Consumidor y Garantías Legales -->
+        <section style="margin-top: 40px; margin-bottom: 24px;">
+          <h2 style="font-size:1.35rem; margin-bottom:4px;">Marco Legal y Protección al Consumidor</h2>
+          <p style="font-size:0.86rem; color:var(--muted); margin-bottom:16px;">
+            Derechos garantizados por las leyes de la República Argentina y normativas de la Secretaría de Comercio Interior.
+          </p>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px;">
+            <!-- Card 1: Botón de Arrepentimiento -->
+            <article class="content-card" style="padding:22px; border-left:4px solid #ea580c; display:flex; flex-direction:column; justify-content:space-between;">
+              <div>
+                <span class="eyebrow" style="color:#ea580c;">Resolución 424/2020</span>
+                <h3 style="margin:4px 0 8px; font-size:1.15rem;">Derecho de Arrepentimiento</h3>
+                <p style="font-size:0.88rem; color:var(--muted); margin-bottom:16px;">
+                  Tenés <strong>10 días corridos</strong> desde la solicitud para revocar cualquier contratación a distancia sin costo alguno y con reintegro total inmediato de fondos en custodia.
+                </p>
+              </div>
+              <div>
+                <a href="/arrepentimiento" class="btn btn-primary btn-small" style="background:#ea580c; border-color:#ea580c; width:100%; text-align:center;">
+                  Acceder al Botón de Arrepentimiento ↩
+                </a>
+              </div>
+            </article>
+
+            <!-- Card 2: Garantía Legal Escrita -->
+            <article class="content-card" style="padding:22px; border-left:4px solid #10b981; display:flex; flex-direction:column; justify-content:space-between;">
+              <div>
+                <span class="eyebrow" style="color:#10b981;">Arts. 11 a 17 Ley 24.240</span>
+                <h3 style="margin:4px 0 8px; font-size:1.15rem;">Garantía Legal Obligatoria</h3>
+                <p style="font-size:0.88rem; color:var(--muted); margin-bottom:16px;">
+                  Todo trabajo goza de una garantía legal obligatoria de <strong>90 días corridos</strong>. La reparación de vicios o defectos de mano de obra y repuestos corre sin costo a cargo del prestador.
+                </p>
+              </div>
+              <div>
+                <button type="button" class="btn btn-outline btn-small btn-expediente" data-codigo="FIX-GARANTIA" data-cliente="<%= nombreCompleto %>" data-servicio="Garantía General" style="width:100%;">
+                  Ver constancia de garantía escrita
+                </button>
+              </div>
+            </article>
+
+            <!-- Card 3: Botón de Baja o Ventanilla Única -->
+            <article class="content-card" style="padding:22px; border-left:4px solid #2563eb; display:flex; flex-direction:column; justify-content:space-between;">
+              <div>
+                <span class="eyebrow" style="color:#2563eb;"><%= esProfesional ? 'Resolución 271/2020' : 'Defensa del Consumidor' %></span>
+                <h3 style="margin:4px 0 8px; font-size:1.15rem;"><%= esProfesional ? 'Baja de Suscripción PRO' : 'Ventanilla Única Federal' %></h3>
+                <p style="font-size:0.88rem; color:var(--muted); margin-bottom:16px;">
+                  <% if (esProfesional) { %>
+                    Podés rescindir tu plan PRO en cualquier momento con un solo clic, sin penalidades ni cobros venideros con constancia inmediata.
+                  <% } else { %>
+                    Canal oficial para reclamos y mediaciones ante la Dirección Nacional de Defensa del Consumidor y Arbitraje del Consumo.
+                  <% } %>
+                </p>
+              </div>
+              <div>
+                <% if (esProfesional) { %>
+                  <a href="/baja" class="btn btn-outline btn-small" style="width:100%; text-align:center;">
+                    Botón de Baja de Suscripción ✕
+                  </a>
+                <% } else { %>
+                  <a href="https://www.argentina.gob.ar/defensadelconsumidor" target="_blank" rel="noreferrer" class="btn btn-outline btn-small" style="width:100%; text-align:center;">
+                    Ir a Defensa del Consumidor ↗
+                  </a>
+                <% } %>
+              </div>
+            </article>
           </div>
         </section>
+
+        <!-- Expediente Digital & Garantía Legal Modal -->
+        <div id="modal-expediente" style="display:none; position:fixed; inset:0; background:rgba(11,31,58,0.7); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+          <div style="background:#fff; border-radius:16px; padding:32px; max-width:640px; width:100%; box-shadow:var(--shadow); position:relative; max-height:90vh; overflow-y:auto;">
+            <button type="button" id="btn-cerrar-expediente" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--muted);">&times;</button>
+            <span class="eyebrow eyebrow-dark">Expediente Trazable & Garantía Escrita</span>
+            <h2 id="exp-codigo" style="margin:4px 0 6px; font-family:monospace;">FIX-00000</h2>
+            <div style="padding:14px; background:var(--bg); border-radius:8px; font-size:0.9rem; margin-bottom:16px;">
+              <p style="margin:0 0 6px;"><strong>Cliente:</strong> <span id="exp-cliente">-</span></p>
+              <p style="margin:0 0 6px;"><strong>Servicio:</strong> <span id="exp-servicio">-</span></p>
+              <p style="margin:0 0 6px;"><strong>Protección de pago:</strong> Fondos en custodia Mercado Pago (PSPCP registrado ante el BCRA)</p>
+              <p style="margin:0;"><strong>Garantía legal:</strong> 90 días corridos de cobertura obligatoria (Arts. 11 a 17 Ley 24.240)</p>
+            </div>
+
+            <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:12px; margin-bottom:16px; font-size:0.86rem; color:#166534;">
+              🛡️ <strong>Constancia de Garantía Legal Escrita:</strong> Este documento certifica que el prestador asume la obligación de subsanar sin cargo alguno cualquier falla o vicio en la mano de obra o piezas utilizadas durante el plazo legal de noventa (90) días corridos contados desde la entrega de la obra.
+            </div>
+
+            <h4 style="margin:12px 0 8px;">Registro de Intervención Técnica</h4>
+            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; margin-bottom:16px;">
+              <div style="border:1px solid var(--line); border-radius:8px; overflow:hidden;">
+                <img src="/assets/corporativas/corp-06-plomeria.webp" alt="Estado inicial" style="width:100%; height:110px; object-fit:cover;" />
+                <small style="display:block; padding:4px 8px; font-size:0.75rem; color:var(--muted);">Fase 1: Diagnóstico previo</small>
+              </div>
+              <div style="border:1px solid var(--line); border-radius:8px; overflow:hidden;">
+                <img src="/assets/corporativas/corp-03-taller.webp" alt="Reparación finalizada" style="width:100%; height:110px; object-fit:cover;" />
+                <small style="display:block; padding:4px 8px; font-size:0.75rem; color:var(--muted);">Fase 2: Conclusión y prueba estanca</small>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+              <span style="font-size:0.8rem; color:#15803d; font-weight:700;">✓ Certificado legalmente vinculante</span>
+              <button type="button" class="btn btn-primary btn-small" onclick="window.print()">Imprimir constancia</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Emitir Presupuesto Formal (Art. 21 Ley 24.240) -->
+        <div id="modal-emitir-presupuesto" style="display:none; position:fixed; inset:0; background:rgba(11,31,58,0.7); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+          <div style="background:#fff; border-radius:16px; padding:32px; max-width:600px; width:100%; box-shadow:var(--shadow); position:relative; max-height:90vh; overflow-y:auto;">
+            <button type="button" id="btn-cerrar-emitir-pres" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--muted);">&times;</button>
+            <span class="eyebrow eyebrow-dark">Art. 21 Ley 24.240</span>
+            <h2 style="margin:4px 0 12px;">Emitir Presupuesto Previo Formal</h2>
+            <p style="font-size:0.88rem; color:var(--muted); margin-bottom:16px;">
+              Completá los datos obligatorios exigidos por la Ley de Defensa del Consumidor. La validez legal no puede ser inferior a 10 días corridos.
+            </p>
+
+            <form id="form-emitir-presupuesto">
+              <div class="form-field" style="margin-bottom:14px;">
+                <label for="pres_solicitud_id"><strong>Seleccionar solicitud asignada *</strong></label>
+                <select id="pres_solicitud_id" name="solicitud_id" required style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;">
+                  <% for (const sol of solicitudesAsignadas) { %>
+                    <option value="<%= sol.id %>">Orden <%= sol.codigo || ('FIX-' + sol.id) %> — <%= sol.nombre %> <%= sol.apellido %> (<%= sol.servicio %>)</option>
+                  <% } %>
+                </select>
+              </div>
+
+              <div class="form-field" style="margin-bottom:14px;">
+                <label for="pres_descripcion"><strong>Descripción técnica del trabajo y tareas *</strong></label>
+                <textarea id="pres_descripcion" name="descripcion_trabajo" rows="3" required placeholder="Detalle exhaustivo de las tareas, procedimientos y pruebas técnicas a ejecutar..." style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;"></textarea>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+                <div class="form-field">
+                  <label for="pres_mano_obra"><strong>Mano de obra (ARS) *</strong></label>
+                  <input type="number" id="pres_mano_obra" name="mano_de_obra" min="1000" step="100" required placeholder="Ej. 35000" style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;" />
+                </div>
+                <div class="form-field">
+                  <label for="pres_materiales"><strong>Materiales y repuestos (ARS)</strong></label>
+                  <input type="number" id="pres_materiales" name="materiales" min="0" step="100" value="0" placeholder="Ej. 12000" style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;" />
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+                <div class="form-field">
+                  <label for="pres_validez"><strong>Validez formal (Días corridos) *</strong></label>
+                  <input type="number" id="pres_validez" name="validez_dias" min="10" value="10" required style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;" />
+                  <small style="color:var(--muted); font-size:0.75rem;">Mínimo 10 días exigido por Ley 24.240</small>
+                </div>
+                <div class="form-field">
+                  <label for="pres_plazo"><strong>Plazo de ejecución (Días) *</strong></label>
+                  <input type="number" id="pres_plazo" name="plazo_ejecucion_dias" min="1" value="1" required style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px;" />
+                </div>
+              </div>
+
+              <div style="padding:12px; background:var(--bg); border-radius:8px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center;">
+                <span>Total presupuestado (con IVA):</span>
+                <strong id="pres_total_calculado" style="font-size:1.2rem; color:var(--navy);">$0</strong>
+              </div>
+
+              <button type="submit" id="btn-submit-pres" class="btn btn-primary" style="width:100%; padding:12px;">
+                Firmar y Emitir Presupuesto Formal
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Modal Ver Detalle de Presupuesto -->
+        <div id="modal-ver-presupuesto" style="display:none; position:fixed; inset:0; background:rgba(11,31,58,0.7); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+          <div style="background:#fff; border-radius:16px; padding:32px; max-width:600px; width:100%; box-shadow:var(--shadow); position:relative;">
+            <button type="button" id="btn-cerrar-ver-pres" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--muted);">&times;</button>
+            <span class="eyebrow eyebrow-dark">Constancia Formal · Art. 21 Ley 24.240</span>
+            <h2 id="vp-codigo" style="margin:4px 0 8px; font-family:monospace;">PRES-2025-000</h2>
+            <div style="padding:14px; background:var(--bg); border-radius:8px; font-size:0.9rem; margin-bottom:14px;">
+              <p style="margin:0 0 4px;"><strong>Prestador:</strong> <span id="vp-profesional">-</span></p>
+              <p style="margin:0 0 4px;"><strong>CUIT / Matrícula:</strong> <span id="vp-cuit">-</span></p>
+              <p style="margin:0 0 4px;"><strong>Cliente:</strong> <span id="vp-cliente">-</span></p>
+              <p style="margin:0;"><strong>Orden asociada:</strong> <span id="vp-orden">-</span></p>
+            </div>
+            <div style="margin-bottom:14px;">
+              <strong>Descripción técnica del trabajo:</strong>
+              <p id="vp-descripcion" style="margin:4px 0 0; font-size:0.88rem; color:var(--text); line-height:1.5;">-</p>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; padding:12px; background:#f8fafc; border-radius:8px; margin-bottom:16px; text-align:center;">
+              <div>
+                <small style="color:var(--muted); display:block;">Mano de obra</small>
+                <strong id="vp-mo">$0</strong>
+              </div>
+              <div>
+                <small style="color:var(--muted); display:block;">Materiales</small>
+                <strong id="vp-mat">$0</strong>
+              </div>
+              <div>
+                <small style="color:var(--muted); display:block;">Total final</small>
+                <strong id="vp-total" style="color:var(--navy); font-size:1.05rem;">$0</strong>
+              </div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span id="vp-validez" style="font-size:0.8rem; color:#15803d; font-weight:700;">Validez legal de 10 días</span>
+              <button type="button" class="btn btn-outline btn-small" onclick="window.print()">Imprimir presupuesto</button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
 
     <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <img src="/assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
+        </div>
+        <div>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Seguridad y Legal (Argentina)</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago (BCRA)</a></li>
+            <li><a href="/arrepentimiento" style="color:var(--orange); font-weight:700;">Botón de Arrepentimiento</a></li>
+            <li><a href="/baja">Botón de Baja de Suscripción</a></li>
+            <li><a href="/terminos">Términos (Ley 24.240)</a></li>
+            <li><a href="/privacidad">Privacidad (Ley 25.326)</a></li>
+            <li><a href="https://www.argentina.gob.ar/defensadelconsumidor" target="_blank" rel="noreferrer">Defensa del Consumidor</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Todos los derechos reservados</span>
+        <span>© <span id="year"></span> FIXYA.io — Cumplimiento estricto Ley 24.240, Ley 25.326 y Res. 424/2020 · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 
     <script src="/script.js"></script>
+    <script>
+      const toastDash = document.getElementById('toast-dash');
+      function mostrarToast(msg) {
+        if (!toastDash) return;
+        toastDash.textContent = msg;
+        toastDash.style.display = 'block';
+        setTimeout(() => { toastDash.style.display = 'none'; }, 3000);
+      }
+
+      // Cambio interactivo de estado de solicitud
+      document.querySelectorAll('.dash-estado-select').forEach((sel) => {
+        sel.addEventListener('change', async () => {
+          const id = sel.dataset.id;
+          const estado = sel.value;
+          const tr = sel.closest('tr');
+
+          try {
+            const res = await fetch('/api/solicitud_estado', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id, estado }),
+            });
+            const data = await res.json();
+            if (data.ok) {
+              if (tr) tr.setAttribute('data-row-estado', estado);
+              const optLabel = sel.options && sel.selectedIndex >= 0 ? sel.options[sel.selectedIndex]?.text : estado;
+              mostrarToast(`Estado actualizado: ${optLabel}`);
+            } else {
+              mostrarToast('Error al actualizar: ' + (data.error || 'intente de nuevo'));
+            }
+          } catch (e) {
+            mostrarToast('Error de conexión.');
+          }
+        });
+      });
+
+      // Filtro de estado
+      const filterBtns = document.querySelectorAll('.filter-dash-btn');
+      const rows = document.querySelectorAll('#tabla-dash tbody tr');
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach((b) => {
+            b.classList.remove('btn-primary');
+            b.classList.add('btn-outline');
+          });
+          btn.classList.remove('btn-outline');
+          btn.classList.add('btn-primary');
+          const target = btn.dataset.estado;
+
+          rows.forEach((r) => {
+            const rowEstado = r.getAttribute('data-row-estado');
+            if (target === 'todos' || rowEstado === target) {
+              r.style.display = '';
+            } else {
+              r.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // Modal de expediente digital & garantía
+      const modalExp = document.getElementById('modal-expediente');
+      const btnCerrarExp = document.getElementById('btn-cerrar-expediente');
+      const expCodigo = document.getElementById('exp-codigo');
+      const expCliente = document.getElementById('exp-cliente');
+      const expServicio = document.getElementById('exp-servicio');
+
+      document.querySelectorAll('.btn-expediente').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (expCodigo) expCodigo.textContent = btn.dataset.codigo;
+          if (expCliente) expCliente.textContent = btn.dataset.cliente;
+          if (expServicio) expServicio.textContent = btn.dataset.servicio;
+          if (modalExp) modalExp.style.display = 'flex';
+        });
+      });
+
+      if (btnCerrarExp && modalExp) {
+        btnCerrarExp.addEventListener('click', () => {
+          modalExp.style.display = 'none';
+        });
+        modalExp.addEventListener('click', (e) => {
+          if (e.target === modalExp) modalExp.style.display = 'none';
+        });
+      }
+
+      // Modal Emitir Presupuesto (Art. 21 Ley 24.240)
+      const modalEmitirPres = document.getElementById('modal-emitir-presupuesto');
+      const btnCerrarEmitirPres = document.getElementById('btn-cerrar-emitir-pres');
+      const btnAbrirEmitirPres = document.getElementById('btn-abrir-emitir-pres');
+      const formEmitirPres = document.getElementById('form-emitir-presupuesto');
+      const inputMO = document.getElementById('pres_mano_obra');
+      const inputMat = document.getElementById('pres_materiales');
+      const displayTotalCalc = document.getElementById('pres_total_calculado');
+      const btnSubmitPres = document.getElementById('btn-submit-pres');
+
+      function actualizarTotalPresupuesto() {
+        const mo = parseFloat(inputMO ? inputMO.value || '0' : '0');
+        const mat = parseFloat(inputMat ? inputMat.value || '0' : '0');
+        const total = (mo >= 0 ? mo : 0) + (mat >= 0 ? mat : 0);
+        if (displayTotalCalc) {
+          displayTotalCalc.textContent = '$' + Math.round(total).toLocaleString('es-AR');
+        }
+      }
+
+      if (inputMO) inputMO.addEventListener('input', actualizarTotalPresupuesto);
+      if (inputMat) inputMat.addEventListener('input', actualizarTotalPresupuesto);
+
+      document.querySelectorAll('#btn-abrir-emitir-pres, .btn-abrir-emitir-pres').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (modalEmitirPres) modalEmitirPres.style.display = 'flex';
+        });
+      });
+
+      if (btnCerrarEmitirPres && modalEmitirPres) {
+        btnCerrarEmitirPres.addEventListener('click', () => {
+          modalEmitirPres.style.display = 'none';
+        });
+        modalEmitirPres.addEventListener('click', (e) => {
+          if (e.target === modalEmitirPres) modalEmitirPres.style.display = 'none';
+        });
+      }
+
+      if (formEmitirPres) {
+        formEmitirPres.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          if (btnSubmitPres) {
+            btnSubmitPres.disabled = true;
+            btnSubmitPres.textContent = 'Emitiendo presupuesto formal...';
+          }
+          const payload = Object.fromEntries(new FormData(formEmitirPres).entries());
+          try {
+            const res = await fetch('/api/presupuesto/crear', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            const data = await res.json();
+            if (data.ok) {
+              mostrarToast(data.mensaje);
+              modalEmitirPres.style.display = 'none';
+              formEmitirPres.reset();
+              setTimeout(() => { window.location.reload(); }, 1200);
+            } else {
+              mostrarToast('✕ ' + (data.error || 'Error al emitir presupuesto'));
+              if (btnSubmitPres) {
+                btnSubmitPres.disabled = false;
+                btnSubmitPres.textContent = 'Firmar y Emitir Presupuesto Formal';
+              }
+            }
+          } catch (err) {
+            mostrarToast('✕ Error de conexión');
+            if (btnSubmitPres) {
+              btnSubmitPres.disabled = false;
+              btnSubmitPres.textContent = 'Firmar y Emitir Presupuesto Formal';
+            }
+          }
+        });
+      }
+
+      // Responder a Presupuesto (Cliente: Aceptar / Rechazar)
+      document.querySelectorAll('.btn-responder-pres').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const presId = btn.dataset.id;
+          const accion = btn.dataset.accion;
+          const confirmMsg = accion === 'aceptar'
+            ? '¿Aceptás formalmente este presupuesto previo conforme al Art. 21 de la Ley 24.240? Se dará inicio a la labor técnica con garantía legal de 90 días.'
+            : '¿Deseás declinar este presupuesto?';
+          
+          if (!confirm(confirmMsg)) return;
+
+          try {
+            const res = await fetch('/api/presupuesto/responder', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ presupuesto_id: presId, accion }),
+            });
+            const data = await res.json();
+            if (data.ok) {
+              mostrarToast(data.mensaje);
+              setTimeout(() => { window.location.reload(); }, 1200);
+            } else {
+              mostrarToast('✕ ' + (data.error || 'Error al responder presupuesto'));
+            }
+          } catch (err) {
+            mostrarToast('✕ Error de conexión');
+          }
+        });
+      });
+
+      // Modal Ver Detalle de Presupuesto
+      const modalVerPres = document.getElementById('modal-ver-presupuesto');
+      const btnCerrarVerPres = document.getElementById('btn-cerrar-ver-pres');
+      const vpCodigo = document.getElementById('vp-codigo');
+      const vpProf = document.getElementById('vp-profesional');
+      const vpCuit = document.getElementById('vp-cuit');
+      const vpCliente = document.getElementById('vp-cliente');
+      const vpOrden = document.getElementById('vp-orden');
+      const vpDesc = document.getElementById('vp-descripcion');
+      const vpMo = document.getElementById('vp-mo');
+      const vpMat = document.getElementById('vp-mat');
+      const vpTotal = document.getElementById('vp-total');
+      const vpValidez = document.getElementById('vp-validez');
+
+      document.querySelectorAll('.btn-ver-presupuesto').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          try {
+            const p = JSON.parse(btn.dataset.pres);
+            if (vpCodigo) vpCodigo.textContent = p.codigo;
+            if (vpProf) vpProf.textContent = p.profesional_nombre;
+            if (vpCuit) vpCuit.textContent = p.cuit_prestador + (p.profesional_matricula ? ' · ' + p.profesional_matricula : '');
+            if (vpCliente) vpCliente.textContent = p.cliente_nombre || p.cliente_email;
+            if (vpOrden) vpOrden.textContent = p.orden_codigo;
+            if (vpDesc) vpDesc.textContent = p.descripcion_trabajo;
+            if (vpMo) vpMo.textContent = '$' + Number(p.mano_de_obra).toLocaleString('es-AR');
+            if (vpMat) vpMat.textContent = p.materiales > 0 ? '$' + Number(p.materiales).toLocaleString('es-AR') : '$0';
+            if (vpTotal) vpTotal.textContent = '$' + Number(p.total).toLocaleString('es-AR');
+            if (vpValidez) {
+              const fVenc = new Date(p.fecha_vencimiento).toLocaleDateString('es-AR');
+              vpValidez.textContent = `Vencimiento formal: ${fVenc} (Mín. 10 días Art. 21 Ley 24.240)`;
+            }
+            if (modalVerPres) modalVerPres.style.display = 'flex';
+          } catch (e) {}
+        });
+      });
+
+      if (btnCerrarVerPres && modalVerPres) {
+        btnCerrarVerPres.addEventListener('click', () => {
+          modalVerPres.style.display = 'none';
+        });
+        modalVerPres.addEventListener('click', (e) => {
+          if (e.target === modalVerPres) modalVerPres.style.display = 'none';
+        });
+      }
+
+      // Botón de arrepentimiento en dashboard
+      const btnArrDash = document.getElementById('btn-abrir-arr-dash');
+      if (btnArrDash) {
+        btnArrDash.addEventListener('click', () => {
+          window.location.href = '/arrepentimiento';
+        });
+      }
+    </script>
   </body>
 </html>

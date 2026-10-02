@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Checkout | FIXYA.io</title>
-    <link rel="canonical" href="https://fixya.io/checkout.html" />
-    <meta name="description" content="Finalizá tu contratación en FIXYA.io." />
+    <title>Checkout seguro | FIXYA.io</title>
+    <link rel="canonical" href="https://fixya.io/checkout" />
+    <meta name="description" content="Contratá servicios profesionales con pago protegido por Mercado Pago en FIXYA.io." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -16,8 +16,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="FIXYA.io" />
     <meta property="og:locale" content="es_AR" />
-    <meta property="og:title" content="Checkout | FIXYA.io" />
-    <meta property="og:description" content="Finalizá tu contratación en FIXYA.io." />
+    <meta property="og:title" content="Checkout seguro | FIXYA.io" />
+    <meta property="og:description" content="Contratá servicios profesionales con pago protegido por Mercado Pago en FIXYA.io." />
     <meta property="og:image" content="https://fixya.io/assets/marketing/og-share.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
@@ -30,14 +30,15 @@
         </div>
         <div class="topbar-meta">
           <span>fixya.io</span>
-          <span>✓ Pago seguro</span>
+          <span>✓ Transacción encriptada SSL</span>
+          <span>✓ Custodia Mercado Pago</span>
         </div>
       </div>
     </div>
 
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="index.html" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
 
@@ -47,126 +48,302 @@
           <span></span>
         </button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="index.html">Inicio</a>
-          <a href="servicios.html">Servicios</a>
-          <a href="categoria.html">Categorías</a>
-          <a href="profesionales.php">Profesionales</a>
-          <a href="nosotros.html">Nosotros</a>
-          <a href="contacto.html">Contacto</a>
+          <a href="/">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria">Categorías</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
         </nav>
         <div class="header-actions">
-          <a class="btn btn-outline" href="login.html">Iniciar sesión</a>
+          <a class="btn btn-outline" href="/login">Iniciar sesión</a>
         </div>
       </div>
     </header>
 
     <main class="page-shell">
       <div class="container">
-        <div class="page-head">
+        <div class="page-head" style="margin-bottom: 24px;">
           <div class="page-head-copy">
-            <span class="eyebrow eyebrow-dark">Checkout</span>
-            <h1>Confirmá tu contratación</h1>
-            <p>Tu solicitud queda registrada y queda prioridad para la atención del profesional elegido.</p>
+            <span class="eyebrow eyebrow-dark">Checkout seguro</span>
+            <h1>Confirmá tu solicitud de servicio</h1>
+            <p>Completá los datos de tu necesidad. El profesional asignado se contactará de inmediato y tus fondos quedarán protegidos en custodia hasta la finalización satisfactoria del trabajo.</p>
           </div>
+        </div>
+
+        <!-- Banner de profesional seleccionado (si aplica) -->
+        <div id="banner-profesional" style="display:none; margin-bottom: 24px; padding: 16px 20px; background: #eef6f1; border: 1px solid #c2e2ce; border-radius: var(--radius-md); align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span style="font-size:1.6rem;">👷‍♂️</span>
+            <div>
+              <strong style="color:var(--navy); font-size:1rem;" id="nombre-profesional-banner">Profesional seleccionado</strong>
+              <p style="margin:0; font-size:0.85rem; color:#156f43;">Solicitud dirigida directamente a este especialista verificado.</p>
+            </div>
+          </div>
+          <span style="font-size:0.85rem; color:var(--muted); background:#fff; padding:4px 10px; border-radius:6px; border:1px solid #c2e2ce;">Garantía FIXYA activa</span>
         </div>
 
         <section class="checkout-grid">
           <div class="checkout-card">
-            <h2>Datos del servicio</h2>
-            <form class="checkout-form">
+            <h2>1. Datos de contacto y ubicación</h2>
+            
+            <form class="checkout-form" id="checkout-main-form">
               <input type="text" name="sitio_web" value="" autocomplete="off" tabindex="-1" style="position:absolute; left:-9999px;" aria-hidden="true" />
-              <p class="form-message" role="status" aria-live="polite" style="display:none; margin-bottom: 8px; font-weight: 600;"></p>
+              <input type="hidden" name="profesional_id" id="hidden_profesional_id" value="" />
+              <p class="form-message" role="status" aria-live="polite" style="display:none; margin-bottom: 12px; font-weight: 600; padding:10px; border-radius:8px;"></p>
+              
               <div class="form-row">
                 <div class="form-field">
                   <label for="nombre">Nombre</label>
-                  <input id="nombre" name="nombre" autocomplete="given-name" required type="text" placeholder="Tu nombre" />
+                  <input id="nombre" name="nombre" autocomplete="given-name" required type="text" placeholder="Ej. Juan" />
                 </div>
                 <div class="form-field">
                   <label for="apellido">Apellido</label>
-                  <input id="apellido" name="apellido" autocomplete="family-name" required type="text" placeholder="Tu apellido" />
+                  <input id="apellido" name="apellido" autocomplete="family-name" required type="text" placeholder="Ej. Pérez" />
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-field">
-                  <label for="email">Email</label>
-                  <input id="email" name="email" autocomplete="email" required type="email" placeholder="tuemail@mail.com" />
+                  <label for="email">Email de confirmación</label>
+                  <input id="email" name="email" autocomplete="email" required type="email" placeholder="juan.perez@email.com" />
                 </div>
                 <div class="form-field">
-                  <label for="telefono">Teléfono</label>
-                  <input id="telefono" name="telefono" autocomplete="tel" required type="tel" placeholder="+54 ..." />
+                  <label for="telefono">Teléfono / WhatsApp</label>
+                  <input id="telefono" name="telefono" autocomplete="tel" required type="tel" placeholder="+54 9 387 123-4567" />
                 </div>
               </div>
 
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="zona">Barrio o localidad</label>
+                  <input id="zona" name="zona" type="text" placeholder="Ej. Salta Capital - Centro, Tres Cerritos, Grand Bourg…" />
+                </div>
+                <div class="form-field">
+                  <label for="urgencia">Plazo de atención</label>
+                  <select id="urgencia" name="urgencia">
+                    <option value="urgencia">Urgencia inmediata (Mismo día / Guardia)</option>
+                    <option value="24hs" selected>Próximas 24 horas</option>
+                    <option value="programado">Programado para esta semana</option>
+                  </select>
+                </div>
+              </div>
+
+              <h2 style="margin-top:24px;">2. Detalle del requerimiento</h2>
+
               <div class="form-field">
-                <label for="servicio">Servicio</label>
+                <label for="servicio">Rubro requerido</label>
                 <select id="servicio" name="servicio">
                   <option value="plomeria">Plomería</option>
                   <option value="electricidad">Electricidad</option>
-                  <option value="gas">Gas</option>
+                  <option value="gas">Gas matriculado</option>
                   <option value="cerrajeria">Cerrajería</option>
                   <option value="aire">Aire acondicionado</option>
-                  <option value="pintura">Pintura</option>
+                  <option value="pintura">Pintura y acabados</option>
+                  <option value="herreria">Herrería y estructuras</option>
                   <option value="carpinteria">Carpintería</option>
                   <option value="jardineria">Jardinería</option>
-                  <option value="limpieza">Limpieza</option>
-                  <option value="mudanzas">Mudanzas</option>
-                  <option value="tecnicos">Técnicos</option>
+                  <option value="limpieza">Limpieza profesional</option>
+                  <option value="mudanzas">Mudanzas y fletes</option>
+                  <option value="tecnicos">Técnicos de electrohogar</option>
+                  <option value="informatica">Informática y redes Wi-Fi</option>
+                  <option value="albanileria">Albañilería y reformas</option>
+                  <option value="vidrieria">Vidriería y mamparas</option>
+                  <option value="piscinas">Piscinas y piletas</option>
                   <option value="otros">Otros servicios</option>
                 </select>
               </div>
 
               <div class="form-field">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" placeholder="Contanos qué necesitás..."></textarea>
+                <label for="descripcion">Descripción del trabajo</label>
+                <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describí brevemente qué necesitás resolver (ej. pérdida en lavatorio, recambio de térmica, colocación de aire…)"></textarea>
               </div>
 
-              <button class="btn btn-primary" type="submit">Confirmar contratación</button>
+              <h2 style="margin-top:24px;">3. Medio de pago protegido</h2>
+              
+              <div style="padding:16px; background:var(--bg); border-radius:10px; border:1px solid var(--line); margin-bottom:20px;">
+                <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+                  <img src="assets/ui/ui-mercado-pago.webp" alt="Mercado Pago" width="36" height="36" />
+                  <div>
+                    <strong style="color:var(--navy); font-size:0.95rem;">Custodia protegida por Mercado Pago</strong>
+                    <p style="margin:0; font-size:0.83rem; color:var(--muted);">El pago se autoriza mediante pasarela oficial pero queda retenido hasta tu visto bueno final.</p>
+                  </div>
+                </div>
+                <div style="display:flex; gap:14px; flex-wrap:wrap; font-size:0.86rem; color:var(--text); margin-top:8px;">
+                  <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+                    <input type="radio" name="metodo_pago" value="mercadopago" checked /> Dinero en cuenta / Débito Mercado Pago
+                  </label>
+                  <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+                    <input type="radio" name="metodo_pago" value="tarjeta" /> Tarjeta de crédito en cuotas
+                  </label>
+                  <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+                    <input type="radio" name="metodo_pago" value="transferencia" /> Transferencia bancaria directa
+                  </label>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" type="submit" style="width:100%; padding:14px; font-size:1.05rem;">
+                Confirmar solicitud con pago protegido
+              </button>
             </form>
           </div>
 
-          <aside class="summary-box">
-            <h3>Resumen</h3>
-            <p>Servicio: <span id="resumen-servicio">Plomería</span></p>
-            <ul class="feature-list">
-              <li>Diagnóstico inicial sin cargo</li>
-              <li>Presupuesto antes de empezar</li>
-              <li>Pago seguro con Mercado Pago</li>
+          <aside class="summary-box" style="height:fit-content; position:sticky; top:96px;">
+            <h3>Resumen de la orden</h3>
+            <p>Servicio: <strong id="resumen-servicio" style="color:var(--navy);">Plomería</strong></p>
+            <p id="resumen-urgencia" style="font-size:0.88rem; color:var(--muted); margin-bottom:16px;">Plazo: Próximas 24 horas</p>
+            
+            <div style="border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:14px 0; margin-bottom:16px; font-size:0.9rem;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                <span>Diagnóstico inicial</span>
+                <strong style="color:#156f43;">Bonificado</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                <span>Presupuesto sin cargo</span>
+                <strong style="color:#156f43;">Sin costo</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span>Custodia y seguro FIXYA</span>
+                <strong style="color:#156f43;">Incluido</strong>
+              </div>
+            </div>
+
+            <div class="price-row" style="margin-top: 14px;">
+              <span>Rango de referencia</span>
+              <strong id="resumen-rango" style="font-size:1.15rem; color:var(--navy);">$25.000 – $55.000</strong>
+            </div>
+
+            <ul class="feature-list" style="margin-top: 20px; font-size:0.86rem;">
+              <li>Sin cobros en mano ni adelantos en efectivo</li>
+              <li>Presupuesto formal previo obligatorio (Art. 21 Ley 24.240)</li>
+              <li>Garantía legal escrita de 90 días corridos (Arts. 11 a 17 Ley 24.240)</li>
+              <li>Derecho de arrepentimiento 10 días sin costo (Res. 424/2020)</li>
+              <li>Liberación de fondos solo con tu conformidad expresa</li>
             </ul>
-            <div class="price-row" style="margin-top: 20px;">
-              <span>Costo del trabajo</span>
-              <strong>A cotizar</strong>
+
+            <div style="margin-top:20px; padding:12px; background:#f0f9fe; border-radius:8px; border:1px solid #bae6fd; font-size:0.8rem; color:#0369a1;">
+              🛡️ <strong>Marco Legal Argentino:</strong> Toda contratación a distancia cuenta con derecho de revocación dentro de los diez (10) días corridos contados desde la solicitud sin gasto alguno (Art. 34 Ley 24.240).
             </div>
           </aside>
         </section>
       </div>
     </main>
 
+    <!-- Modal de confirmación exitosa -->
+    <div id="modal-confirmacion" style="display:none; position:fixed; inset:0; background:rgba(11,31,58,0.7); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+      <div style="background:#fff; border-radius:16px; padding:32px; max-width:520px; width:100%; box-shadow:var(--shadow); text-align:center;">
+        <div style="width:64px; height:64px; background:#dcfce7; color:#15803d; font-size:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+          ✓
+        </div>
+        <h2 style="font-size:1.5rem; margin-bottom:8px; color:var(--navy);">¡Solicitud confirmada con éxito!</h2>
+        <p style="color:var(--muted); font-size:0.95rem; margin-bottom:20px;">
+          Tu número de orden es <strong id="codigo-orden" style="color:var(--navy); font-family:monospace; font-size:1.15rem;">FIX-10492</strong>. Hemos notificado al equipo técnico y te contactaremos en breve por WhatsApp.
+        </p>
+
+        <div style="background:var(--bg); border-radius:10px; padding:16px; text-align:left; font-size:0.88rem; margin-bottom:24px;">
+          <div style="margin-bottom:6px;"><strong>Estado:</strong> <span style="color:#d97706; font-weight:700;">Pendiente de coordinación</span></div>
+          <div style="margin-bottom:6px;"><strong>Protección de pago:</strong> Fondos en custodia Mercado Pago (PSPCP - BCRA)</div>
+          <div style="margin-bottom:6px;"><strong>Garantía legal:</strong> 90 días corridos de cobertura</div>
+          <div><strong>Soporte directo:</strong> +54 9 387 352-2920</div>
+        </div>
+
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <a href="/dashboard" class="btn btn-primary">Ir a mi panel</a>
+          <a href="/arrepentimiento" class="btn btn-outline" style="color:#c2410c; border-color:#fed7aa;">Botón de Arrepentimiento</a>
+        </div>
+      </div>
+    </div>
+
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
           <img src="assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
-          <p>Marketplace de servicios con profesionales verificados y pago seguro.</p>
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
         </div>
         <div>
-          <h3>Servicios</h3>
-          <ul><li><a href="producto.php?s=plomeria">Plomería</a></li><li><a href="producto.php?s=electricidad">Electricidad</a></li><li><a href="producto.php?s=gas">Gas</a></li><li><a href="producto.php?s=pintura">Pintura</a></li><li><a href="categoria.html">Ver todas</a></li></ul>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
         </div>
         <div>
-          <h3>Empresa</h3>
-          <ul><li><a href="nosotros.html">Nosotros</a></li><li><a href="profesionales.php">Profesionales</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="privacidad.html">Privacidad</a></li><li><a href="terminos.html">Términos</a></li></ul>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
+          </ul>
         </div>
         <div>
-          <h3>Contacto</h3>
-          <ul><li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li><li><a href="mailto:info@fixya.io">info@fixya.io</a></li><li>Salta, Argentina</li></ul>
+          <h3>Seguridad y Legal (Argentina)</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago (BCRA)</a></li>
+            <li><a href="/arrepentimiento" style="color:var(--orange); font-weight:700;">Botón de Arrepentimiento</a></li>
+            <li><a href="/baja">Botón de Baja de Suscripción</a></li>
+            <li><a href="/terminos">Términos (Ley 24.240)</a></li>
+            <li><a href="/privacidad">Privacidad (Ley 25.326)</a></li>
+            <li><a href="https://www.argentina.gob.ar/defensadelconsumidor" target="_blank" rel="noreferrer">Defensa del Consumidor</a></li>
+          </ul>
         </div>
       </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Todos los derechos reservados</span>
+        <span>© <span id="year"></span> FIXYA.io — Cumplimiento Ley 24.240, Ley 25.326 y Res. 424/2020 · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+      // Detección de parámetros de URL para precargar profesional, servicio y tarea
+      const urlParams = new URLSearchParams(window.location.search);
+      const proId = urlParams.get('profesional');
+      const servicioParam = urlParams.get('servicio');
+      const estimadoParam = urlParams.get('estimado');
+      const hiddenProId = document.getElementById('hidden_profesional_id');
+      const bannerPro = document.getElementById('banner-profesional');
+      const bannerNombre = document.getElementById('nombre-profesional-banner');
+      const resumenRango = document.getElementById('resumen-rango');
+
+      if (estimadoParam && resumenRango) {
+        resumenRango.textContent = estimadoParam;
+      }
+
+      if (proId && hiddenProId) {
+        hiddenProId.value = proId;
+        fetch('/api/profesionales')
+          .then(res => res.json())
+          .then(data => {
+            if (data.ok && data.data) {
+              const target = data.data.find(p => p.id === parseInt(proId, 10));
+              if (target && bannerPro && bannerNombre) {
+                bannerNombre.textContent = `Contratando a: ${target.nombre} ${target.apellido} (${target.especialidad})`;
+                bannerPro.style.display = 'flex';
+              }
+            }
+          })
+          .catch(() => {});
+      }
+
+      // Sincronizar plazo de urgencia con el resumen
+      const selectUrgencia = document.getElementById('urgencia');
+      const resumenUrgencia = document.getElementById('resumen-urgencia');
+      if (selectUrgencia && resumenUrgencia) {
+        selectUrgencia.addEventListener('change', () => {
+          const optText =
+            selectUrgencia.options && selectUrgencia.selectedIndex >= 0
+              ? selectUrgencia.options[selectUrgencia.selectedIndex]?.text
+              : selectUrgencia.value;
+          resumenUrgencia.textContent = `Plazo: ${optText}`;
+        });
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,21 @@
+{
+  "name": "FIXYA — Marketplace de Servicios",
+  "short_name": "FIXYA",
+  "description": "Técnicos verificados para hogar, industria y campo en Argentina con pago protegido en Mercado Pago.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#0b1f3a",
+  "icons": [
+    {
+      "src": "/assets/extras/favicon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/extras/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}

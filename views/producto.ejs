@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= cat.nombre %> | FIXYA.io</title>
-    <link rel="canonical" href="https://fixya.io/producto.php?s=<%= slug %>" />
+    <link rel="canonical" href="https://fixya.io/producto?s=<%= slug %>" />
     <meta name="description" content="<%= cat.descripcion %>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,94 +30,186 @@
         </div>
         <div class="topbar-meta">
           <span>fixya.io</span>
-          <span>✓ Mercado Pago</span>
+          <span>✓ Custodia Mercado Pago</span>
+          <span>✓ Profesionales verificados</span>
         </div>
       </div>
     </div>
 
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="/index.html" aria-label="Inicio FIXYA">
+        <a class="brand" href="/" aria-label="Inicio FIXYA">
           <img src="/assets/logos/logo-horizontal.png" alt="Logo FIXYA" width="400" height="117" />
         </a>
         <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
           <span></span><span></span><span></span>
         </button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-          <a href="/index.html">Inicio</a>
-          <a href="/servicios.html">Servicios</a>
-          <a href="/categoria.html" class="active">Categorías</a>
-          <a href="/profesionales.php">Profesionales</a>
-          <a href="/nosotros.html">Nosotros</a>
-          <a href="/contacto.html">Contacto</a>
+          <a href="/">Inicio</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/categoria" class="active">Categorías</a>
+          <a href="/profesionales">Profesionales</a>
+          <a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes PRO ⭐</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contacto">Contacto</a>
         </nav>
         <div class="header-actions">
-          <a class="btn btn-outline" href="/login.html">Iniciar sesión</a>
-          <a class="btn btn-primary" href="/checkout.html?servicio=<%= slug %>">Pagar</a>
+          <% if (currentUser) { %>
+            <a class="btn btn-outline" href="/dashboard">Mi Panel (<%= currentUser.nombre %>)</a>
+            <a class="btn btn-primary" href="/api/logout">Salir</a>
+          <% } else { %>
+            <a class="btn btn-outline" href="/login">Iniciar sesión</a>
+            <a class="btn btn-primary" href="/checkout?servicio=<%= slug %>">Pedir presupuesto</a>
+          <% } %>
         </div>
       </div>
     </header>
 
     <main class="page-shell">
       <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb-nav" aria-label="Ruta de navegación" style="margin-bottom: 20px; font-size: 0.88rem; color: var(--muted);">
+          <a href="/" style="color: var(--navy); font-weight: 500;">Inicio</a>
+          <span style="margin: 0 8px;">/</span>
+          <a href="/categoria" style="color: var(--navy); font-weight: 500;">Categorías</a>
+          <span style="margin: 0 8px;">/</span>
+          <span style="color: var(--muted);"><%= cat.nombre %></span>
+        </nav>
+
         <section class="page-head">
           <div class="page-head-copy">
-            <span class="eyebrow eyebrow-dark"><%= cat.nombre %></span>
+            <span class="eyebrow eyebrow-dark"><%= cat.etiqueta || 'Servicio oficial' %></span>
             <h1><%= cat.titulo %></h1>
             <p><%= cat.descripcion %></p>
+            <div class="brand-pill-row" style="margin: 16px 0 24px;">
+              <span class="brand-pill">Técnicos certificados</span>
+              <span class="brand-pill brand-pill-muted">Garantía Mercado Pago</span>
+              <span class="brand-pill brand-pill-muted">Atención 24/7</span>
+            </div>
             <div class="page-actions">
-              <a class="btn btn-primary" href="/checkout.html?servicio=<%= slug %>">Solicitar servicio</a>
-              <a class="btn btn-outline" href="/categoria.html">Volver a categorías</a>
+              <a class="btn btn-primary" id="btn-cta-hero" href="/checkout?servicio=<%= slug %>">Solicitar servicio ahora</a>
+              <a class="btn btn-outline" href="/profesionales?servicio=<%= encodeURIComponent(cat.nombre) %>">Ver técnicos disponibles (<%= profesionalesRelacionados.length %>)</a>
             </div>
           </div>
           <div class="page-head-card">
-            <img src="/<%= cat.imagen %>" alt="<%= cat.nombre %> FIXYA" width="960" height="540" loading="lazy" decoding="async" />
+            <img src="/<%= cat.imagen %>" alt="<%= cat.nombre %> FIXYA" width="960" height="540" fetchpriority="high" />
           </div>
         </section>
 
-        <section class="product-detail-grid">
+        <!-- Product Details & Summary -->
+        <section class="product-detail-grid" style="margin-top: 36px;">
           <div class="content-card">
-            <h2>Galería</h2>
-            <div class="gallery-grid">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+              <h2 style="margin:0;">Galería de trabajos reales</h2>
+              <span style="font-size:0.85rem; color:var(--muted);">Expediente fotográfico verificado</span>
+            </div>
+            <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
               <% for (const img of cat.galeria) { %>
-                <img src="/<%= img %>" alt="Trabajo de <%= cat.nombre %>" width="960" height="540" loading="lazy" decoding="async" />
+                <div style="overflow:hidden; border-radius:12px; background:#eef2f6;">
+                  <img src="/<%= img %>" alt="Trabajo de <%= cat.nombre %>" width="960" height="540" loading="lazy" decoding="async" style="transition:transform 0.3s ease; width:100%; height:180px; object-fit:cover;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
+                </div>
               <% } %>
+            </div>
+
+            <!-- Calculadora interactiva de presupuesto estimado -->
+            <div style="margin-top: 32px; padding: 24px; background: var(--bg); border-radius: var(--radius-md); border: 1px solid var(--line);">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span style="font-size:1.4rem;">🧮</span>
+                <h3 style="margin:0;">Calculadora de presupuesto orientativo</h3>
+              </div>
+              <p style="font-size: 0.92rem; margin-bottom: 16px; color:var(--muted);">Seleccioná el tipo de necesidad y tu zona para conocer el rango estimado del mercado antes de solicitar.</p>
+              
+              <div class="form-row" style="margin-bottom: 16px; display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;">
+                <div class="form-field">
+                  <label for="tipo-tarea">Tipo de tarea</label>
+                  <select id="tipo-tarea" style="background:#fff; width:100%; padding:10px; border-radius:8px; border:1px solid var(--line);">
+                    <option value="visita" data-min="18000" data-max="30000">Diagnóstico técnico / Revisión inicial</option>
+                    <option value="reparacion" data-min="25000" data-max="55000" selected>Reparación puntual o arreglo menor</option>
+                    <option value="instalacion" data-min="45000" data-max="120000">Instalación nueva o recambio de artefactos</option>
+                    <option value="urgencia" data-min="35000" data-max="75000">Urgencia inmediata (mismo día / guardia)</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="zona-calculo">Zona del trabajo</label>
+                  <select id="zona-calculo" style="background:#fff; width:100%; padding:10px; border-radius:8px; border:1px solid var(--line);">
+                    <option value="salta-capital" data-factor="1">Salta Capital (Centro, Tres Cerritos, Grand Bourg)</option>
+                    <option value="san-lorenzo" data-factor="1.15">San Lorenzo / Villa San Lorenzo</option>
+                    <option value="valle-lerma" data-factor="1.2">Valle de Lerma / Cerrillos</option>
+                    <option value="otras" data-factor="1.25">Otras localidades</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; padding:16px; background:#fff; border-radius:8px; border:1px solid var(--line);">
+                <div>
+                  <small style="color:var(--muted); display:block; font-size:0.8rem;">Rango estimado de mercado</small>
+                  <strong id="monto-estimado" style="font-size:1.4rem; color:var(--navy);">$25.000 – $55.000</strong>
+                </div>
+                <a id="btn-pedir-calc" class="btn btn-primary" href="/checkout?servicio=<%= slug %>">
+                  Solicitar este servicio con garantía
+                </a>
+              </div>
+            </div>
+
+            <!-- Qué incluye este servicio -->
+            <div style="margin-top: 32px; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px;">
+              <div>
+                <h3 style="margin-bottom: 12px; font-size: 1.15rem;">¿Qué incluye el servicio?</h3>
+                <ul class="feature-list" style="font-size: 0.92rem;">
+                  <% for (const item of cat.incluye) { %>
+                    <li><%= item %></li>
+                  <% } %>
+                </ul>
+              </div>
+              <div>
+                <h3 style="margin-bottom: 12px; font-size: 1.15rem;">¿Cuándo solicitar este especialista?</h3>
+                <ul class="feature-list" style="font-size: 0.92rem;">
+                  <% for (const item of cat.cuando) { %>
+                    <li><%= item %></li>
+                  <% } %>
+                </ul>
+              </div>
             </div>
           </div>
 
-          <aside class="checkout-card">
-            <h2>Cotización a medida</h2>
-            <p>El costo depende del trabajo. Contanos qué necesitás y recibís un presupuesto sin cargo antes de confirmar.</p>
-            <ul class="feature-list">
-              <li>Presupuesto sin cargo</li>
-              <li>Precio transparente antes de empezar</li>
-              <li>Pago seguro con Mercado Pago</li>
-              <li>Profesionales verificados</li>
-            </ul>
-            <div class="page-actions">
-              <a class="btn btn-primary" href="/checkout.html?servicio=<%= slug %>">Contratar</a>
-              <a class="btn btn-outline" href="/profesionales.php">Ver profesionales</a>
+          <!-- Profesionales relacionados en este rubro -->
+          <aside class="summary-box" style="height:fit-content; position:sticky; top:96px;">
+            <h3>Especialistas disponibles hoy</h3>
+            <p style="font-size:0.88rem; color:var(--muted); margin-bottom:16px;">Técnicos matriculados en <%= cat.nombre %> listos para coordinar:</p>
+
+            <% if (profesionalesRelacionados.length === 0) { %>
+              <div style="padding:14px; background:var(--bg); border-radius:8px; font-size:0.88rem; color:var(--muted); margin-bottom:16px;">
+                Nuestro equipo cuenta con guardia para asignarte un profesional disponible de inmediato.
+              </div>
+            <% } else { %>
+              <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px;">
+                <% for (const p of profesionalesRelacionados) { %>
+                  <div style="padding:12px; background:var(--bg); border-radius:8px; border:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:10px;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                      <% if (p.foto) { %>
+                        <img src="<%= p.foto %>" alt="<%= p.nombre %>" width="44" height="44" style="border-radius:50%; object-fit:cover; border:2px solid var(--orange);" />
+                      <% } else { %>
+                        <div style="width:44px; height:44px; border-radius:50%; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;"><%= p.nombre.charAt(0) %></div>
+                      <% } %>
+                      <div>
+                        <strong style="display:block; font-size:0.92rem; color:var(--navy);"><%= p.nombre %> <%= p.apellido %></strong>
+                        <small style="color:var(--muted); font-size:0.78rem;"><%= p.zona || 'Salta' %></small>
+                      </div>
+                    </div>
+                    <a href="/profesional?id=<%= p.id %>" class="btn btn-outline btn-small" style="padding:4px 8px; font-size:0.78rem;">Ficha</a>
+                  </div>
+                <% } %>
+              </div>
+            <% } %>
+
+            <div style="padding:16px; background:#f0f9fe; border-radius:10px; border:1px solid #bae6fd; font-size:0.85rem; color:#0369a1; margin-bottom:16px;">
+              🛡️ <strong>Garantía FIXYA:</strong> El pago queda en custodia de Mercado Pago hasta tu visto bueno final. Presupuesto sin cargo y sin compromiso.
             </div>
+
+            <a class="btn btn-primary" style="width:100%; text-align:center; padding:12px;" href="/checkout?servicio=<%= slug %>">
+              Pedir presupuesto sin cargo
+            </a>
           </aside>
-        </section>
-
-        <section class="page-head" style="margin-top: 28px;">
-          <div class="content-card">
-            <h2>Qué incluye</h2>
-            <ul class="feature-list">
-              <% for (const item of cat.incluye) { %>
-                <li><%= item %></li>
-              <% } %>
-            </ul>
-          </div>
-          <div class="content-card">
-            <h2>Cuándo pedirlo</h2>
-            <ul class="feature-list">
-              <% for (const item of cat.cuando) { %>
-                <li><%= item %></li>
-              <% } %>
-            </ul>
-          </div>
         </section>
       </div>
     </main>
@@ -126,27 +218,83 @@
       <div class="container footer-grid">
         <div>
           <img src="/assets/logos/logo-blanco.png" alt="FIXYA" class="footer-logo" width="400" height="108" loading="lazy" decoding="async" />
-          <p>Marketplace de servicios con profesionales verificados y pago seguro.</p>
+          <p>Marketplace de servicios con profesionales verificados y pago seguro en Argentina.</p>
         </div>
         <div>
-          <h3>Servicios</h3>
-          <ul><li><a href="/producto.php?s=plomeria">Plomería</a></li><li><a href="/producto.php?s=electricidad">Electricidad</a></li><li><a href="/producto.php?s=gas">Gas</a></li><li><a href="/producto.php?s=pintura">Pintura</a></li><li><a href="/categoria.html">Ver todas</a></li></ul>
+          <h3>Servicios populares</h3>
+          <ul>
+            <li><a href="/producto?s=plomeria">Plomería y Destapaciones</a></li>
+            <li><a href="/producto?s=electricidad">Electricidad e Iluminación</a></li>
+            <li><a href="/producto?s=gas">Gas Matriculado</a></li>
+            <li><a href="/producto?s=aire">Aire Acondicionado</a></li>
+            <li><a href="/producto?s=pintura">Pintura y Acabados</a></li>
+            <li><a href="/categoria">Ver las 12 categorías</a></li>
+          </ul>
         </div>
         <div>
-          <h3>Empresa</h3>
-          <ul><li><a href="/nosotros.html">Nosotros</a></li><li><a href="/profesionales.php">Profesionales</a></li><li><a href="/contacto.html">Contacto</a></li><li><a href="/privacidad.html">Privacidad</a></li><li><a href="/terminos.html">Términos</a></li></ul>
+          <h3>Profesionales y Empresa</h3>
+          <ul>
+            <li><a href="/planes-pro" style="color: var(--orange); font-weight: 700;">Planes FIXYA PRO ⭐</a></li>
+            <li><a href="/profesionales">Directorio de profesionales</a></li>
+            <li><a href="/registro">Registrarse como profesional</a></li>
+            <li><a href="/nosotros">Quiénes somos</a></li>
+            <li><a href="/contacto">Contacto y soporte</a></li>
+          </ul>
         </div>
         <div>
-          <h3>Contacto</h3>
-          <ul><li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li><li><a href="mailto:info@fixya.io">info@fixya.io</a></li><li>Salta, Argentina</li></ul>
+          <h3>Seguridad y Legal</h3>
+          <ul>
+            <li><a href="/checkout">Custodia Mercado Pago</a></li>
+            <li><a href="/terminos">Términos del servicio</a></li>
+            <li><a href="/privacidad">Política de privacidad</a></li>
+            <li><a href="tel:+5493873522920">+54 9 387 352-2920</a></li>
+            <li><a href="https://wa.me/5493873522920" target="_blank" rel="noreferrer">WhatsApp Oficial 24hs</a></li>
+          </ul>
         </div>
       </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> FIXYA</span>
-        <span>Todos los derechos reservados</span>
+        <span>© <span id="year"></span> FIXYA.io — Todos los derechos reservados · Salta, Argentina</span>
+        <span>Tecnología y custodia asegurada por Mercado Pago</span>
       </div>
     </footer>
 
     <script src="/script.js"></script>
+    <script>
+      // Calculadora interactiva
+      const selectTarea = document.getElementById('tipo-tarea');
+      const selectZona = document.getElementById('zona-calculo');
+      const montoEstimado = document.getElementById('monto-estimado');
+      const btnPedir = document.getElementById('btn-pedir-calc');
+
+      function actualizarCalculo() {
+        if (!selectTarea || !selectZona || !montoEstimado) return;
+        const optTarea = selectTarea.options && selectTarea.selectedIndex >= 0 ? selectTarea.options[selectTarea.selectedIndex] : null;
+        const optZona = selectZona.options && selectZona.selectedIndex >= 0 ? selectZona.options[selectZona.selectedIndex] : null;
+        
+        const minBase = parseFloat(optTarea?.getAttribute('data-min') || '25000');
+        const maxBase = parseFloat(optTarea?.getAttribute('data-max') || '55000');
+        const factor = parseFloat(optZona?.getAttribute('data-factor') || '1');
+
+        const minFinal = Math.round((minBase * factor) / 1000) * 1000;
+        const maxFinal = Math.round((maxBase * factor) / 1000) * 1000;
+
+        const formatMin = minFinal.toLocaleString('es-AR');
+        const formatMax = maxFinal.toLocaleString('es-AR');
+
+        const textoRango = `$${formatMin} – $${formatMax}`;
+        montoEstimado.textContent = textoRango;
+
+        if (btnPedir) {
+          const tareaVal = selectTarea.value;
+          btnPedir.href = `/checkout?servicio=<%= slug %>&tarea=${encodeURIComponent(tareaVal)}&estimado=${encodeURIComponent(textoRango)}`;
+        }
+      }
+
+      if (selectTarea && selectZona) {
+        selectTarea.addEventListener('change', actualizarCalculo);
+        selectZona.addEventListener('change', actualizarCalculo);
+        actualizarCalculo();
+      }
+    </script>
   </body>
 </html>
